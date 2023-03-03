@@ -1,0 +1,57 @@
+---
+import { emailToGravatar, iso8601ToString } from '../../utils';
+
+const { comment } = Astro.props;
+
+const gravatar = emailToGravatar(comment.email).tiny;
+---
+
+<article class="comment">
+    <footer class="comment-info">
+        <img class="comment-author-image" src={gravatar} />
+        <div class="comment-meta">
+            <a href="/" class="comment-author" target="_blank" rel="external nofollow noopener ugc">{comment.author}</a>
+            <time class="comment-date" datetime={comment.date}>{iso8601ToString(comment.date)}</time>
+        </div>
+    </footer>
+    <div class="comment-content">
+        {comment.message}
+    </div>
+</article>
+
+<style>
+
+.comment {
+    background-color: var(--comment-single-background-color);
+    padding: .5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.comment-author-image {
+    border: var(--comment-single-avatar-border);
+    height: inherit;
+    image-rendering: pixelated;
+}
+.comment-content {
+    margin-top: 1rem;
+    font-family: var(--font-comments);
+}
+.comment-author {
+    color: var(--comment-single-author-color);
+    font-size: 2rem;
+}
+
+.comment-date {
+    color: var(--comment-single-date-color);
+    display: block;
+}
+
+.comment-info {
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    gap: 1rem;
+}
+</style>

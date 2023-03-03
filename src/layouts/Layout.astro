@@ -1,0 +1,47 @@
+---
+import '@styles/global.scss';
+import Analytics from '@components/Analytics.astro';
+import OpenGraph from '@components/OpenGraph.astro';
+import Schema from '@components/Schema.astro';
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<Analytics />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<title>{title}</title>
+
+		<OpenGraph title={title} url={Astro.url.href} description={''} />
+		<Schema props={Astro.props} />
+
+		<slot name="schema" />
+
+		<script is:inline>
+			// Hacky AF but prevents theme flash. YOLO.
+			const root  = document.documentElement;
+			const theme = localStorage.getItem('theme');
+			
+			if (theme === 'light') {
+				root.classList.remove('dark');
+				root.classList.remove('sanity');
+				root.classList.add('light');
+			} else if (theme === 'dark') {
+				root.classList.remove('light');
+				root.classList.remove('sanity');
+				root.classList.add('dark');
+			} else if ( theme === 'sanity' ) {
+				root.classList.remove('dark');
+				root.classList.remove('light');
+				root.classList.add('sanity');
+			}
+		</script>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

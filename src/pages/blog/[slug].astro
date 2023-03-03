@@ -1,0 +1,42 @@
+---
+import BrowserWindow from '@components/BrowserWindow.astro';
+import Comments from '@components/Comments.astro';
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const blogEntries = await getCollection('blog');
+	
+	return blogEntries.map(entry => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const { Content } = await entry.render();
+---
+
+<Layout title={data.title} entry={entry}>
+	<!-- <script type="application/ld+json" set:html={schema} slot="schema"></script> -->
+
+    <BrowserWindow showTopNav title={data.title}>
+        <div slot="title">{data.title}</div>
+
+        <main class="primary-content">
+			<div class="container">
+				<header>
+					<h1>{data.title}</h1>
+				</header>
+
+				<Content />
+				
+				{data.comments ? <Comments /> : null}
+			</div>
+        </main>
+    </BrowserWindow>
+
+</Layout>
+

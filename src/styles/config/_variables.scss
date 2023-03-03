@@ -1,0 +1,8 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'colors';
+
+@forward 'colors';
+
+$shadow-offset: inset -1px -1px colors.$black, inset 1px 1px colors.$gray-light, inset -2px -2px colors.$gray, inset 2px 2px colors.$white;
+$shadow-inset: inset -1px -1px colors.$white, inset 1px 1px colors.$gray, inset -2px -2px colors.$gray-light, inset 2px 2px colors.$black;

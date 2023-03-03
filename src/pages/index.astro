@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+
+import YouWon from '@components/YouWon.jsx';
+import Marquee from '@components/Marquee.astro';
+import Layout from '@layouts/Layout.astro';
+import BrowserWindow from '@components/BrowserWindow.astro';
+
+import PBJellyGif from '/images/pbjelly.gif';
+import framePic from '/images/frame-pic.png';
+import PostList from '@components/PostList.astro';
+
+const title = 'Jeff Matson\'s Super Rad Home Page';
+const blogEntries = await getCollection('blog');
+---
+
+<Layout title={title}>
+    <BrowserWindow showTopNav title={title}>
+        <div slot="title">{title}</div>
+        <main class="primary-content">
+            <div class="container">
+
+                <h1>{title}</h1>
+                <Marquee>Throwback to the beautiful trash of days gone by. If it bugs you, you can disable it up top.</Marquee>
+                <img src={framePic} style="width: 100%" />
+
+                <h2>Holup... WTF Is This Monstrosity?</h2>
+
+                <div style="display: flex;">
+                    <div style="width: 50%;">
+                        <p>At this point, you're probably wondering what in the hell you're looking at. Jeff's Super Rad Home Page, DUH.</p>
+
+                        <p>The TL;DR is that I suck at design. Sure, I could have used a pre-built theme, hired a designer, or used the multitude of UI components out there, but where's the fun in that? Thanks to my lack of skills, this is what you get - **the ugliest thing I could possibly think of**. It's so ugly it's pretty.</p>
+
+                        <p>Just for a little bit of icing on the cake, [it's overengineered too]().</p>
+                    </div>
+                    <div style="width: 50%;">
+                        <YouWon className="sanityModeHidden" client:visible />
+                    </div>
+                </div>
+
+                <h2>Recent Blog Ramblings</h2>
+                <PostList entries={blogEntries} titleLevel="h3" more="/blog/" />
+
+                <h2>Social Media</h2>
+
+                <ul>
+                    <li><a href="https://twitter.com/thejeffmatson">Tweeterzz</a></li>
+                    <li><a href="https://github.com/JeffMatson">GertHerb</a></li>
+                </ul>
+
+                <img class="sanityModeHidden" src={PBJellyGif} alt="peanut butter jelly time gif" />
+
+            </div>
+        </main>
+    </BrowserWindow>
+</Layout>

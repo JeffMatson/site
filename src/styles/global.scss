@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+@use 'config/fonts';
+@use 'typography';
+@use 'config/variables';
+@use 'config/colors';
+@use 'functions';
+@use 'themes';
+@use 'config/breakpoints';
+@use 'mixins';
+
+html {
+	@include typography.responsive-type();
+
+	@include themes.register-vars('base');
+
+	&.dark {
+		@include themes.register-vars('dark');
+	}
+
+	&.light {
+        @include themes.register-vars('light');
+    }
+
+	&.sanity {
+		@include themes.register-vars('sanity');
+	}
+}
+
+body {
+	background-color: var(--color-wallpaper);
+	font-size: var(--font-size-base);
+}
+
+h1 {
+	color: var(--color-h1);
+	font-size: var(--font-size-xxxl);
+	text-align: center;
+}
+
+h2 {
+	color: var(--color-h2);
+	font-size: var(--font-size-xxl);
+
+	a {
+		color: var(--color-h2);
+	}
+}
+
+h3 {
+	color: var(--color-h3);
+	font-size: var(--font-size-xl);
+}
+
+h4 {
+	color: var(--color-h4);
+	font-size: var(--font-size-lg);
+}
+
+h5 {
+	color: var(--color-h5);
+	font-size: var(--font-size-md);
+}
+
+a {
+	color: var(--color-a);
+}
+
+.dark .primary-content ul,
+.light .primary-content ul {
+	list-style-image: var(--li-image);
+
+	li {
+
+		padding-left: 0.5rem;
+
+		&::marker {
+			font-size: 1.25rem;
+		}
+	}
+}
+
+.primary-content {
+	padding: 1em;
+}
+
+.container {
+	max-width: breakpoints.get-single('lg');
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.sanity {
+	.sanityModeHidden {
+		display: none;
+	}
+}
+
+select {
+	@include mixins.appearance(none);
+
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='16' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 0H0v16h1V1h14V0z' fill='%23DFDFDF'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 1H1v14h1V2h12V1H2z' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 17H0v-1h15V0h1v17z' fill='%23000'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 1h-1v14H1v1h14V1z' fill='gray'/%3E%3Cpath fill='silver' d='M2 2h12v13H2z'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11 6H4v1h1v1h1v1h1v1h1V9h1V8h1V7h1V6z' fill='%23000'/%3E%3C/svg%3E");
+	background-position: top 2px right 2px;
+	background-repeat: no-repeat;
+	background-color: var(--color-background);
+	color: var(--color-text);
+	box-shadow: variables.$shadow-inset;
+	border-radius: 0;
+	padding-right: 32px;
+	position: relative;
+	border: none;
+	box-sizing: border-box;
+	padding: 3px 32px 3px 4px;
+}
+
+
+
+.post-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+
+	.post-item {
+
+		h2, h3, h4, h5, h6 {
+			margin: 0;
+		}
+
+		h2 a {
+			color: var(--color-h2);
+		}
+
+		h3 a {
+			color: var(--color-h3);
+		}
+
+		.post-meta {
+			font-size: var(--font-size-sm);
+			color: var(--color-post-meta);
+		}
+	}
+}

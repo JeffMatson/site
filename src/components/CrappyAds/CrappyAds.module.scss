@@ -1,0 +1,27 @@
+@use '../../styles/config/variables' as *;
+
+.textContainer {
+    padding: 1rem;
+}
+
+.hotSingles {
+    background-color: orange;
+}
+
+.mobileGame {
+    background-color: green;
+}
+
+.simpleTrick {
+    background-color: red;
+    color: blue;
+    font-size: 2em;
+    line-height: 2em;
+}
+
+.std {
+    background-color: blue;
+    color: white;
+    font-size: 2em;
+    line-height: 2em;
+}

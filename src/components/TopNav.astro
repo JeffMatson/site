@@ -1,0 +1,57 @@
+---
+import ThemeSelect from './ThemeSelect';
+---
+
+<nav class="topNav">
+    <div class="container">
+        <ul class="navItems">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li id="enableSanityMode" class="sanityModeToggle">
+                <ThemeSelect client:only />
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<style lang="scss">
+    @use '../styles/config/variables';
+    @use '../styles/config/colors';
+
+    .container {
+        background-color: colors.$gray-light;
+        padding: 1px;
+    }
+
+    .navItems {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navItems li {
+        padding: 2px 5px;
+
+        &:hover {
+            box-shadow: variables.$shadow-offset;
+        }
+    }
+
+    .navItems li a {
+        text-decoration: none;
+        color: colors.$black;
+        font-size: var(--font-size-sm);
+    }
+
+    .sanityModeToggle {
+        margin-left: auto;
+    }
+
+    .sanityModeToggle:hover {
+        box-shadow: none !important;
+    }
+</style>

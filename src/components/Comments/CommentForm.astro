@@ -1,0 +1,129 @@
+---
+import BrowserWindow from '@components/BrowserWindow.astro';
+import { pathToFormName } from '../../utils';
+
+const { pathname } = Astro.url;
+const formName = pathToFormName(pathname);
+---
+<BrowserWindow showTopNav={false} title="Leave a comment">
+    <form name={formName} method="POST" data-netlify="true">
+      <div class="halfwidth">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+			    <input type="email" name="email" required/>
+        </div>
+      </div>
+    <div class="form-group">
+			<label for="url">URL (optional)</label>
+			<input type="url" name="url"/>
+		</div>
+		<div class="form-group">
+			<label for="message">Message</label>
+			<textarea name="message" required></textarea>
+		</div>
+		<div class="form-group">
+			<button class="submit" type="submit">SUBMIT</button>
+		</div>
+	</form>
+</BrowserWindow>
+
+<style lang="scss">
+    @use '../../styles/config/variables';
+
+    form {
+        background-color: variables.$gray-light;
+        color: variables.$black;
+        padding: 1rem;
+    }
+
+    input, textarea {
+      box-shadow: variables.$shadow-inset;
+      border: none;
+      padding: .5rem;
+    }
+
+    .form-group {
+      display: flex;
+      margin: 0.5rem;
+      flex-direction: column;
+    }
+
+    .halfwidth {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .halfwidth .form-group {
+      flex-grow: 1;
+    }
+
+    .submit {
+      padding: var(--comment-form-submit-padding);
+      font-size: var(--comment-form-submit-font-size);
+      background-color: var(--comment-form-submit-background-color);
+    }
+
+    @keyframes effect {
+        0% {
+            color: variables.$magenta;
+            background-color: variables.$green;
+        }
+
+        10% {
+          color: variables.$green;
+          background-color: variables.$yellow;
+        }
+
+        20% {
+          color: variables.$red;
+          background-color: variables.$magenta;
+        }
+ 
+        30% {
+            color: variables.$yellow;
+            background-color: variables.$blue;
+        }
+
+        40% {
+          color: variables.$blue;
+          background-color: variables.$red;
+        }
+
+        50% {
+          color: variables.$magenta;
+          background-color: variables.$green;
+        }
+
+        60% {
+            color: variables.$green;
+            background-color: variables.$magenta;
+        }
+
+        70% {
+          color: variables.$red;
+          background-color: variables.$blue;
+        }
+
+        80% {
+          color: variables.$yellow;
+          background-color: variables.$green;
+        }
+
+        90% {
+            color: variables.$blue;
+            background-color: variables.$cyan;
+
+        }
+
+        100% {
+          color: variables.$green;
+          background-color: variables.$blue;
+        }
+
+    }
+    
+</style>

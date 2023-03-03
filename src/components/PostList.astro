@@ -1,0 +1,40 @@
+---
+import { CollectionEntry, getEntryBySlug } from 'astro:content';
+
+interface Props {
+    entries: CollectionEntry<'blog'>[];
+    titleLevel: 'h2'|'h3'|'h4'|'h5'|'h6';
+    more?: string;
+}
+
+const { entries, titleLevel, more } = Astro.props;
+
+let Title = titleLevel;
+if ( ! Title ) {
+    Title = 'h2';
+}
+---
+
+<div class="post-list">
+    {entries.map(async post => {
+        const postSlug        = post.slug;
+        const postTitle       = post.data.title;
+        const postDescription = post.data.description;
+        const postDateString  = post.data.date.toDateString();
+        const postISOString   = post.data.date.toISOString();
+        const postAuthorSlug  = post.data.author;
+        const postAuthor      = await getEntryBySlug('authors', postAuthorSlug);
+
+        return (
+            <article class="post-item">
+                <Title class="post-title"><a href={`/blog/${postSlug}`}>{postTitle}</a></Title>
+                <div class="post-meta">
+                    Published on <time datetime={postISOString}>{postDateString}</time> by {postAuthor && postAuthor.data.name}
+                </div>
+                <p class="post-description">{postDescription}</p>
+            </article>
+        );
+    })}
+</div>
+
+{more && <a href={more} style="text-align: right;">More Posts</a>}

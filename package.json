@@ -1,0 +1,52 @@
+{
+  "name": "@jeffmatson/site",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest run --coverage",
+    "test-ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^0.15.2",
+    "@astrojs/react": "^2.0.2",
+    "@astrojs/sitemap": "^1.0.1",
+    "@nanostores/react": "^0.4.1",
+    "@netlify/functions": "^1.4.0",
+    "@types/jsonld": "^1.5.8",
+    "@types/md5": "^2.3.2",
+    "@types/node": "^18.14.0",
+    "@types/react": "^18.0.28",
+    "@types/validator": "^13.7.12",
+    "@vitest/coverage-c8": "^0.28.5",
+    "@vitest/ui": "^0.28.5",
+    "astro": "^2.0.14",
+    "happy-dom": "^8.7.2",
+    "md5": "^2.3.0",
+    "nanostores": "^0.7.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.58.3",
+    "use-local-storage": "^2.3.6",
+    "validator": "^13.9.0",
+    "vitest": "^0.28.5",
+    "zod": "^3.20.6"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.9",
+    "@astrojs/netlify": "^2.1.2",
+    "@astrojs/partytown": "^1.0.3",
+    "@astrojs/prefetch": "^0.1.2",
+    "@nanostores/persistent": "^0.7.0",
+    "graphql": "^16.6.0",
+    "html-react-parser": "^3.0.9",
+    "jsonld": "^8.1.0"
+  }
+}

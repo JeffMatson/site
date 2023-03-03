@@ -1,0 +1,44 @@
+---
+import { getEntryBySlug } from "astro:content";
+
+const { props } = Astro.props;
+type Schema = { [prop: string]: any };
+const schema: Schema = {
+    '@context': 'https://schema.org',
+};
+
+if ( props.entry ) {
+    if ( props.entry.collection === 'single' || props.entry.collection === 'blog' ) {
+        schema.type = 'Article';
+    }
+
+    if ( props.entry.data ) {
+        const { data } = props.entry;
+
+        if ( data.title && schema.type === 'Article' ) {
+            schema.headline = data.title;
+            schema.title = data.title;
+        }
+
+        if ( data.author ) {
+            const author = await getEntryBySlug( 'authors', data.author );
+            if ( author ) {
+
+                const authorSchema = {
+                    '@type': 'Author',
+                    'name': author.data.name,
+                    'description': author.data.description,
+                    'knowsAbout': author.data.knowsAbout,
+                    'url': author.data.url
+                }
+
+                schema.author = authorSchema;
+            }
+        }
+    }
+}
+
+const stringified = JSON.stringify(schema);
+---
+
+<script type="application/ld+json" set:html={stringified}></script>

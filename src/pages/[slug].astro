@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+import BrowserWindow from '@components/BrowserWindow.astro';
+import Layout from '@layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const pages = await getCollection('single');
+	
+	return pages.map(entry => {
+		return {
+			params: { slug: entry.slug },
+			props: { entry },
+		};
+	});
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+
+const { Content } = await entry.render();
+---
+
+<Layout title={data.title} entry={entry}>
+	<!-- <script type="application/ld+json" set:html={schema} slot="schema"></script> -->
+
+    <BrowserWindow showTopNav title={data.title}>
+        <div slot="title">{data.title}</div>
+
+        <main class="primary-content">
+			<div class="container">
+				<header>
+					<h1>{data.title}</h1>
+				</header>
+				<Content />
+			</div>
+        </main>
+    </BrowserWindow>
+
+</Layout>

@@ -1,0 +1,61 @@
+@use '../styles/config/colors';
+@use '../styles/config/variables';
+
+.annoyBox {
+    position: fixed;
+    background-color: colors.$gray-light;
+}
+
+.browserWindow {
+    box-shadow: variables.$shadow-offset;
+    background-color: colors.$gray-light;
+    padding: 3px;
+}
+
+.annoyBoxConfirm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header {
+    font-family: 'Windows Regular', sans-serif;
+    font-size: var(--font-size-sm);
+}
+
+.title {
+    background-color: colors.$blue;
+    color: colors.$white;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.contentContainer {
+    background-color: colors.$gray-light;
+    padding: 1rem;
+    box-shadow: variables.$shadow-inset;
+    color: colors.$black;
+
+    p {
+        margin: 0;
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    button {
+        box-shadow: variables.$shadow-offset;
+        background-color: colors.$gray-light;
+        border: 0;
+        padding: 0.5rem;
+        font-family: 'Windows Regular';
+        min-width: 100px;
+    }
+}

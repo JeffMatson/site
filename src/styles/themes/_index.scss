@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '../config/themes';
+
+@mixin register-vars($mode: 'base') {
+	@each $key, $val in themes.variables($mode) {
+		--#{$key}: #{$val};
+	}
+}

@@ -1,0 +1,57 @@
+---
+import TopNav from './TopNav.astro';
+
+const { title = null, children = null, showTopNav = false } = Astro.props;
+
+---
+
+<div class="browserWindow">
+    <div class="wrapper">
+        <header class="header">
+            <div class="title">{title}</div>
+            {showTopNav ? <TopNav /> : null}
+        </header>
+        <div class="main">
+            <slot />
+        </div>
+    </div>
+</div>
+
+<style lang="scss">
+	@use '../styles/config/variables';
+    @use '../styles/config/colors';
+
+	.browserWindow {
+        box-shadow: variables.$shadow-offset;
+        background: colors.$gray-light;
+        padding: 3px;
+        max-width: 920px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .wrapper {
+            padding: 1px;
+        }
+
+        .header {
+            font-family: 'Windows Regular';
+            font-size: var(--font-size-sm);
+        }
+
+        .title {
+            background-color: colors.$blue;
+            color: colors.$white;
+            font-weight: bold;
+            font-size: var(--font-size-sm);
+            padding: 3px;
+            background: linear-gradient(90deg,navy,#1084d0);
+        }
+
+        .main {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-normal);
+            box-shadow: variables.$shadow-inset
+        }
+    }
+</style>

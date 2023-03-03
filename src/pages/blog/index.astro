@@ -1,0 +1,33 @@
+---
+import { getCollection, getEntryBySlug } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+import BrowserWindow from '@components/BrowserWindow.astro';
+import PostList from '@components/PostList.astro';
+
+const title = 'Blog';
+const blogEntries = await getCollection('blog');
+const excerpt = 'Thoughts about tech, life, work, and various projects I\'m working on.';
+---
+
+<Layout title={title}>
+    <BrowserWindow showTopNav title={title}>
+
+        <div slot="title">{title}</div>
+
+        <main class="primary-content">
+            <div class="container">
+                <h1>{title}</h1>
+                <p>{excerpt}</p>
+                <PostList entries={blogEntries} titleLevel="h2" />
+            </div>
+        </main>
+    </BrowserWindow>
+</Layout>
+
+<style lang="scss">	
+    article {
+        h2 {
+            margin-bottom: 0;
+        }
+    }
+</style>

@@ -1,0 +1,24 @@
+@use 'sass:map';
+
+@use 'base';
+@use 'dark';
+@use 'light';
+@use 'sanity';
+
+@function variables($theme: 'base') {
+    @if ($theme == 'base') {
+        @return base.$variables;
+    }
+
+    @if ($theme == 'dark') {
+        @return map.merge(base.$variables, dark.$variables);
+    }
+
+    @if ($theme == 'light') {
+        @return map.merge(base.$variables, light.$variables);
+    }
+
+    @if ($theme == 'sanity') {
+        @return map.merge(base.$variables, sanity.$variables);
+    }
+}

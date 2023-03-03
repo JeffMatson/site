@@ -1,0 +1,8 @@
+---
+const {title, description, url} = Astro.props;
+const canonicalURL = new URL( Astro.url.pathname, Astro.site );
+---
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={} />
+<meta property="og:url" content={canonicalURL} />

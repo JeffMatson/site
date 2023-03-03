@@ -1,0 +1,21 @@
+@use '../colors';
+
+$variables: (
+    color-background: colors.$white,
+    color-text: colors.$black,
+    color-a: colors.$green-dark,
+    color-h1: colors.$green-dark,
+    color-h2: colors.$magenta-dark,
+    color-h3: colors.$cyan-dark,
+    color-h4: colors.$yellow-dark,
+    color-h5: colors.$cyan-dark,
+
+    comment-form-submit-padding: 3rem,
+    comment-form-submit-font-size: 3rem,
+    comment-form-submit-background-color: colors.$cyan-dark,
+
+    comment-single-background-color: colors.$yellow-dark,
+    comment-single-avatar-border: 2px solid colors.$green,
+    comment-single-date-color: colors.$magenta-dark,
+    comment-single-author-color: colors.$red-dark,
+);

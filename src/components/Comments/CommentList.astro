@@ -1,0 +1,84 @@
+---
+import { FormId, CommentItem, CommentFormSubmissionList, FormsResponse } from './CommentSchema';
+import { getEnv, pathToFormName } from '../../utils';
+import Comment from './Comment.astro';
+
+const { pathname } = Astro.url;
+
+const apiToken = getEnv('FORM_API_TOKEN');
+const siteId = getEnv('NETLIFY_SITE_ID');
+const apiPrefix = 'https://api.netlify.com/api/v1/sites/';
+
+const getAllForms = async () => {
+    try {
+        const response = await fetch(`${apiPrefix}${siteId}/forms/`, {
+            headers: new Headers({
+                'Authorization': `Bearer ${apiToken}`,
+                'Content-Type': 'application/json',
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+
+        const json = await response.json();
+        return FormsResponse.parse(json);
+    } catch (err) {
+        console.error(err);
+        return [];
+    };
+}
+const getFormSubmissions = async (id: FormId) => {
+    id = FormId.parse(id);
+
+    const response = await fetch(`${apiPrefix}${siteId}/forms/${id}/submissions/`, {
+        headers: new Headers({
+            'Authorization': `Bearer ${apiToken}`,
+            'Content-Type': 'application/json',
+        }),
+    });
+
+    const json = await response.json();
+    return CommentFormSubmissionList.parse(json);
+}
+
+const processAll = async () => {
+    const allForms = await getAllForms();
+    const commentList = [];
+    const formName = pathToFormName(pathname);
+
+    for (const form of allForms) {
+        if ( form.submission_count > 0 && form.name === formName ) {
+
+            const submissions = await getFormSubmissions(form.id);            
+            for (const submission of submissions) {
+                commentList.push(CommentItem.parse({
+                    author: submission.data.name,
+                    email: submission.data.email,
+                    message: submission.data.message,
+                    date: submission.created_at
+                }))
+            };
+        }
+
+    }
+
+    return commentList;
+}
+
+const comments = await processAll();
+---
+
+<div class="comment-list-container">
+    {comments.map(comment => (
+        <Comment comment={comment} />
+    ))}
+</div>
+
+<style lang="scss">
+    .comment-list-container {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+</style>

@@ -1,0 +1,6 @@
+@use 'sass:list';
+
+$type-base: 16px;
+$type-scale: 1.2;
+$type-steps: 'sm', 'base', 'md', 'lg', 'xl', 'xxl', 'xxxl';
+$type-base-index: list.index($type-steps, 'base');
