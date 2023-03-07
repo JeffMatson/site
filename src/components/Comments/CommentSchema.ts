@@ -34,7 +34,7 @@ export const CommentItem = z.object({
     email: z.string().email(),
     message: z.string(),
     date: z.string(),
-    url: z.string().url().optional(),
+    url: z.string().url().or(z.literal('')).optional(),
 });
 
 export const CommentList = z.array(CommentItem);
