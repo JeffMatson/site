@@ -15,13 +15,43 @@ export function generateString(prefix = '', length = 16) {
 }
 
 export function getEnv(env: string) {
-    if ( import.meta.env[env]) {
-        return import.meta.env[env];
-    } else if (process.env[env]) {
-        return process.env[env];
+    // Since Astro env vars is weird, we have to do this instead of getting it dynamically.
+    // See: https://docs.astro.build/en/guides/environment-variables/#getting-environment-variables
+    switch (env) {
+        case 'FORM_API_TOKEN':
+            switch (true) {
+                case import.meta.env.FORM_API_TOKEN !== undefined:
+                    return import.meta.env.FORM_API_TOKEN;
+                case process.env.FORM_API_TOKEN !== undefined:
+                    return process.env.FORM_API_TOKEN;
+                default:
+                    console.error('Could not find form api token. Set env variable FORM_API_TOKEN');
+                    return undefined;
+            }
+        case 'NETLIFY_API_KEY':
+            switch (true) {
+                case import.meta.env.NETLIFY_API_KEY !== undefined:
+                    return import.meta.env.NETLIFY_API_KEY;
+                case process.env.NETLIFY_API_KEY !== undefined:
+                    return process.env.NETLIFY_API_KEY;
+                default:
+                    console.error('Could not find netlify api key. Set env variable NETLIFY_API_KEY');
+                    return undefined;
+            }
+        case 'NETLIFY_SITE_ID':
+            switch (true) {
+                case import.meta.env.NETLIFY_SITE_ID !== undefined:
+                    return import.meta.env.NETLIFY_SITE_ID;
+                case process.env.NETLIFY_SITE_ID !== undefined:
+                    return process.env.NETLIFY_SITE_ID;
+                default:
+                    console.error('Could not find netlify site id. Set env variable NETLIFY_SITE_ID');
+                    return undefined;
+            }
+        default:
+            console.error(`Unknown env variable ${env}.`);
+            return undefined;
     }
-
-    return undefined;
 }
 
 export function getViewportSize() {
