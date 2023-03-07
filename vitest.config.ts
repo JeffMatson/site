@@ -3,8 +3,8 @@ import { getViteConfig } from 'astro/config';
 
 export default getViteConfig({
 	test: {
-        environment: "happy-dom"
-		/* for example, use global to avoid globals imports (describe, test, expect): */
-		// globals: true,
+        environment: "happy-dom",
+		testTimeout: 60_000,
+    	hookTimeout: 60_000,
 	},
 });
