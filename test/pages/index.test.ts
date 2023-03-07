@@ -23,7 +23,7 @@ describe('Test path: "/"', async () => {
         })
     })
 
-    test('Check index', async () => {
+    test('Check title', async () => {
         await page.goto('http://localhost:3000');
 
         await expect(page).toHaveTitle("Jeff Matson's Super Rad Home Page");
