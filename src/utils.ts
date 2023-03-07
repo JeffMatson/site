@@ -19,6 +19,9 @@ export function getEnv(env: string) {
     // See: https://docs.astro.build/en/guides/environment-variables/#getting-environment-variables
     switch (env) {
         case 'FORM_API_TOKEN':
+            console.log(import.meta.env.FORM_API_TOKEN);
+            console.log(process.env.FORM_API_TOKEN);
+            
             switch (true) {
                 case import.meta.env.FORM_API_TOKEN !== undefined:
                     return import.meta.env.FORM_API_TOKEN;
