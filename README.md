@@ -2,4 +2,4 @@
 
 Ugly AF, overengineered, pointless. Enjoy.
 
-[http://jeffmatson.net](http://jeffmatson.net)
+[https://jeffmatson.net](https://jeffmatson.net)
