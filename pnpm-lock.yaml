@@ -11,6 +11,7 @@ specifiers:
   '@nanostores/persistent': ^0.7.0
   '@nanostores/react': ^0.4.1
   '@netlify/functions': ^1.4.0
+  '@playwright/test': ^1.31.2
   '@types/jsonld': ^1.5.8
   '@types/md5': ^2.3.2
   '@types/node': ^18.14.0
@@ -25,6 +26,7 @@ specifiers:
   jsonld: ^8.1.0
   md5: ^2.3.0
   nanostores: ^0.7.4
+  playwright: ^1.31.2
   react: ^18.2.0
   react-dom: ^18.2.0
   sass: ^1.58.3
@@ -49,6 +51,7 @@ devDependencies:
   '@astrojs/sitemap': 1.0.1
   '@nanostores/react': 0.4.1_nkfnbc2tpc77iht7asm3uqwau4
   '@netlify/functions': 1.4.0
+  '@playwright/test': 1.31.2
   '@types/jsonld': 1.5.8
   '@types/md5': 2.3.2
   '@types/node': 18.14.0
@@ -60,6 +63,7 @@ devDependencies:
   happy-dom: 8.7.2
   md5: 2.3.0
   nanostores: 0.7.4
+  playwright: 1.31.2
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   sass: 1.58.3
@@ -835,6 +839,17 @@ packages:
       picocolors: 1.0.0
       tiny-glob: 0.2.9
       tslib: 2.5.0
+
+  /@playwright/test/1.31.2:
+    resolution: {integrity: sha512-BYVutxDI4JeZKV1+ups6dt5WiqKhjBtIYowyZIJ3kBDmJgsuPKsqqKNIMFbUePLSCmp2cZu+BDL427RcNKTRYw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 18.14.0
+      playwright-core: 1.31.2
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
@@ -3397,6 +3412,21 @@ packages:
       jsonc-parser: 3.2.0
       mlly: 1.1.1
       pathe: 1.1.0
+    dev: true
+
+  /playwright-core/1.31.2:
+    resolution: {integrity: sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
+  /playwright/1.31.2:
+    resolution: {integrity: sha512-jpC47n2PKQNtzB7clmBuWh6ftBRS/Bt5EGLigJ9k2QAKcNeYXZkEaDH5gmvb6+AbcE0DO6GnXdbl9ogG6Eh+og==}
+    engines: {node: '>=14'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      playwright-core: 1.31.2
     dev: true
 
   /postcss/8.4.21:
