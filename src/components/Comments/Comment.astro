@@ -10,7 +10,7 @@ const gravatar = emailToGravatar(comment.email).tiny;
     <footer class="comment-info">
         <img class="comment-author-image" src={gravatar} alt="comment author avatar" />
         <div class="comment-meta">
-            <a href="/" class="comment-author" target="_blank" rel="external nofollow noopener ugc">{comment.author}</a>
+            <a href={comment.url} class="comment-author" target="_blank" rel="external nofollow noopener ugc">{comment.author}</a>
             <time class="comment-date" datetime={comment.date}>{iso8601ToString(comment.date)}</time>
         </div>
     </footer>
