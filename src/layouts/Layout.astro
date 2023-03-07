@@ -19,8 +19,6 @@ const { title } = Astro.props;
 		<OpenGraph title={title} url={Astro.url.href} description={''} />
 		<Schema props={Astro.props} />
 
-		<slot name="schema" />
-
 		<script is:inline>
 			// Hacky AF but prevents theme flash. YOLO.
 			const root  = document.documentElement;
