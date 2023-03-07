@@ -5,6 +5,14 @@ import OpenGraph from '@components/OpenGraph.astro';
 import Schema from '@components/Schema.astro';
 
 const { title } = Astro.props;
+
+// @todo: Fix this later.
+let description = '';
+if ( Astro.props.entry ) {
+	if ( Astro.props.entry.data && Astro.props.entry.data.description ) {
+		description = Astro.props.entry.data.description;
+	}
+}
 ---
 
 <!DOCTYPE html>
@@ -16,7 +24,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<title>{title}</title>
 
-		<OpenGraph title={title} url={Astro.url.href} description={''} />
+		<OpenGraph title={title} url={Astro.url.href} description={description} />
 		<Schema props={Astro.props} />
 
 		<script is:inline>
