@@ -22,14 +22,15 @@ if ( props.entry ) {
 
         if ( data.author ) {
             const author = await getEntryBySlug( 'authors', data.author );
-            if ( author ) {
 
+            if ( author ) {
                 const authorSchema = {
                     '@type': 'Author',
                     'name': author.data.name,
                     'description': author.data.description,
                     'knowsAbout': author.data.knowsAbout,
-                    'url': author.data.url
+                    'url': author.data.url,
+                    'sameAs': author.data.sameAs,
                 }
 
                 schema.author = authorSchema;

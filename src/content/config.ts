@@ -35,6 +35,7 @@ const authorsCollection = defineCollection({
         lastName: z.string(),
         knowsAbout: z.array(z.string()).optional(),
         url: z.string().optional(),
+        sameAs: z.array(z.string()).optional().default([]),
     }),
 });
 
