@@ -1,15 +1,24 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, imagePath } = Astro.props;
 const canonicalURL = new URL( Astro.url.pathname, Astro.site );
+
+console.log(imagePath);
+
+let ogImage = new URL('images/featured/default.png', Astro.site);
+if ( imagePath !== undefined ) {
+    ogImage = new URL(imagePath, Astro.site);
+}
 ---
 
 <meta property="og:type" content="article" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImage} />
 
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@thejeffmatson" />
 <meta name="twitter:creator" content="@thejeffmatson">
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

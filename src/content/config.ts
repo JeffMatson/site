@@ -21,6 +21,7 @@ const blogCollection = defineCollection({
         comments: z.boolean().default(true),
         date: z.string().transform(str => new Date(str)).default(new Date().toISOString()),
         author: z.string().default('jeffmatson'),
+        image: z.string().optional(),
     }),
 });
 
