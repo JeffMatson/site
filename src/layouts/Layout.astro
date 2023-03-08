@@ -9,8 +9,6 @@ const { title } = Astro.props;
 // @todo: Fix this later.
 let description = '';
 let image;
-
-console.log(Astro.props);
 if ( Astro.props.entry ) {
 	if ( Astro.props.entry.data && Astro.props.entry.data.description ) {
 		description = Astro.props.entry.data.description;
