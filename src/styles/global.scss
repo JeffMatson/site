@@ -118,7 +118,7 @@ select {
 .post-list {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: space-between;
 
 	.post-item {
 
@@ -133,6 +133,8 @@ select {
 		h3 a {
 			color: var(--color-h3);
 		}
+
+		margin-top: 1rem;
 
 		.post-meta {
 			font-size: var(--font-size-sm);
