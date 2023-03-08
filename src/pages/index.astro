@@ -11,7 +11,8 @@ import framePic from '/images/frame-pic.png';
 import PostList from '@components/PostList.astro';
 
 const title = 'Jeff Matson\'s Super Rad Home Page';
-const blogEntries = await getCollection('blog');
+const blogEntries = await getCollection('blog')
+const blogEntriesByDate = blogEntries.sort((a, b) => { return new Date(b.data.date).getTime() - new Date(a.data.date).getTime() });
 ---
 
 <Layout title={title}>
@@ -40,7 +41,7 @@ const blogEntries = await getCollection('blog');
                 </div>
 
                 <h2>Recent Blog Ramblings</h2>
-                <PostList entries={blogEntries} titleLevel="h3" more="/blog/" />
+                <PostList entries={blogEntriesByDate} titleLevel="h3" more="/blog/" />
 
                 <h2>Social Media</h2>
 
