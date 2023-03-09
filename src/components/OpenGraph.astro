@@ -2,8 +2,6 @@
 const { title, description, imagePath } = Astro.props;
 const canonicalURL = new URL( Astro.url.pathname, Astro.site );
 
-console.log(imagePath);
-
 let ogImage = new URL('images/featured/default.png', Astro.site);
 if ( imagePath !== undefined ) {
     ogImage = new URL(imagePath, Astro.site);
