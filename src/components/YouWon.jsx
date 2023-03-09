@@ -5,6 +5,8 @@ import { annoyBoxStore, addAnnoyBox } from '../stores/annoyBoxStore';
 
 export default function YouWon(props) {
 
+    const wrapperStyles = props.wrapperStyles ? props.wrapperStyles : {};
+
     const annoyBoxes = useStore(annoyBoxStore);
 
     const createAnnoyBox = (isConfirmation = false) => {
@@ -14,7 +16,7 @@ export default function YouWon(props) {
     }
 
     return (
-        <div className="sanityModeHidden">
+        <div className="sanityModeHidden" style={wrapperStyles}>
             <img src={youWon} alt="ugly fake you won popup ad banner" onClick={() => createAnnoyBox(true)} />
 
             {Object.keys(annoyBoxes).map(annoyBoxId => {
