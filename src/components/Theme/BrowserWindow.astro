@@ -18,8 +18,8 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
 </div>
 
 <style lang="scss">
-	@use '../styles/config/variables';
-    @use '../styles/config/colors';
+	@use '../../styles/config/variables';
+    @use '../../styles/config/colors';
 
 	.browserWindow {
         box-shadow: variables.$shadow-offset;
@@ -34,17 +34,17 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
         }
 
         .header {
-            font-family: 'Windows Regular';
+            font-family: var(--window-font-title);
             font-size: var(--font-size-sm);
         }
 
         .title {
-            background-color: colors.$blue;
-            color: colors.$white;
+            background-color: var(--window-color-background-left);
+            color: var(--window-color-title-text);
             font-weight: bold;
             font-size: var(--font-size-sm);
             padding: 3px;
-            background: linear-gradient(90deg,navy,#1084d0);
+            background: linear-gradient(90deg, var(--window-color-background-left), var(--window-color-background-right));
         }
 
         .main {

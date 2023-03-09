@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { themeStore, setTheme } from '../stores/themeStore';
+import { themeStore, setTheme } from '../../stores/themeStore';
 
 export default function ThemeSelect() {
 
