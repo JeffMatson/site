@@ -25,6 +25,10 @@ html {
 	&.sanity {
 		@include themes.register-vars('sanity');
 	}
+
+	&.hotdog {
+		@include themes.register-vars('hotdog');
+	}
 }
 
 body {

@@ -40,15 +40,23 @@ if ( Astro.props.entry ) {
 			if (theme === 'light') {
 				root.classList.remove('dark');
 				root.classList.remove('sanity');
+				root.classList.remove('hotdog');
 				root.classList.add('light');
 			} else if (theme === 'dark') {
 				root.classList.remove('light');
 				root.classList.remove('sanity');
+				root.classList.remove('hotdog');
 				root.classList.add('dark');
 			} else if ( theme === 'sanity' ) {
 				root.classList.remove('dark');
 				root.classList.remove('light');
+				root.classList.remove('hotdog');
 				root.classList.add('sanity');
+			} else if ( theme === 'hotdog' ) {
+				root.classList.remove('dark');
+				root.classList.remove('light');
+				root.classList.remove('sanity');
+				root.classList.add('hotdog');
 			}
 		</script>
 	</head>

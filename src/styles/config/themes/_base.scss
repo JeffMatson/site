@@ -29,8 +29,11 @@ $variables: (
     window-color-title-text: colors.$white,
     // border not functional yet but placeholder.
     window-color-border: colors.$gray-light,
+    window-color-nav-background: colors.$white,
+    window-color-nav-text: colors.$black,
 
     // Comments
+    comment-form-background-color: colors.$gray-light,
     comment-form-submit-padding: 3rem,
     comment-form-submit-font-size: 3rem,
     comment-form-submit-background-color: colors.$cyan,

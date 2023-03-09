@@ -23,7 +23,7 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
 
 	.browserWindow {
         box-shadow: variables.$shadow-offset;
-        background: colors.$gray-light;
+        background: var(--window-color-nav-background);
         padding: 3px;
         max-width: 920px;
         margin-left: auto;
