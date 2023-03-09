@@ -1,0 +1,28 @@
+
+.post-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	.post-item {
+
+		h2, h3, h4, h5, h6 {
+			margin: 0;
+		}
+
+		h2 a {
+			color: var(--color-h2);
+		}
+
+		h3 a {
+			color: var(--color-h3);
+		}
+
+		margin-top: 1rem;
+
+		.post-meta {
+			font-size: var(--font-size-sm);
+			color: var(--color-post-meta);
+		}
+	}
+}

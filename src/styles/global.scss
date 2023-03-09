@@ -9,25 +9,17 @@
 @use 'config/breakpoints';
 @use 'mixins';
 
+$theme-presets: 'dark', 'light', 'sanity', 'hotdog';
+
 html {
 	@include typography.responsive-type();
 
+	// Register themes.
 	@include themes.register-vars('base');
-
-	&.dark {
-		@include themes.register-vars('dark');
-	}
-
-	&.light {
-        @include themes.register-vars('light');
-    }
-
-	&.sanity {
-		@include themes.register-vars('sanity');
-	}
-
-	&.hotdog {
-		@include themes.register-vars('hotdog');
+	@each $theme-preset in $theme-presets {
+		&.#{$theme-preset} {
+			@include themes.register-vars($theme-preset);
+		}
 	}
 }
 
@@ -115,34 +107,4 @@ select {
 	border: none;
 	box-sizing: border-box;
 	padding: 3px 32px 3px 4px;
-}
-
-
-
-.post-list {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-
-	.post-item {
-
-		h2, h3, h4, h5, h6 {
-			margin: 0;
-		}
-
-		h2 a {
-			color: var(--color-h2);
-		}
-
-		h3 a {
-			color: var(--color-h3);
-		}
-
-		margin-top: 1rem;
-
-		.post-meta {
-			font-size: var(--font-size-sm);
-			color: var(--color-post-meta);
-		}
-	}
 }
