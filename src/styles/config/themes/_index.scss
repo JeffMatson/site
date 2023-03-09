@@ -4,6 +4,7 @@
 @use 'dark';
 @use 'light';
 @use 'sanity';
+@use 'hotdog';
 
 @function variables($theme: 'base') {
     @if ($theme == 'base') {
@@ -20,5 +21,9 @@
 
     @if ($theme == 'sanity') {
         @return map.merge(base.$variables, sanity.$variables);
+    }
+
+    @if ($theme == 'hotdog') {
+        @return map.merge(base.$variables, hotdog.$variables);
     }
 }

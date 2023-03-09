@@ -22,7 +22,18 @@ $variables: (
     font-h5: "'Tinos', 'Times New Roman', Times, serif",
     font-comments: "'Tinos', 'Times New Roman', Times, serif",
 
+    // Windows
+    window-font-title: "'Windows Regular', sans-serif",
+    window-color-background-left: colors.$windows-left,
+    window-color-background-right: colors.$windows-right,
+    window-color-title-text: colors.$white,
+    // border not functional yet but placeholder.
+    window-color-border: colors.$gray-light,
+    window-color-nav-background: colors.$white,
+    window-color-nav-text: colors.$black,
+
     // Comments
+    comment-form-background-color: colors.$gray-light,
     comment-form-submit-padding: 3rem,
     comment-form-submit-font-size: 3rem,
     comment-form-submit-background-color: colors.$cyan,

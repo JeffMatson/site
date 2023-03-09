@@ -1,7 +1,9 @@
 import { persistentAtom } from '@nanostores/persistent';
 import type { BooleanAsString } from '../types';
 
-export type ThemeStoreValue = 'light' | 'dark' | 'sanity' | undefined;
+export type ThemeStoreValue = 'light' | 'dark' | 'sanity' | 'hotdog' | undefined;
+
+export type PaletteStoreValue = '' | undefined;
 
 function getPreferredTheme(): ThemeStoreValue {
     if ( ! window ) {
@@ -16,21 +18,32 @@ function getPreferredTheme(): ThemeStoreValue {
 }
 
 const themeStore = persistentAtom<ThemeStoreValue>('theme', getPreferredTheme());
+const paletteStore = persistentAtom<PaletteStoreValue>('palette', undefined);
+
+// I should really just loop this. It's fine now, but it's gonna get annoying.
 themeStore.subscribe(val => {
     const root = document.documentElement;
     if (val === 'light') {
         root.classList.remove('dark');
         root.classList.remove('sanity');
+        root.classList.remove('hotdog');
         root.classList.add('light');
     } else if (val === 'dark') {
         root.classList.remove('light');
         root.classList.remove('sanity');
+        root.classList.remove('hotdog');
         root.classList.add('dark');
     } else if ( val === 'sanity' ) {
         root.classList.remove('dark');
         root.classList.remove('light');
+        root.classList.remove('hotdog');
         root.classList.add('sanity');
-    } else {
+    } else if ( val === 'hotdog' ) {
+        root.classList.remove('dark');
+        root.classList.remove('light');
+        root.classList.remove('sanity');
+        root.classList.add('hotdog');
+    }else {
         const prefers = getPreferredTheme();
     }
 });
@@ -52,9 +65,19 @@ function getTheme(): ThemeStoreValue {
     return themeStore.get();
 }
 
+function setPalette(palette: PaletteStoreValue) {
+    paletteStore.set(palette);
+}
+
+function getPalette(): PaletteStoreValue {
+    return paletteStore.get();
+}
+
 export {
     prefersReducedMotionStore,
     themeStore,
     setTheme,
+    setPalette,
     getTheme,
+    getPalette,
 };
