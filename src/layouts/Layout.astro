@@ -27,7 +27,11 @@ if ( Astro.props.entry ) {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png">
 		<title>{title}</title>
+		
 
 		<OpenGraph title={title} url={Astro.url.href} description={description} imagePath={image} />
 		<Schema props={Astro.props} />
