@@ -33,30 +33,20 @@ if ( Astro.props.entry ) {
 		<Schema props={Astro.props} />
 
 		<script is:inline>
-			// Hacky AF but prevents theme flash. YOLO.
+			// Better, and still prevents theme flash, but still not great.
 			const root  = document.documentElement;
 			const theme = localStorage.getItem('theme');
-			
-			if (theme === 'light') {
-				root.classList.remove('dark');
-				root.classList.remove('sanity');
-				root.classList.remove('hotdog');
-				root.classList.add('light');
-			} else if (theme === 'dark') {
-				root.classList.remove('light');
-				root.classList.remove('sanity');
-				root.classList.remove('hotdog');
-				root.classList.add('dark');
-			} else if ( theme === 'sanity' ) {
-				root.classList.remove('dark');
-				root.classList.remove('light');
-				root.classList.remove('hotdog');
-				root.classList.add('sanity');
-			} else if ( theme === 'hotdog' ) {
-				root.classList.remove('dark');
-				root.classList.remove('light');
-				root.classList.remove('sanity');
-				root.classList.add('hotdog');
+			const themeOptions = ['light', 'dark', 'sanity', 'hotdog'];
+
+			if ( themeOptions.includes(theme) ) {
+				for ( const themeOption of themeOptions ) {
+
+					root.classList.remove(themeOption);
+
+					if ( themeOption === theme ) {
+						root.classList.add(theme);
+					}
+				}
 			}
 		</script>
 	</head>

@@ -1,55 +1,37 @@
 import { persistentAtom } from '@nanostores/persistent';
-import type { BooleanAsString } from '../types';
-
-export type ThemeStoreValue = 'light' | 'dark' | 'sanity' | 'hotdog' | undefined;
+import { BooleanAsString, ThemeName } from '../types';
 
 export type PaletteStoreValue = '' | undefined;
 
-function getPreferredTheme(): ThemeStoreValue {
-    if ( ! window ) {
-        return 'dark';
-    }
-
-    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+function getPreferredTheme(): ThemeName {
+    if ( window && window.matchMedia('(prefers-color-scheme: light)').matches) {
         return 'light';
     }
 
     return 'dark';
 }
 
-const themeStore = persistentAtom<ThemeStoreValue>('theme', getPreferredTheme());
+const themeStore = persistentAtom<ThemeName>('theme', getPreferredTheme());
 const paletteStore = persistentAtom<PaletteStoreValue>('palette', undefined);
 
 // I should really just loop this. It's fine now, but it's gonna get annoying.
 themeStore.subscribe(val => {
+    const themeName = ThemeName.parse(val);
     const root = document.documentElement;
-    if (val === 'light') {
-        root.classList.remove('dark');
-        root.classList.remove('sanity');
-        root.classList.remove('hotdog');
-        root.classList.add('light');
-    } else if (val === 'dark') {
-        root.classList.remove('light');
-        root.classList.remove('sanity');
-        root.classList.remove('hotdog');
-        root.classList.add('dark');
-    } else if ( val === 'sanity' ) {
-        root.classList.remove('dark');
-        root.classList.remove('light');
-        root.classList.remove('hotdog');
-        root.classList.add('sanity');
-    } else if ( val === 'hotdog' ) {
-        root.classList.remove('dark');
-        root.classList.remove('light');
-        root.classList.remove('sanity');
-        root.classList.add('hotdog');
-    }else {
-        const prefers = getPreferredTheme();
-    }
+    
+    const themeOptions = ['light', 'dark', 'sanity', 'hotdog'];
+	if ( themeName && themeOptions.includes(themeName) ) {
+        for ( const themeOption of themeOptions ) {
+            root.classList.remove(themeOption);
+            if ( themeOption === themeName ) {
+                root.classList.add(themeName);
+            }
+        }
+	}
 });
 
 function getPrefersReducedMotion(): BooleanAsString {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         return 'true';
     }
 
@@ -57,11 +39,11 @@ function getPrefersReducedMotion(): BooleanAsString {
 }
 const prefersReducedMotionStore = persistentAtom<BooleanAsString>('reducedMotion', getPrefersReducedMotion());
 
-function setTheme(theme: ThemeStoreValue) {
+function setTheme(theme: ThemeName) {
     themeStore.set(theme);
 }
 
-function getTheme(): ThemeStoreValue {
+function getTheme(): ThemeName {
     return themeStore.get();
 }
 
