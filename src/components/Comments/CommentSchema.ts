@@ -21,7 +21,7 @@ export const CommentFormSubmission = z.object({
     created_at: z.string().refine(isISO8601),
     data: z.object({
         name: z.string(),
-        email: z.string().email(),
+        email: z.string().email().or(z.string().refine(str => str === '')),
         message: z.string(),
         url: z.string().url().or(z.string().refine(str => str === '')).optional()
     })
