@@ -31,6 +31,7 @@ if ( Astro.props.entry ) {
 		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
 		<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png">
 		<title>{title}</title>
+		<meta name="description" content={description} />
 		
 
 		<OpenGraph title={title} url={Astro.url.href} description={description} imagePath={image} />
