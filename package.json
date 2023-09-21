@@ -48,7 +48,7 @@
     "@astrojs/prefetch": "^0.1.2",
     "@astrojs/rss": "^2.1.1",
     "@nanostores/persistent": "^0.7.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "html-react-parser": "^3.0.9",
     "jsonld": "^8.1.0"
   }
