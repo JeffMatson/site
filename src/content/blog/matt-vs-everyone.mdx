@@ -1,0 +1,187 @@
+---
+title: "Matt Mullenweg Vs... Everyone?"
+description: "Matt attacked WP Engine, then the community fired back. Here are my thoughts on this dumpster fire and why we might be entering a very dangerous era for WordPress."
+date: "2024-9-24"
+comments: false
+---
+
+import { Image } from "astro:assets";
+import existential1 from "../../images/existential-threat-thread-1.jpg";
+import existential2 from "../../images/existential-threat-thread-2.jpg";
+import existential3 from "../../images/existential-threat-thread-3.jpg";
+import existential4 from "../../images/existential-threat-thread-4.jpg";
+import existential5 from "../../images/existential-threat-thread-5.jpg";
+
+**(For the new folks around here: you can disable the chaotic styles by using "Sanity Mode" up top.)**
+
+I feel like I've re-written this introductory paragraph a thousand times now. At this point, it's getting tiring.
+
+When it began, I was sitting on a plane, reflecting on the wonderful time I had at WordCamp US. As I typed feverishly for 5 hours throughout my first flight, my first draft was purely an exploration of thoughts. By the time the flight landed, more details had already begun to emerge; further solidifying those thoughts.
+
+That evening, I started getting a bit of a cough. By the next morning, I felt like I had been hit my a bus. Now, a few days later, I've mostly recovered.
+
+In just a few days, countless items have come to light regarding the Matt Vs. WP Engine situation. I've "feverishly" (pun intended har har har), been trying to keep up with everything. With cease and desist letters going out rapidly, I have an obligation to the community to get this out as quickly as possible, preferably before my broke ass gets slapped with one too.
+
+With that said, this post may be updated as I continue to digest more information. Speed is a priority right now. Since this entire site is [publicly available on GitHub](https://github.com/JeffMatson/site), feel free to check the commits for any updates. Additionally, I'll do my best to notate any changes within the copy as well.
+
+Obligatory disclaimer:
+
+- I am not a lawyer, do not claim to be, and none of this is legal advice.
+- Everything here is speculation.
+- This post is not in any way infludenced by anything other than my own personal observations.
+- Nothing here is proprietary information. All facts are backed with publicly available details.
+- I have previously worked as a full-time employee for Automattic, Pagely, and GoDaddy.
+- I _do_ own some Automattic stock (as many current and former Automattic employees do), in the form of [A12 shares](https://automattic.com/benefits/buying-and-selling-automattic-stock/) that I acquired when I worked there.
+
+Anyways, without further ado, let's get started.
+
+## Same Salt, Different Day
+
+For many of us, this isn't the first time that we've witnessed Matt have a tantrum about web hosts. Most notably, we saw it when Matt referred to GoDaddy as an “existential threat” while responding to me on an unrelated thread.
+
+Looking back at it now, it might be more related than I had initially thought.
+
+What most people don't know is that the thread that triggered him that time was intentional. Whether he was aware of it or not (I think he was, but who knows for sure), I was digging into a problem that I saw: Matt was attempting to use open source as a virtuous reason for why someone should support NewsPack, a closed SaaS platform (with some minor open source elements).
+
+I saw this and wanted to get to the root of it. Was it a fully (or at least mostly) FOSS platform with some proprietary elements, or was it a proprietary platform with minor FOSS elements? That's when he went on a rampage - against a company that I'd historically fought against and was actively trying to change from the inside.
+
+<div style="display:flex; max-width: 100%; flex-wrap:wrap; justify-content:center;">
+  <Image
+    src={existential1}
+    width={250}
+    alt="existential threat twitter thread - screenshot 1 of 5"
+  />
+  <Image
+    src={existential2}
+    width={250}
+    alt="existential threat twitter thread - screenshot 2 of 5"
+  />
+  <Image
+    src={existential3}
+    width={250}
+    alt="existential threat twitter thread - screenshot 3 of 5"
+  />
+  <Image
+    src={existential4}
+    width={250}
+    alt="existential threat twitter thread - screenshot 4 of 5"
+  />
+  <Image
+    src={existential5}
+    width={250}
+    alt="existential threat twitter thread - screenshot 5 of 5"
+  />
+</div>
+
+What does this have to do with the WP Engine situation? Patience, young padawan.
+
+First, let's get a few things out of the way. My personal views towards businesses in the FOSS space are as follows:
+
+- I have zero issue with companies who want to maintain proprietary platforms.
+- I have zero issue with for-profit companies who offer solutions that FOSS can solve.
+- What I have a problem with is using goodwill as a facade for business objectives.
+
+Of course, the longevity and success of WordPress is in the best interest of everyone who uses it, but how much does it really matter in the grand scope of things? For a company like Automattic, especially due to the exclusive trademark rights and inherent competitive advantages that come with it, it's critical. But for someone like Silver Lake, does it really even matter at all? Sure, if WordPress were to disappear one day, their employees would be laid off and they would close their doors, but it would be merely a bump in the road. They have significantly less stake. The same could be said for Automattic's multitude of investors as well.
+
+At the end of the day, if WordPress core were to go stagnant, it's the surrounding ecosystem that would keep it alive. In fact, I would argue that WordPress core is the _least_ significant piece of the puzzle. If it weren't WordPress hosting, plugins, themes, etc., it would be another CMS or framework. It's merely a tool in our arsenal - one that we customize for the benefit of ourselves and others.
+
+## Here's Where It Gets Weird
+
+Do I dislike WP Engine and their approach? Absolutely. But should they be punished for "not contributing enough"? Absolutely not. In fact, I don't think it has anything to do with it at all -- it's merely a false flag for something else entirely.
+
+Let's look at what Matt has specifically said: that it's been going on for 18 months.
+
+On April 12th, 2023 (a little over 17 months ago, at the time of writing), WP Engine announced that they would be directly integrating Stripe Connect:
+https://twitter.com/wpengine/status/1646166350572711940
+
+Now you're thinking, so what? Who cares? Even if it's more than a coincidence, why would he care? Let's look a little deeper.
+
+Let's look back at the last time that Matt flipped out on a host: when he responded to me on Twitter, calling GoDaddy an "existential threat to WordPress", and what was happening at that time.
+
+- May 19, 2020: [Automattic launches WooPayments](https://www.godaddy.com/resources/news/managed-woocommerce-stores-launch).
+- September 14th, 2020: [GoDaddy announced the acquisition of SkyVerge](https://www.prnewswire.com/news-releases/godaddy-acquires-skyverge-to-help-everyday-entrepreneurs-sell-online-with-wordpress-and-woocommerce-301130309.html) - one of, if not **the**, top WooCommerce extension provider.
+- June 15th, 2021: [GoDaddy officially announced the launch of GoDaddy Payments](https://www.prnewswire.com/news-releases/introducing-godaddy-payments-fast-and-secure-payments-for-small-businesses-301312606.html) - a payment processor that they explicitly state will be used for processing payments within WooCommerce and their other eCommerce payment solutions.
+- November 9th, 2021: [WooCommerce begins defaulting installs to WooPayments](https://github.com/woocommerce/woocommerce/blob/trunk/changelog.txt#L5312) _(Author note: this might be the wrong update. Not 100% sure. Will update if the details change.)_.
+- November 11th, 2021: [GoDaddy officially announces the acquisition of Pagely](https://www.prnewswire.com/news-releases/pagely-joins-godaddy-301422686.html) - who was, in my biased opinion, the de-facto standard when it comes to scalable WordPress hosting - explicitly stating the following: _"GoDaddy plans to build a world-class WooCommerce SaaS platform providing the highest levels of reliability, scalability, flexibility, security and performance."_.
+- June 23, 2022: the whole "GD is an existential threat" thing happens on Twitter. Matt uses the same reasoning against GoDaddy as he's using now against WP Engine.
+- December 6th, 2022, [GoDaddy officially launches their Managed WooCommerce Stores product to the public](https://www.godaddy.com/resources/news/managed-woocommerce-stores-launch), replacing the default Woo Payments provider with GoDaddy Payments.
+
+For those unaware, payment processing is serious business, even for those who are merely an "enabler" (for lack of a better word) for another processor like Stripe. Payment processors like Stripe, PayPal, etc. often kick back a percentage of fees back over to the creator of the integration - a pretty standard practice known as "revshare".
+
+This revshare model means that by using WooPayments, even though Stripe is processing the payment, Automattic is getting a kickback of each transaction fee. The same likely goes for WP Engine's Stripe integration - they most likely get a payout, based on the fees generated by users.
+
+Or, if you're GoDaddy Payments, you're probably getting revshare kickbacks on all of the payment processor integrations; plus 100% of fees for users who are using the native GoDaddy Payments integration.
+
+Again, this is purely speculation at this point - only Matt knows his true intentions, but it seems to becoming much clearer with each tantrum.
+
+### Revisions - this is your hill?
+
+Almost immediately after I got off of my first flight, Matt went on another rant on WordPress.org - this time focusing on post revisions. While my initial reaction was "really, this is your hill?!", the more I think about it, the more it starts to make sense.
+
+Within that post, he's explicitly making the argument that if default WordPress functionality is being overridden, it's "not WordPress".
+
+Now let's look at this from the perspective of the WooCommerce fiasco: if the same were applied to WooCommerce, he could argue that by changing the default payment gateway of WooCommerce from WooPayments to anything else, "it would no longer be WooCommerce.
+
+If he goes this route, it can be **extremely dangerous** for everyone in WordPress community. Most make their liveliehood on customizing WordPress and overriding defaults. **Whether you're selling plugins, themes, or professional services, you're almost certainly overriding some form of default functionality.**
+
+Again, I'm not a lawyer, but here's my unprofessional opinion: if this precedent is set, merely extending WordPress or any derivative work puts your business at risk.
+
+## Can We Deprecate the Dependency Conflicts Now?
+
+_(I wrote this section while on the plane, before other items came to light. Just a heads up: it might feel out of place, but I feel that it's still worth noting. Might move it later. Bear with me, please.)_
+
+The issues that I have with WP Engine are similar to what Matt mentioned - they put profit above all else. Like the vast majority of hosts out there, they overprovision servers, they nickel and dime their customers, and would much rather trade customer experience for a few extra bucks. I could say the same thing about GoDaddy, Bluehost/EIG/Newfold, or practically any other shared/containerized host out there.
+
+But in a competitive environment, does it really matter? Their customers have plenty of options, and are most certainly aware of at least a few other options. If their customers don't like it, they have no reason to stay.
+
+This is a stark contrast with Automattic, who holds exclusive rights to the WordPress trademark. While there is a distinct difference between WordPress.com and the open source WordPress software, most wouldn't know the difference - creating a drastic market advantage for Automattic and a vested interest in the name alone. If someone hears about Wix, they're going to go to Wix.com to check it out. If someone hears about WordPress, they're going to go to WordPress.com. They probably don't even know that it's possible to use WordPress otherwise.
+
+On top of this, we have a "benevolent dictator for life" who's able have the final decision across the for-profit Automattic and the open source WordPress software. While that's not _"automattically"_ a bad thing on it's own, it's impossible to to stay impartial. Especially when your competitors hold a large share of the market that your own investors desperately want to control.
+
+This brings me to what I think might be the real motivation: the threat of being overshadowed by competitors, despite the clear competitive advantage that you started with. The contribution concern may be real, but again, it's most likely far more influencened by other factors.
+
+Fight for your profit margins and market share all you want - just don't use FOSS as a shield while doing it.
+
+## Solutions
+
+_(Again, this was written on the plane. Thankfully, it still applies, so no need to rewrite it. [Check the GitHub commits](https://github.com/JeffMatson/site) for changes later.)_
+
+I know, that was a lot to take in. What do we do if we don't even know what the problem is? Or if it's even a problem at all? A bit at a time, I guess.
+
+Assuming that it _is_ genuinely an issue with contributions, throwing multiple tantrums certainly won't help. Cutting off their WordCamp sponsorships will do basically nothing. Punishment will only result in retaliation, possibly further reducing what they already contribute. Throwing around legal nonsense only costs everyone morey money - nobody wins.
+
+How do you motivate a VC who's only motivation is ROI? Better ROI.
+
+What if a solution existed that _made them more money_ for directly contributing to WordPress. Although instituting a solution that aims to make WP Engine more profitable would be directly at odds with "Automattic Matt's" goals, it would solve "WordPress Foundation Matt's" concerns about sponsoring contributors.
+
+What solution is that? I'm not sure yet. I told Matt that I'd be willing to help if he's willing to listen, but clearly, he would rather act like a child.
+
+### Hey WP Engine, Here's An Idea
+
+For WP Engine, I have a proposal for you:
+
+Matt offered to return your money. Do it, then redistribute it out to members of the WordPress community who bring value.
+
+Donate to wonderful efforts like [HeroPress](https://heropress.com). Sponsor content creators like [WP Sessions](https://wpsessions.com). Send people out to WordPress events of their choosing. Take it back from Matt, then give it back to the community - the ones who appreciate it the most.
+
+Plus, you've now gained even more ROI on your sponsorship. You get a snarky-ass response to Matt's hissy fit, he can't use refunding your money against you, and you get to do more good in the community. Sounds like a win-win to wrap it all up.
+
+Feel free to reach out. Will I back you wholeheartedly? No. But I'm happy to back you if it means benefiting the community and WordPress ecosystem as a whole.
+
+### Hey Matt, Can We Fix This?
+
+Dude. Stop trying to be everything, all at once. Pick something.
+
+What do you want to be when you grow up? Do you want to be remembered for democratizing publishing? Running a successful business? Making cool shit? Pick one. Right now, your legacy is as a CEO man-child who throws tantrums in the middle of conferences.
+
+What happened to the old Matt? The pre-pandemic Matt? The Matt who treated people with respect? The Matt who genuinely wanted to democratize publishing? That Matt was one that I believed in. I miss that Matt.
+
+In an effort to show goodwill towards your employees, I have a suggestion for you: publicly state that you **will not** retaliate against any Automattic/Audrey Capital/etc. employees who speak up against you. Rumors are flying - let's clarify your intentions.
+
+## What's Next?
+
+Frankly, I'm concerned. This isn't the first time something like this has happened, and it certainly won't be the last. Many of us have known about or witnessed the selective criticism that comes with Matt's personal vendettas overflowing into the WordPress Foundation, especially when it comes to top tier sponsorships, but it's getting worse. Far worse.
+
+The silver lining is that we, the community, have the power to overthrow the WordPress' benevolent dictator for life, even if we can't remove him from his throne. WordPress' success has never been in the software itself, but in the ecosystem and community around it.
+
+Let him sit on that throne - without us, it will rot.
