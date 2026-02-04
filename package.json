@@ -19,7 +19,6 @@
     "@astrojs/react": "^3.6.2",
     "@astrojs/sitemap": "^3.1.6",
     "@nanostores/react": "^0.4.1",
-    "@netlify/functions": "^1.4.0",
     "@playwright/test": "^1.31.2",
     "@types/jsonld": "^1.5.8",
     "@types/md5": "^2.3.2",
@@ -43,7 +42,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
-    "@astrojs/netlify": "^5.5.3",
+    "@astrojs/cloudflare": "^11.2.0",
     "@astrojs/partytown": "^2.1.2",
     "@astrojs/prefetch": "^0.4.1",
     "@astrojs/rss": "^4.0.7",
