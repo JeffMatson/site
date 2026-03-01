@@ -9,13 +9,13 @@ const schema: Schema = {
 
 if (props.entry) {
 	if (props.entry.collection === 'single' || props.entry.collection === 'blog') {
-		schema.type = 'Article';
+		schema['@type'] = 'Article';
 	}
 
 	if (props.entry.data) {
 		const { data } = props.entry;
 
-		if (data.title && schema.type === 'Article') {
+		if (data.title && schema['@type'] === 'Article') {
 			schema.headline = data.title;
 			schema.title = data.title;
 		}
@@ -25,7 +25,7 @@ if (props.entry) {
 
 			if (author) {
 				const authorSchema = {
-					'@type': 'Author',
+					'@type': 'Person',
 					name: author.data.name,
 					description: author.data.description,
 					knowsAbout: author.data.knowsAbout,

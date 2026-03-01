@@ -28,7 +28,7 @@ interface AnnoyBox {
 	ButtonContainer: FunctionComponent<{ children: ReactElement }>;
 	Button: FunctionComponent<{
 		action: (id: string) => void;
-		AnnoyBoxId: string;
+		annoyBoxId: string;
 		title: string;
 	}>;
 }
@@ -73,7 +73,7 @@ const AnnoyBox: AnnoyBox = {
 	ButtonContainer: ({ children }) => {
 		return <div className={styles.buttonContainer}>{children}</div>;
 	},
-	Button: ({ action, AnnoyBoxId, title }) => {
+	Button: ({ action, annoyBoxId, title }) => {
 		let buttonAction = action;
 
 		if (action === undefined) {
@@ -81,7 +81,7 @@ const AnnoyBox: AnnoyBox = {
 		}
 
 		return (
-			<button type="button" onClick={() => buttonAction(AnnoyBoxId)}>
+			<button type="button" onClick={() => buttonAction(annoyBoxId)}>
 				{title}
 			</button>
 		);

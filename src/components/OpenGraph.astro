@@ -1,5 +1,5 @@
 ---
-const { title, description, imagePath } = Astro.props;
+const { title, description, imagePath, ogType = 'website' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 let ogImage = new URL('images/featured/default.png', Astro.site);
@@ -8,7 +8,7 @@ if (imagePath !== undefined) {
 }
 ---
 
-<meta property="og:type" content="article" />
+<meta property="og:type" content={ogType} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalURL} />

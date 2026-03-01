@@ -17,8 +17,8 @@ export default function YouWon(props) {
 
 	return (
 		<div className="sanityModeHidden" style={wrapperStyles}>
-			<button type="button" onClick={() => createAnnoyBox(true)} style={{ all: 'unset', cursor: 'pointer' }}>
-				<img src="/images/you-won.svg" alt="ugly fake you won popup ad banner" />
+			<button type="button" onClick={() => createAnnoyBox(true)} style={{ all: 'unset', cursor: 'pointer', display: 'block', width: '100%' }}>
+				<img src="/images/you-won.svg" alt="ugly fake you won popup ad banner" style={{ width: '100%', height: 'auto' }} />
 			</button>
 
 			{Object.keys(annoyBoxes).map((annoyBoxId) => {

@@ -15,10 +15,9 @@ export function removeAnnoyBox(annoyBoxId: string) {
 	const currentBoxes = annoyBoxStore.get();
 
 	if (annoyBoxId in currentBoxes) {
-		delete currentBoxes[annoyBoxId];
+		const { [annoyBoxId]: _, ...remaining } = currentBoxes;
+		annoyBoxStore.set(remaining);
 	}
-
-	annoyBoxStore.set(currentBoxes);
 }
 
 export function removeAllAnnoyBoxes() {
