@@ -13,7 +13,7 @@ pnpm dev              # Start dev server (generates tokens first)
 pnpm build            # Production build (generates tokens first, output: dist/)
 pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
 pnpm test             # Run Vitest in watch mode
-pnpm test:run         # Run tests once
+pnpm test:run         # Run tests once (test/pages/ Playwright tests excluded, require pre-built dist/)
 pnpm coverage         # Run tests with coverage
 pnpm test-ui          # Interactive Vitest UI
 pnpm lint             # Check for lint and format issues
@@ -33,6 +33,7 @@ pnpm format:mdx       # Format MDX files only
 - **Astro files:** Experimental support. Several lint rules (`noUnusedVariables`, `noUnusedImports`, `noExplicitAny`, `noImplicitAnyLet`, `organizeImports`) are disabled for `.astro` files because Biome cannot see into the template section — variables/imports that appear unused in frontmatter are often used in the HTML template
 - **MDX files:** Formatted by Prettier (handles both prose and embedded JSX/imports)
 - Run `pnpm lint` before committing. Use `pnpm lint:fix` to auto-fix safe issues
+- **Gotcha:** Biome enforces import ordering (`organizeImports`). After adding imports to `.tsx`/`.jsx` files, run `pnpm lint:fix` to auto-sort them
 - **Gotcha:** Never run `biome check --write` or `--unsafe` on `.astro` files without reviewing the diff — Biome will remove imports and rename variables that are used in the template section but appear unused in the frontmatter
 
 ## Architecture
@@ -67,6 +68,7 @@ File-based routing via `src/pages/`:
 Client-side state uses **Nanostores** with `@nanostores/persistent` for localStorage persistence:
 - `src/stores/themeStore.ts` — Theme selection (light/dark/sanity/hotdog), palette, reduced motion preference
 - `src/stores/annoyBoxStore.ts` — Interactive popup/annoyance box state
+- **Gotcha:** `nanostores` `map.get()` returns the internal state reference. Never mutate it directly — always spread into a new object before calling `.set()`, otherwise subscribers won't be notified (identity check in `.set()`)
 
 ### Styling
 
@@ -81,7 +83,7 @@ Plain CSS with a TypeScript design token pipeline — no Sass dependency:
 - **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`**`-based modular scale, 16px base, 1.2 ratio)
 - **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
 
-Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash. Components consume theme tokens via `var(--token-name)`.
+Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash. Components consume theme tokens via `var(--token-name)`. The theme names array in Layout.astro's `is:inline` script is intentionally duplicated from `tokens.ts` — inline scripts cannot import ES modules.
 
 To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm generate-tokens` to regenerate the CSS. `src/styles/tokens.css` is gitignored — never edit it directly. Astro `<style>` blocks use plain CSS with native nesting — do not add `lang="scss"`.
 
@@ -99,4 +101,4 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 ## Deployment
 
-Pushes to `master` trigger GitHub Actions → builds with pnpm + Node 22 → deploys to Cloudflare Pages via Wrangler.
+Pushes to `master` trigger GitHub Actions → lint → test → build with pnpm + Node 22 → deploys to Cloudflare Pages via Wrangler.
