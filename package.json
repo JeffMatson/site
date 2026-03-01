@@ -36,7 +36,7 @@
     "react-dom": "^19.2.4",
     "sass": "^1.97.3",
     "vitest": "^4.0.18",
-    "zod": "^3.24.0"
+    "zod": "^4.3.6"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",

@@ -23,8 +23,8 @@ const blogCollection = defineCollection({
     description: z.string().default(""),
     date: z
       .string()
-      .transform((str) => new Date(str))
-      .default(new Date().toISOString()),
+      .default(new Date().toISOString())
+      .transform((str) => new Date(str)),
     author: z.string().default("jeffmatson"),
     image: z.string().optional(),
   }),
