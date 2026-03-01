@@ -1,0 +1,16 @@
+{
+	"useTabs": true,
+	"tabWidth": 4,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"printWidth": 120,
+	"semi": true,
+	"overrides": [
+		{
+			"files": "*.mdx",
+			"options": {
+				"parser": "mdx"
+			}
+		}
+	]
+}
