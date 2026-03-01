@@ -35,7 +35,7 @@ export function iso8601ToString(iso8601: string) {
 export function emailToGravatar(email: string) {
 	const emailMd5 = md5(email);
 	return {
-		tiny: `http://www.gravatar.com/avatar/${emailMd5}?s=20`,
-		normal: `http://www.gravatar.com/avatar/${emailMd5}`,
+		tiny: `https://www.gravatar.com/avatar/${emailMd5}?s=20`,
+		normal: `https://www.gravatar.com/avatar/${emailMd5}`,
 	};
 }

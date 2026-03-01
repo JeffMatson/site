@@ -21,10 +21,7 @@ const blogCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().default(''),
-		date: z
-			.string()
-			.default(new Date().toISOString())
-			.transform((str) => new Date(str)),
+		date: z.string().transform((str) => new Date(str)),
 		author: z.string().default('jeffmatson'),
 		image: z.string().optional(),
 	}),

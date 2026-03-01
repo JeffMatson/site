@@ -25,4 +25,11 @@
         0%   { transform: translate(0, 0); }
         100% { transform: translate(-100%, 0); }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+        .inner {
+            animation: none;
+            padding-left: 0;
+        }
+    }
 </style>

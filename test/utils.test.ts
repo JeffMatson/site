@@ -40,8 +40,8 @@ describe('Test utility functions: utils.ts', () => {
 
     test('email to gravatar', () => {
         expect(emailToGravatar('foo@bar.com')).toEqual({
-            tiny: 'http://www.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?s=20',
-            normal: 'http://www.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
+            tiny: 'https://www.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?s=20',
+            normal: 'https://www.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
         });
     });
 

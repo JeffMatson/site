@@ -15,10 +15,10 @@
     "test:run": "vitest run",
     "coverage": "vitest run --coverage",
     "test-ui": "vitest --ui",
-    "lint": "biome check src/ scripts/ && prettier --check src/**/*.mdx",
-    "lint:fix": "biome check --write src/ scripts/ && prettier --write src/**/*.mdx",
-    "format": "biome format --write src/ scripts/ && prettier --write src/**/*.mdx",
-    "format:mdx": "prettier --write src/**/*.mdx"
+    "lint": "biome check src/ scripts/ && prettier --check 'src/**/*.mdx'",
+    "lint:fix": "biome check --write src/ scripts/ && prettier --write 'src/**/*.mdx'",
+    "format": "biome format --write src/ scripts/ && prettier --write 'src/**/*.mdx'",
+    "format:mdx": "prettier --write 'src/**/*.mdx'"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.13",

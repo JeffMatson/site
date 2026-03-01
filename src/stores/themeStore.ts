@@ -1,4 +1,5 @@
 import { persistentAtom } from '@nanostores/persistent';
+import { themeNames } from '../styles/tokens';
 import { type BooleanAsString, ThemeName } from '../types';
 
 export type PaletteStoreValue = '' | undefined;
@@ -20,7 +21,7 @@ themeStore.subscribe((val) => {
 	const themeName = ThemeName.parse(val);
 	const root = document.documentElement;
 
-	const themeOptions = ['light', 'dark', 'sanity', 'hotdog'];
+	const themeOptions = Array.from(themeNames);
 	if (themeOptions.includes(themeName)) {
 		for (const themeOption of themeOptions) {
 			root.classList.remove(themeOption);
