@@ -27,7 +27,7 @@ if (!Title) {
 
         return (
             <article class="post-item">
-                <Title class="post-title"><a href={`/blog/${postSlug}`}>{postTitle}</a></Title>
+                <Title class="post-title"><a href={`/blog/${postSlug}/`}>{postTitle}</a></Title>
                 <div class="post-meta">
                     Published on <time datetime={postISOString}>{postDateString}</time> by {postAuthor && postAuthor.data.name}
                 </div>

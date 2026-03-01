@@ -12,7 +12,7 @@ const blogEntriesByDate = blogEntries.sort((a, b) => {
 const excerpt = "Thoughts about tech, life, work, and various projects I'm working on.";
 ---
 
-<Layout title={title}>
+<Layout title={title} description={excerpt}>
     <BrowserWindow showTopNav title={title}>
 
         <div slot="title">{title}</div>

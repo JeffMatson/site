@@ -6,8 +6,7 @@ import Schema from '@components/Schema.astro';
 
 const { title } = Astro.props;
 
-// @todo: Fix this later.
-let description = '';
+let description = Astro.props.description || '';
 let image;
 let ogType = 'website';
 if (Astro.props.entry) {
@@ -23,6 +22,8 @@ if (Astro.props.entry) {
 		ogType = 'article';
 	}
 }
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!DOCTYPE html>
@@ -37,7 +38,7 @@ if (Astro.props.entry) {
 		<link rel="apple-touch-icon-precomposed" sizes="180x180" href="/apple-touch-icon-precomposed.png">
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		
+		<link rel="canonical" href={canonicalURL} />
 
 		<OpenGraph title={title} url={Astro.url.href} description={description} imagePath={image} ogType={ogType} />
 		<Schema props={Astro.props} />
