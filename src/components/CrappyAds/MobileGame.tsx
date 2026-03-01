@@ -1,4 +1,4 @@
-import styles from './CrappyAds.module.scss';
+import styles from './CrappyAds.module.css';
 
 const MobileGame = {
     title: 'Play our shitty mobile game!',

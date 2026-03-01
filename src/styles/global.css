@@ -1,26 +1,12 @@
 @charset "UTF-8";
 
-@use "config/fonts";
-@use "typography";
-@use "config/variables";
-@use "config/colors";
-@use "functions";
-@use "themes";
-@use "config/breakpoints";
-@use "mixins";
+@import './tokens.css';
+@import './fonts.css';
 
-$theme-presets: "dark", "light", "sanity", "hotdog";
-
-html {
-  @include typography.responsive-type();
-
-  // Register themes.
-  @include themes.register-vars("base");
-  @each $theme-preset in $theme-presets {
-    &.#{$theme-preset} {
-      @include themes.register-vars($theme-preset);
-    }
-  }
+/* Base font */
+body,
+select {
+  font-family: "Windows Regular";
 }
 
 body {
@@ -29,6 +15,7 @@ body {
   min-width: fit-content;
 }
 
+/* Headings: color from theme tokens, font-size from fluid type tokens */
 h1 {
   color: var(--color-h1);
   font-size: var(--font-size-xxxl);
@@ -38,6 +25,7 @@ h1 {
 h2 {
   color: var(--color-h2);
   font-size: var(--font-size-xxl);
+  font-family: var(--font-h2);
 
   a {
     color: var(--color-h2);
@@ -47,11 +35,13 @@ h2 {
 h3 {
   color: var(--color-h3);
   font-size: var(--font-size-xl);
+  font-family: var(--font-h3);
 }
 
 h4 {
   color: var(--color-h4);
   font-size: var(--font-size-lg);
+  font-family: var(--font-h4);
 }
 
 h5 {
@@ -63,6 +53,7 @@ a {
   color: var(--color-a);
 }
 
+/* List bullet image for dark/light themes */
 .dark .primary-content ul,
 .light .primary-content ul {
   list-style-image: var(--li-image);
@@ -81,30 +72,70 @@ a {
 }
 
 .container {
-  max-width: breakpoints.get-single("lg");
+  max-width: 992px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.sanity {
-  .sanityModeHidden {
-    display: none;
-  }
+/* Sanity mode: normalize fonts, hide decorative elements */
+.sanity h1,
+.sanity h2,
+.sanity h3,
+.sanity h4,
+.sanity h5,
+.sanity h6,
+.sanity p {
+  font-family: sans-serif;
 }
 
-select {
-  @include mixins.appearance(none);
+.sanity .sanityModeHidden {
+  display: none;
+}
 
+/* Win95-style select dropdown */
+select {
+  appearance: none;
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='16' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 0H0v16h1V1h14V0z' fill='%23DFDFDF'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 1H1v14h1V2h12V1H2z' fill='%23fff'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 17H0v-1h15V0h1v17z' fill='%23000'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 1h-1v14H1v1h14V1z' fill='gray'/%3E%3Cpath fill='silver' d='M2 2h12v13H2z'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11 6H4v1h1v1h1v1h1v1h1V9h1V8h1V7h1V6z' fill='%23000'/%3E%3C/svg%3E");
   background-position: top 2px right 2px;
   background-repeat: no-repeat;
   background-color: var(--color-background);
   color: var(--color-text);
-  box-shadow: variables.$shadow-inset;
+  box-shadow: var(--shadow-inset);
   border-radius: 0;
-  padding-right: 32px;
   position: relative;
   border: none;
   box-sizing: border-box;
   padding: 3px 32px 3px 4px;
+}
+
+/* Post list */
+.post-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.post-list .post-item {
+  margin-top: 1rem;
+}
+
+.post-list .post-item h2,
+.post-list .post-item h3,
+.post-list .post-item h4,
+.post-list .post-item h5,
+.post-list .post-item h6 {
+  margin: 0;
+}
+
+.post-list .post-item h2 a {
+  color: var(--color-h2);
+}
+
+.post-list .post-item h3 a {
+  color: var(--color-h3);
+}
+
+.post-list .post-item .post-meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-post-meta);
 }

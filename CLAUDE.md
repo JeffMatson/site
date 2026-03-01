@@ -9,12 +9,13 @@ Personal portfolio site (jeffmatson.net) built with Astro 5. Intentionally embra
 ## Commands
 
 ```bash
-pnpm dev          # Start dev server
-pnpm build        # Production build (output: dist/)
-pnpm test         # Run Vitest in watch mode
-pnpm test:run     # Run tests once
-pnpm coverage     # Run tests with coverage
-pnpm test-ui      # Interactive Vitest UI
+pnpm dev              # Start dev server (generates tokens first)
+pnpm build            # Production build (generates tokens first, output: dist/)
+pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
+pnpm test             # Run Vitest in watch mode
+pnpm test:run         # Run tests once
+pnpm coverage         # Run tests with coverage
+pnpm test-ui          # Interactive Vitest UI
 ```
 
 No linter or formatter is configured.
@@ -54,13 +55,20 @@ Client-side state uses **Nanostores** with `@nanostores/persistent` for localSto
 
 ### Styling
 
-SCSS with a theme system based on CSS custom properties:
-- `src/styles/global.scss` — Global styles entry point
-- `src/styles/config/themes/` — Theme definitions (light, dark, sanity, hotdog)
-- Component-scoped styles use CSS Modules (`.module.scss`)
-- Design uses Windows 95-style beveled shadows and retro color palette
+Plain CSS with a TypeScript design token pipeline — no Sass dependency:
 
-Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash.
+- **Token source of truth:** `src/styles/tokens.ts` — typed color, theme, typography, and shadow definitions
+- **Generated CSS:** `src/styles/tokens.css` — auto-generated via `pnpm generate-tokens` using CSS `@layer` for cascade control
+- **Global styles:** `src/styles/global.css` — imports tokens.css and fonts.css, defines element and component styles
+- **Font declarations:** `src/styles/fonts.css` — `@font-face` rules for Windows Regular, Comic Neue, Papyrus, Tinos
+- **Component styles:** Astro scoped `<style>` blocks and CSS Modules (`.module.css`) for React islands
+- **4 themes:** dark (default), light, sanity (accessibility mode), hotdog — defined as typed override maps in tokens.ts, merged via `{ ...base, ...overrides }` spread
+- **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`Math.pow`-based modular scale, 16px base, 1.2 ratio)
+- **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
+
+Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash. Components consume theme tokens via `var(--token-name)`.
+
+To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm generate-tokens` to regenerate the CSS. `src/styles/tokens.css` is gitignored — never edit it directly. Astro `<style>` blocks use plain CSS with native nesting — do not add `lang="scss"`.
 
 ### TypeScript Path Aliases
 
@@ -72,7 +80,7 @@ Theme is applied by setting a class on `<html>` — an inline script in `Layout.
 
 ### Key Types
 
-`src/types.ts` defines shared Zod schemas: `ThemeName` (light | dark | sanity | hotdog) and `BooleanAsString`.
+`src/types.ts` defines shared Zod schemas: `ThemeName` (derived from `tokens.ts` via `z.enum(themeNames)`) and `BooleanAsString`. To add a theme, add it to `themeNames` in `tokens.ts` — the Zod schema updates automatically.
 
 ## Deployment
 

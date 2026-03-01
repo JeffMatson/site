@@ -25,6 +25,9 @@ pnpm-debug.log*
 # Astro
 .astro/
 
+# Generated files
+src/styles/tokens.css
+
 # Testing
 coverage/
 /test-results/

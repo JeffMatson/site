@@ -1,4 +1,4 @@
-import styles from './CrappyAds.module.scss';
+import styles from './CrappyAds.module.css';
 
 const STD = {
         title: 'Your computer might have an STD!',

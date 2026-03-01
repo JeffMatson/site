@@ -17,12 +17,9 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
     </div>
 </div>
 
-<style lang="scss">
-	@use '../../styles/config/variables';
-    @use '../../styles/config/colors';
-
+<style>
 	.browserWindow {
-        box-shadow: variables.$shadow-offset;
+        box-shadow: var(--shadow-offset);
         background: var(--window-color-nav-background);
         padding: 3px;
         max-width: 920px;
@@ -51,7 +48,7 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
             background-color: var(--color-background);
             color: var(--color-text);
             font-family: var(--font-normal);
-            box-shadow: variables.$shadow-inset
+            box-shadow: var(--shadow-inset);
         }
     }
 </style>

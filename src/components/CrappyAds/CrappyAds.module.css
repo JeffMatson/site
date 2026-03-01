@@ -1,5 +1,3 @@
-@use '../../styles/config/variables' as *;
-
 .textContainer {
     padding: 1rem;
 }

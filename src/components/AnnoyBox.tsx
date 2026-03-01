@@ -9,7 +9,7 @@ import type { FunctionComponent, ReactElement } from "react";
 
 import boldStrategy from "../images/bold-strategy.gif";
 
-import styles from "./YouWon.module.scss";
+import styles from "./YouWon.module.css";
 
 interface PositionCoordinates {
   x: number;

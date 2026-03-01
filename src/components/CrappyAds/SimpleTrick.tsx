@@ -1,4 +1,4 @@
-import styles from './CrappyAds.module.scss';
+import styles from './CrappyAds.module.css';
 
 const SimpleTrick = {
     title: 'This one simple trick...',

@@ -5,9 +5,10 @@
   "packageManager": "pnpm@10.30.3",
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "generate-tokens": "tsx scripts/generate-tokens.ts",
+    "dev": "pnpm generate-tokens && astro dev",
+    "start": "pnpm generate-tokens && astro dev",
+    "build": "pnpm generate-tokens && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest",
@@ -34,7 +35,7 @@
     "playwright": "^1.58.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "sass": "^1.97.3",
+    "tsx": "^4.21.0",
     "vitest": "^4.0.18",
     "zod": "^4.3.6"
   },

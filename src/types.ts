@@ -1,11 +1,8 @@
 import { z } from 'zod';
+import { themeNames } from './styles/tokens';
 
 export const BooleanAsString = z.literal('true').or(z.literal('false'));
 export type BooleanAsString = z.infer<typeof BooleanAsString>;
 
-export const ThemeName = z.literal('light')
-    .or(z.literal('dark'))
-    .or(z.literal('sanity'))
-    .or(z.literal('hotdog'))
-    .optional();
+export const ThemeName = z.enum(themeNames).optional();
 export type ThemeName = z.infer<typeof ThemeName>;

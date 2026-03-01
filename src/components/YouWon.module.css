@@ -1,14 +1,11 @@
-@use '../styles/config/colors';
-@use '../styles/config/variables';
-
 .annoyBox {
     position: fixed;
-    background-color: colors.$gray-light;
+    background-color: #bebebe;
 }
 
 .browserWindow {
-    box-shadow: variables.$shadow-offset;
-    background-color: colors.$gray-light;
+    box-shadow: var(--shadow-offset);
+    background-color: #bebebe;
     padding: 3px;
 }
 
@@ -25,17 +22,17 @@
 }
 
 .title {
-    background-color: colors.$blue;
-    color: colors.$white;
+    background-color: #0000ff;
+    color: #ffffff;
     font-weight: bold;
     padding: 3px;
 }
 
 .contentContainer {
-    background-color: colors.$gray-light;
+    background-color: #bebebe;
     padding: 1rem;
-    box-shadow: variables.$shadow-inset;
-    color: colors.$black;
+    box-shadow: var(--shadow-inset);
+    color: #000000;
 
     p {
         margin: 0;
@@ -51,8 +48,8 @@
     padding-bottom: 5px;
 
     button {
-        box-shadow: variables.$shadow-offset;
-        background-color: colors.$gray-light;
+        box-shadow: var(--shadow-offset);
+        background-color: #bebebe;
         border: 0;
         padding: 0.5rem;
         font-family: 'Windows Regular';
