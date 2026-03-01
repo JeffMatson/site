@@ -11,9 +11,11 @@ import PBJellyGif from '../images/pbjelly.gif';
 import framePic from '../images/frame-pic.png';
 import PostList from '@components/PostList.astro';
 
-const title = 'Jeff Matson\'s Super Rad Home Page';
-const blogEntries = await getCollection('blog')
-const blogEntriesByDate = blogEntries.sort((a, b) => { return new Date(b.data.date).getTime() - new Date(a.data.date).getTime() });
+const title = "Jeff Matson's Super Rad Home Page";
+const blogEntries = await getCollection('blog');
+const blogEntriesByDate = blogEntries.sort((a, b) => {
+	return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
 ---
 
 <Layout title={title}>

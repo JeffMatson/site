@@ -6,8 +6,10 @@ import PostList from '@components/PostList.astro';
 
 const title = 'Blog';
 const blogEntries = await getCollection('blog');
-const blogEntriesByDate = blogEntries.sort((a, b) => { return new Date(b.data.date).getTime() - new Date(a.data.date).getTime() });
-const excerpt = 'Thoughts about tech, life, work, and various projects I\'m working on.';
+const blogEntriesByDate = blogEntries.sort((a, b) => {
+	return new Date(b.data.date).getTime() - new Date(a.data.date).getTime();
+});
+const excerpt = "Thoughts about tech, life, work, and various projects I'm working on.";
 ---
 
 <Layout title={title}>

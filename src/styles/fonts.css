@@ -1,95 +1,95 @@
 /**
-* Windows Regular
-*/
+ * Windows Regular
+ */
 @font-face {
-  font-family: "Windows Regular";
-  font-style: normal;
-  font-weight: 1 1000;
-  src: url("/fonts/windows-regular.ttf") format("truetype");
+	font-family: "Windows Regular";
+	font-style: normal;
+	font-weight: 1 1000;
+	src: url("/fonts/windows-regular.ttf") format("truetype");
 }
 
 /**
-* Comic Neue
-*/
+ * Comic Neue
+ */
 @font-face {
-  font-family: "Comic Neue";
-  font-style: normal;
-  font-weight: 300;
-  src: url("/fonts/ComicNeue-Light.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: normal;
+	font-weight: 300;
+	src: url("/fonts/ComicNeue-Light.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Comic Neue";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/ComicNeue-Regular.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/fonts/ComicNeue-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Comic Neue";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/ComicNeue-Bold.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: normal;
+	font-weight: 700;
+	src: url("/fonts/ComicNeue-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Comic Neue";
-  font-style: italic;
-  font-weight: 300;
-  src: url("/fonts/ComicNeue-LightItalic.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: italic;
+	font-weight: 300;
+	src: url("/fonts/ComicNeue-LightItalic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Comic Neue";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/fonts/ComicNeue-Italic.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: italic;
+	font-weight: 400;
+	src: url("/fonts/ComicNeue-Italic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Comic Neue";
-  font-style: italic;
-  font-weight: 700;
-  src: url("/fonts/ComicNeue-BoldItalic.ttf") format("truetype");
-}
-
-/**
-* Papyrus
-*/
-@font-face {
-  font-family: "Papyrus";
-  font-style: normal;
-  font-weight: 1 1000;
-  src: url("/fonts/papyrus.ttf") format("truetype");
+	font-family: "Comic Neue";
+	font-style: italic;
+	font-weight: 700;
+	src: url("/fonts/ComicNeue-BoldItalic.ttf") format("truetype");
 }
 
 /**
-* Tinos
-*/
+ * Papyrus
+ */
 @font-face {
-  font-family: "Tinos";
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/Tinos-Regular.ttf") format("truetype");
+	font-family: "Papyrus";
+	font-style: normal;
+	font-weight: 1 1000;
+	src: url("/fonts/papyrus.ttf") format("truetype");
+}
+
+/**
+ * Tinos
+ */
+@font-face {
+	font-family: "Tinos";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/fonts/Tinos-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Tinos";
-  font-style: normal;
-  font-weight: 700;
-  src: url("/fonts/Tinos-Bold.ttf") format("truetype");
+	font-family: "Tinos";
+	font-style: normal;
+	font-weight: 700;
+	src: url("/fonts/Tinos-Bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Tinos";
-  font-style: italic;
-  font-weight: 400;
-  src: url("/fonts/Tinos-Italic.ttf") format("truetype");
+	font-family: "Tinos";
+	font-style: italic;
+	font-weight: 400;
+	src: url("/fonts/Tinos-Italic.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "Tinos";
-  font-style: italic;
-  font-weight: 700;
-  src: url("/fonts/Tinos-BoldItalic.ttf") format("truetype");
+	font-family: "Tinos";
+	font-style: italic;
+	font-weight: 700;
+	src: url("/fonts/Tinos-BoldItalic.ttf") format("truetype");
 }

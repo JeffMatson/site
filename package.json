@@ -14,12 +14,16 @@
     "test": "vitest",
     "test:run": "vitest run",
     "coverage": "vitest run --coverage",
-    "test-ui": "vitest --ui"
+    "test-ui": "vitest --ui",
+    "lint": "biome check src/ scripts/",
+    "lint:fix": "biome check --write src/ scripts/",
+    "format": "biome format --write src/ scripts/"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
+    "@biomejs/biome": "^2.4.4",
     "@nanostores/react": "^1.0.0",
     "@playwright/test": "^1.58.2",
     "@types/md5": "^2.3.6",

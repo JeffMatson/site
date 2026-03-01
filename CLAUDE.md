@@ -16,9 +16,20 @@ pnpm test             # Run Vitest in watch mode
 pnpm test:run         # Run tests once
 pnpm coverage         # Run tests with coverage
 pnpm test-ui          # Interactive Vitest UI
+pnpm lint             # Check for lint and format issues
+pnpm lint:fix         # Auto-fix lint and format issues
+pnpm format           # Auto-format code
 ```
 
-No linter or formatter is configured.
+### Linting & Formatting
+
+**Biome** handles both linting and formatting. Configuration is in `biome.json`. A parent config at `~/biome.json` is also inherited.
+
+- **Formatting:** Tabs, indent width 4, line width 120, single quotes, trailing commas
+- **Linting:** Recommended rules enabled for JS/TS/JSX/TSX/CSS/JSON
+- **Astro files:** Experimental support. Several lint rules (`noUnusedVariables`, `noUnusedImports`, `noExplicitAny`, `noImplicitAnyLet`, `organizeImports`) are disabled for `.astro` files because Biome cannot see into the template section — variables/imports that appear unused in frontmatter are often used in the HTML template
+- **MDX files:** Not supported by Biome (Markdown support is in progress); MDX files are excluded from checking
+- Run `pnpm lint` before committing. Use `pnpm lint:fix` to auto-fix safe issues
 
 ## Architecture
 

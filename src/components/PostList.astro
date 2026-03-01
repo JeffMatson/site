@@ -2,16 +2,16 @@
 import { type CollectionEntry, getEntry } from 'astro:content';
 
 interface Props {
-    entries: CollectionEntry<'blog'>[];
-    titleLevel: 'h2'|'h3'|'h4'|'h5'|'h6';
-    more?: string;
+	entries: CollectionEntry<'blog'>[];
+	titleLevel: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+	more?: string;
 }
 
 const { entries, titleLevel, more } = Astro.props;
 
 let Title = titleLevel;
-if ( ! Title ) {
-    Title = 'h2';
+if (!Title) {
+	Title = 'h2';
 }
 ---
 

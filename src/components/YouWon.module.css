@@ -1,58 +1,58 @@
 .annoyBox {
-    position: fixed;
-    background-color: #bebebe;
+	position: fixed;
+	background-color: #bebebe;
 }
 
 .browserWindow {
-    box-shadow: var(--shadow-offset);
-    background-color: #bebebe;
-    padding: 3px;
+	box-shadow: var(--shadow-offset);
+	background-color: #bebebe;
+	padding: 3px;
 }
 
 .annoyBoxConfirm {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .header {
-    font-family: 'Windows Regular', sans-serif;
-    font-size: var(--font-size-sm);
+	font-family: "Windows Regular", sans-serif;
+	font-size: var(--font-size-sm);
 }
 
 .title {
-    background-color: #0000ff;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 3px;
+	background-color: #0000ff;
+	color: #ffffff;
+	font-weight: bold;
+	padding: 3px;
 }
 
 .contentContainer {
-    background-color: #bebebe;
-    padding: 1rem;
-    box-shadow: var(--shadow-inset);
-    color: #000000;
+	background-color: #bebebe;
+	padding: 1rem;
+	box-shadow: var(--shadow-inset);
+	color: #000000;
 
-    p {
-        margin: 0;
-    }
+	p {
+		margin: 0;
+	}
 }
 
 .buttonContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding-top: 5px;
-    padding-bottom: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	padding-top: 5px;
+	padding-bottom: 5px;
 
-    button {
-        box-shadow: var(--shadow-offset);
-        background-color: #bebebe;
-        border: 0;
-        padding: 0.5rem;
-        font-family: 'Windows Regular';
-        min-width: 100px;
-    }
+	button {
+		box-shadow: var(--shadow-offset);
+		background-color: #bebebe;
+		border: 0;
+		padding: 0.5rem;
+		font-family: "Windows Regular", sans-serif;
+		min-width: 100px;
+	}
 }

@@ -6,24 +6,24 @@
 // ---------------------------------------------------------------------------
 
 export const colors = {
-  black: '#000000',
-  gray: '#7e7e7e',
-  grayLight: '#bebebe',
-  white: '#ffffff',
-  red: '#fe0000',
-  redDark: '#7e0000',
-  green: '#06ff04',
-  greenDark: '#047e00',
-  yellow: '#ffff04',
-  yellowDark: '#7e7e00',
-  blue: '#0000ff',
-  blueDark: '#00007e',
-  magenta: '#fe00ff',
-  magentaDark: '#7e007e',
-  cyan: '#06ffff',
-  cyanDark: '#047e7e',
-  windowsLeft: '#000080',
-  windowsRight: '#1084d0',
+	black: '#000000',
+	gray: '#7e7e7e',
+	grayLight: '#bebebe',
+	white: '#ffffff',
+	red: '#fe0000',
+	redDark: '#7e0000',
+	green: '#06ff04',
+	greenDark: '#047e00',
+	yellow: '#ffff04',
+	yellowDark: '#7e7e00',
+	blue: '#0000ff',
+	blueDark: '#00007e',
+	magenta: '#fe00ff',
+	magentaDark: '#7e007e',
+	cyan: '#06ffff',
+	cyanDark: '#047e7e',
+	windowsLeft: '#000080',
+	windowsRight: '#1084d0',
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -31,8 +31,8 @@ export const colors = {
 // ---------------------------------------------------------------------------
 
 export const shadows = {
-  offset: `inset -1px -1px ${colors.black}, inset 1px 1px ${colors.grayLight}, inset -2px -2px ${colors.gray}, inset 2px 2px ${colors.white}`,
-  inset: `inset -1px -1px ${colors.white}, inset 1px 1px ${colors.gray}, inset -2px -2px ${colors.grayLight}, inset 2px 2px ${colors.black}`,
+	offset: `inset -1px -1px ${colors.black}, inset 1px 1px ${colors.grayLight}, inset -2px -2px ${colors.gray}, inset 2px 2px ${colors.white}`,
+	inset: `inset -1px -1px ${colors.white}, inset 1px 1px ${colors.gray}, inset -2px -2px ${colors.grayLight}, inset 2px 2px ${colors.black}`,
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -50,144 +50,165 @@ export const themeNames = ['dark', 'light', 'sanity', 'hotdog'] as const;
 export type ThemeName = (typeof themeNames)[number];
 
 const themeTokenKeys = [
-  'color-background', 'color-text', 'color-a',
-  'color-h1', 'color-h2', 'color-h3', 'color-h4', 'color-h5',
-  'color-wallpaper', 'color-post-meta',
-  'font-normal', 'font-h1', 'font-h2', 'font-h3', 'font-h4', 'font-h5', 'font-comments',
-  'window-font-title', 'window-color-background-left', 'window-color-background-right',
-  'window-color-title-text', 'window-color-border',
-  'window-color-nav-background', 'window-color-nav-text',
-  'comment-form-background-color', 'comment-form-submit-padding',
-  'comment-form-submit-font-size', 'comment-form-submit-background-color',
-  'comment-single-background-color', 'comment-single-avatar-border',
-  'comment-single-date-color', 'comment-single-author-color',
-  'li-image',
+	'color-background',
+	'color-text',
+	'color-a',
+	'color-h1',
+	'color-h2',
+	'color-h3',
+	'color-h4',
+	'color-h5',
+	'color-wallpaper',
+	'color-post-meta',
+	'font-normal',
+	'font-h1',
+	'font-h2',
+	'font-h3',
+	'font-h4',
+	'font-h5',
+	'font-comments',
+	'window-font-title',
+	'window-color-background-left',
+	'window-color-background-right',
+	'window-color-title-text',
+	'window-color-border',
+	'window-color-nav-background',
+	'window-color-nav-text',
+	'comment-form-background-color',
+	'comment-form-submit-padding',
+	'comment-form-submit-font-size',
+	'comment-form-submit-background-color',
+	'comment-single-background-color',
+	'comment-single-avatar-border',
+	'comment-single-date-color',
+	'comment-single-author-color',
+	'li-image',
 ] as const;
 
 export type ThemeTokenKey = (typeof themeTokenKeys)[number];
 export type ThemeTokens = Record<ThemeTokenKey, string>;
 
 const baseTheme: ThemeTokens = {
-  // Colors
-  'color-background': colors.black,
-  'color-text': colors.white,
-  'color-a': colors.blue,
-  'color-h1': colors.green,
-  'color-h2': colors.magenta,
-  'color-h3': colors.cyan,
-  'color-h4': colors.yellow,
-  'color-h5': colors.cyan,
-  'color-wallpaper': colors.cyanDark,
-  'color-post-meta': colors.gray,
+	// Colors
+	'color-background': colors.black,
+	'color-text': colors.white,
+	'color-a': colors.blue,
+	'color-h1': colors.green,
+	'color-h2': colors.magenta,
+	'color-h3': colors.cyan,
+	'color-h4': colors.yellow,
+	'color-h5': colors.cyan,
+	'color-wallpaper': colors.cyanDark,
+	'color-post-meta': colors.gray,
 
-  // Fonts
-  'font-normal': "'Comic Neue'",
-  'font-h1': "'Comic Neue'",
-  'font-h2': "'Papyrus'",
-  'font-h3': "'Comic Neue'",
-  'font-h4': "'Tinos', 'Times New Roman', Times, serif",
-  'font-h5': "'Tinos', 'Times New Roman', Times, serif",
-  'font-comments': "'Tinos', 'Times New Roman', Times, serif",
+	// Fonts
+	'font-normal': "'Comic Neue'",
+	'font-h1': "'Comic Neue'",
+	'font-h2': "'Papyrus'",
+	'font-h3': "'Comic Neue'",
+	'font-h4': "'Tinos', 'Times New Roman', Times, serif",
+	'font-h5': "'Tinos', 'Times New Roman', Times, serif",
+	'font-comments': "'Tinos', 'Times New Roman', Times, serif",
 
-  // Windows
-  'window-font-title': "'Windows Regular', sans-serif",
-  'window-color-background-left': colors.windowsLeft,
-  'window-color-background-right': colors.windowsRight,
-  'window-color-title-text': colors.white,
-  'window-color-border': colors.grayLight,
-  'window-color-nav-background': colors.grayLight,
-  'window-color-nav-text': colors.black,
+	// Windows
+	'window-font-title': "'Windows Regular', sans-serif",
+	'window-color-background-left': colors.windowsLeft,
+	'window-color-background-right': colors.windowsRight,
+	'window-color-title-text': colors.white,
+	'window-color-border': colors.grayLight,
+	'window-color-nav-background': colors.grayLight,
+	'window-color-nav-text': colors.black,
 
-  // Comments
-  'comment-form-background-color': colors.grayLight,
-  'comment-form-submit-padding': '3rem',
-  'comment-form-submit-font-size': '3rem',
-  'comment-form-submit-background-color': colors.cyan,
-  'comment-single-background-color': colors.yellowDark,
-  'comment-single-avatar-border': `2px solid ${colors.green}`,
-  'comment-single-date-color': colors.magentaDark,
-  'comment-single-author-color': colors.redDark,
+	// Comments
+	'comment-form-background-color': colors.grayLight,
+	'comment-form-submit-padding': '3rem',
+	'comment-form-submit-font-size': '3rem',
+	'comment-form-submit-background-color': colors.cyan,
+	'comment-single-background-color': colors.yellowDark,
+	'comment-single-avatar-border': `2px solid ${colors.green}`,
+	'comment-single-date-color': colors.magentaDark,
+	'comment-single-author-color': colors.redDark,
 
-  // List markers
-  'li-image': fireSvg,
+	// List markers
+	'li-image': fireSvg,
 };
 
 // Dark theme is identical to base — no overrides needed.
 const darkOverrides: Partial<ThemeTokens> = {};
 
 const lightOverrides: Partial<ThemeTokens> = {
-  'color-background': colors.white,
-  'color-text': colors.black,
-  'color-a': colors.greenDark,
-  'color-h1': colors.greenDark,
-  'color-h2': colors.magentaDark,
-  'color-h3': colors.cyanDark,
-  'color-h4': colors.yellowDark,
-  'color-h5': colors.cyanDark,
-  'comment-form-submit-padding': '3rem',
-  'comment-form-submit-font-size': '3rem',
-  'comment-form-submit-background-color': colors.cyanDark,
-  'comment-single-background-color': colors.yellowDark,
-  'comment-single-avatar-border': `2px solid ${colors.green}`,
-  'comment-single-date-color': colors.magentaDark,
-  'comment-single-author-color': colors.redDark,
+	'color-background': colors.white,
+	'color-text': colors.black,
+	'color-a': colors.greenDark,
+	'color-h1': colors.greenDark,
+	'color-h2': colors.magentaDark,
+	'color-h3': colors.cyanDark,
+	'color-h4': colors.yellowDark,
+	'color-h5': colors.cyanDark,
+	'comment-form-submit-padding': '3rem',
+	'comment-form-submit-font-size': '3rem',
+	'comment-form-submit-background-color': colors.cyanDark,
+	'comment-single-background-color': colors.yellowDark,
+	'comment-single-avatar-border': `2px solid ${colors.green}`,
+	'comment-single-date-color': colors.magentaDark,
+	'comment-single-author-color': colors.redDark,
 };
 
 const sanityOverrides: Partial<ThemeTokens> = {
-  'font-normal': 'sans-serif',
-  'font-h1': 'sans-serif',
-  'font-h2': 'sans-serif',
-  'font-h3': 'sans-serif',
-  'font-h4': 'sans-serif',
-  'font-h5': 'sans-serif',
-  'font-comments': 'sans-serif',
-  'color-background': colors.white,
-  'color-text': colors.black,
-  'color-a': colors.blue,
-  'color-h1': colors.black,
-  'color-h2': colors.black,
-  'color-h3': colors.black,
-  'color-h4': colors.black,
-  'color-h5': colors.black,
-  'comment-form-submit-padding': '3rem',
-  'comment-form-submit-font-size': '3rem',
-  'comment-form-submit-background-color': colors.cyan,
-  'comment-single-background-color': colors.yellowDark,
-  'comment-single-avatar-border': `2px solid ${colors.green}`,
-  'comment-single-date-color': colors.magentaDark,
-  'comment-single-author-color': colors.redDark,
+	'font-normal': 'sans-serif',
+	'font-h1': 'sans-serif',
+	'font-h2': 'sans-serif',
+	'font-h3': 'sans-serif',
+	'font-h4': 'sans-serif',
+	'font-h5': 'sans-serif',
+	'font-comments': 'sans-serif',
+	'color-background': colors.white,
+	'color-text': colors.black,
+	'color-a': colors.blue,
+	'color-h1': colors.black,
+	'color-h2': colors.black,
+	'color-h3': colors.black,
+	'color-h4': colors.black,
+	'color-h5': colors.black,
+	'comment-form-submit-padding': '3rem',
+	'comment-form-submit-font-size': '3rem',
+	'comment-form-submit-background-color': colors.cyan,
+	'comment-single-background-color': colors.yellowDark,
+	'comment-single-avatar-border': `2px solid ${colors.green}`,
+	'comment-single-date-color': colors.magentaDark,
+	'comment-single-author-color': colors.redDark,
 };
 
 const hotdogOverrides: Partial<ThemeTokens> = {
-  'color-background': colors.yellow,
-  'color-text': colors.black,
-  'color-a': colors.red,
-  'color-h1': colors.red,
-  'color-h2': colors.red,
-  'color-h3': colors.red,
-  'color-h4': colors.red,
-  'color-h5': colors.red,
-  'color-wallpaper': colors.red,
-  'color-post-meta': colors.black,
-  'window-color-background-left': colors.red,
-  'window-color-background-right': colors.red,
-  'window-color-border': colors.red,
-  'window-color-nav-background': colors.white,
-  'window-color-nav-text': colors.black,
-  'comment-form-background-color': colors.yellow,
-  'comment-form-submit-background-color': colors.yellow,
-  'comment-single-background-color': colors.red,
-  'comment-single-avatar-border': `2px solid ${colors.yellow}`,
-  'comment-single-date-color': colors.white,
-  'comment-single-author-color': colors.white,
-  'li-image': fireSvg,
+	'color-background': colors.yellow,
+	'color-text': colors.black,
+	'color-a': colors.red,
+	'color-h1': colors.red,
+	'color-h2': colors.red,
+	'color-h3': colors.red,
+	'color-h4': colors.red,
+	'color-h5': colors.red,
+	'color-wallpaper': colors.red,
+	'color-post-meta': colors.black,
+	'window-color-background-left': colors.red,
+	'window-color-background-right': colors.red,
+	'window-color-border': colors.red,
+	'window-color-nav-background': colors.white,
+	'window-color-nav-text': colors.black,
+	'comment-form-background-color': colors.yellow,
+	'comment-form-submit-background-color': colors.yellow,
+	'comment-single-background-color': colors.red,
+	'comment-single-avatar-border': `2px solid ${colors.yellow}`,
+	'comment-single-date-color': colors.white,
+	'comment-single-author-color': colors.white,
+	'li-image': fireSvg,
 };
 
 export const themes: Record<ThemeName, ThemeTokens> = {
-  dark: { ...baseTheme, ...darkOverrides },
-  light: { ...baseTheme, ...lightOverrides },
-  sanity: { ...baseTheme, ...sanityOverrides },
-  hotdog: { ...baseTheme, ...hotdogOverrides },
+	dark: { ...baseTheme, ...darkOverrides },
+	light: { ...baseTheme, ...lightOverrides },
+	sanity: { ...baseTheme, ...sanityOverrides },
+	hotdog: { ...baseTheme, ...hotdogOverrides },
 };
 
 export { baseTheme };
@@ -197,26 +218,21 @@ export { baseTheme };
 // ---------------------------------------------------------------------------
 
 function round(value: number, places: number): number {
-  const factor = Math.pow(10, places);
-  return Math.round(value * factor) / factor;
+	const factor = 10 ** places;
+	return Math.round(value * factor) / factor;
 }
 
 function toRems(px: number): number {
-  return px / 16;
+	return px / 16;
 }
 
-function computeClamp(
-  minPx: number,
-  maxPx: number,
-  minBp: number = 0,
-  maxBp: number = 1400,
-): string {
-  const slope = (maxPx - minPx) / (maxBp - minBp);
-  const slopeVw = round(slope * 100, 2);
-  const interceptRems = round(toRems(minPx - slope * minBp), 2);
-  const minRems = round(toRems(minPx), 2);
-  const maxRems = round(toRems(maxPx), 2);
-  return `clamp(${minRems}rem, ${slopeVw}vw + ${interceptRems}rem, ${maxRems}rem)`;
+function computeClamp(minPx: number, maxPx: number, minBp: number = 0, maxBp: number = 1400): string {
+	const slope = (maxPx - minPx) / (maxBp - minBp);
+	const slopeVw = round(slope * 100, 2);
+	const interceptRems = round(toRems(minPx - slope * minBp), 2);
+	const minRems = round(toRems(minPx), 2);
+	const maxRems = round(toRems(maxPx), 2);
+	return `clamp(${minRems}rem, ${slopeVw}vw + ${interceptRems}rem, ${maxRems}rem)`;
 }
 
 export type FluidTypeStep = 'sm' | 'base' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
@@ -227,12 +243,12 @@ const typeScale = 1.2;
 const typeBaseIndex = typeSteps.indexOf('base');
 
 export function computeFluidType(): Record<FluidTypeStep, string> {
-  const result = {} as Record<FluidTypeStep, string>;
-  for (let i = 0; i < typeSteps.length; i++) {
-    const step = typeSteps[i];
-    const min = typeBase * Math.pow(typeScale, i - typeBaseIndex);
-    const max = typeBase * Math.pow(typeScale, i - typeBaseIndex + 1);
-    result[step] = computeClamp(min, max);
-  }
-  return result;
+	const result = {} as Record<FluidTypeStep, string>;
+	for (let i = 0; i < typeSteps.length; i++) {
+		const step = typeSteps[i];
+		const min = typeBase * typeScale ** (i - typeBaseIndex);
+		const max = typeBase * typeScale ** (i - typeBaseIndex + 1);
+		result[step] = computeClamp(min, max);
+	}
+	return result;
 }
