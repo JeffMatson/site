@@ -33,6 +33,7 @@ pnpm format:mdx       # Format MDX files only
 - **Astro files:** Experimental support. Several lint rules (`noUnusedVariables`, `noUnusedImports`, `noExplicitAny`, `noImplicitAnyLet`, `organizeImports`) are disabled for `.astro` files because Biome cannot see into the template section — variables/imports that appear unused in frontmatter are often used in the HTML template
 - **MDX files:** Formatted by Prettier (handles both prose and embedded JSX/imports)
 - Run `pnpm lint` before committing. Use `pnpm lint:fix` to auto-fix safe issues
+- **Gotcha:** Never run `biome check --write` or `--unsafe` on `.astro` files without reviewing the diff — Biome will remove imports and rename variables that are used in the template section but appear unused in the frontmatter
 
 ## Architecture
 
@@ -77,7 +78,7 @@ Plain CSS with a TypeScript design token pipeline — no Sass dependency:
 - **Font declarations:** `src/styles/fonts.css` — `@font-face` rules for Windows Regular, Comic Neue, Papyrus, Tinos
 - **Component styles:** Astro scoped `<style>` blocks and CSS Modules (`.module.css`) for React islands
 - **4 themes:** dark (default), light, sanity (accessibility mode), hotdog — defined as typed override maps in tokens.ts, merged via `{ ...base, ...overrides }` spread
-- **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`Math.pow`-based modular scale, 16px base, 1.2 ratio)
+- **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`**`-based modular scale, 16px base, 1.2 ratio)
 - **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
 
 Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash. Components consume theme tokens via `var(--token-name)`.
