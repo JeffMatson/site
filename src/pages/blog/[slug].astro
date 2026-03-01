@@ -1,6 +1,5 @@
 ---
 import BrowserWindow from '@components/Theme/BrowserWindow.astro';
-import Comments from '@components/Comments.astro';
 import Layout from '@layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
@@ -31,8 +30,6 @@ const { Content } = await render(entry);
 				</header>
 
 				<Content />
-				
-				{data.comments ? <Comments /> : null}
 			</div>
         </main>
     </BrowserWindow>

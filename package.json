@@ -24,7 +24,6 @@
     "@types/node": "^22.0.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.7",
-    "@types/validator": "^13.15.0",
     "@vitest/coverage-v8": "^4.0.0",
     "@vitest/ui": "^4.0.0",
     "astro": "^5.0.0",
@@ -35,7 +34,6 @@
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "sass": "^1.97.0",
-    "validator": "^13.15.0",
     "vitest": "^4.0.0",
     "zod": "^3.24.0"
   },
@@ -44,6 +42,10 @@
     "@nanostores/persistent": "^1.0.0"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@parcel/watcher", "esbuild", "sharp"]
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "sharp"
+    ]
   }
 }
