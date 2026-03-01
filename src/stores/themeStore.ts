@@ -16,11 +16,12 @@ const paletteStore = persistentAtom<PaletteStoreValue>('palette', undefined);
 
 // I should really just loop this. It's fine now, but it's gonna get annoying.
 themeStore.subscribe((val) => {
+	if (typeof document === 'undefined') return;
 	const themeName = ThemeName.parse(val);
 	const root = document.documentElement;
 
 	const themeOptions = ['light', 'dark', 'sanity', 'hotdog'];
-	if (themeName && themeOptions.includes(themeName)) {
+	if (themeOptions.includes(themeName)) {
 		for (const themeOption of themeOptions) {
 			root.classList.remove(themeOption);
 			if (themeOption === themeName) {

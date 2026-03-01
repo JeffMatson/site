@@ -1,10 +1,13 @@
 import { useStore } from '@nanostores/react';
+import type React from 'react';
 import { addAnnoyBox, annoyBoxStore } from '../stores/annoyBoxStore';
 import { AnnoyBox, generateAnnoyBoxProps } from './AnnoyBox';
 
-export default function YouWon(props) {
-	const wrapperStyles = props.wrapperStyles ? props.wrapperStyles : {};
+interface YouWonProps {
+	wrapperStyles?: React.CSSProperties;
+}
 
+export default function YouWon({ wrapperStyles = {} }: YouWonProps) {
 	const annoyBoxes = useStore(annoyBoxStore);
 
 	const createAnnoyBox = (isConfirmation = false) => {

@@ -15,8 +15,28 @@ export default function ThemeSelect() {
 
 	return (
 		<>
-			<label className="label" htmlFor="theme" aria-label="Theme select"></label>
-			<select className="select" name="theme" id="themeSelector" value={theme} onChange={onModeChange}>
+			<label
+				className="label"
+				htmlFor="themeSelector"
+				style={{
+					position: 'absolute',
+					width: '1px',
+					height: '1px',
+					overflow: 'hidden',
+					clip: 'rect(0, 0, 0, 0)',
+					whiteSpace: 'nowrap',
+				}}
+			>
+				Theme select
+			</label>
+			<select
+				className="select"
+				name="theme"
+				id="themeSelector"
+				aria-label="Theme select"
+				value={theme}
+				onChange={onModeChange}
+			>
 				<option value="sanity">Sanity Mode</option>
 				<option value="dark">Dark Mode</option>
 				<option value="light">Light Mode</option>

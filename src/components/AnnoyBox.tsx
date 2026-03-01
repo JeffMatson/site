@@ -1,5 +1,5 @@
 import CrappyAds, { type CrappyAd } from '@components/CrappyAds';
-import type { FunctionComponent, ReactElement } from 'react';
+import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import boldStrategy from '../images/bold-strategy.gif';
 import { addAnnoyBox, removeAllAnnoyBoxes, removeAnnoyBox } from '../stores/annoyBoxStore';
 import { generateString, getViewportSize } from '../utils';
@@ -15,17 +15,15 @@ interface AnnoyBox {
 	Container: FunctionComponent<{
 		isConfirmation: boolean;
 		position: PositionCoordinates;
-		children: ReactElement;
+		children: ReactNode;
 	}>;
 	Content: FunctionComponent<{
-		styles: CSSModuleClasses;
-		children: ReactElement;
+		children: ReactNode;
 	}>;
 	Header: FunctionComponent<{
-		styles: CSSModuleClasses;
-		children: ReactElement;
+		children: ReactNode;
 	}>;
-	ButtonContainer: FunctionComponent<{ children: ReactElement }>;
+	ButtonContainer: FunctionComponent<{ children: ReactNode }>;
 	Button: FunctionComponent<{
 		action: (id: string) => void;
 		annoyBoxId: string;
@@ -42,7 +40,6 @@ export interface AnnoyBoxProps extends CrappyAd {
 	key: string;
 	id: string;
 	isConfirmation: boolean;
-	styles: object;
 	title: string;
 	content: () => ReactElement;
 	position: PositionCoordinates;
@@ -60,8 +57,8 @@ const AnnoyBox: AnnoyBox = {
 			</div>
 		);
 	},
-	Content: ({ styles, children }) => {
-		return <div style={styles}>{children}</div>;
+	Content: ({ children }) => {
+		return <div>{children}</div>;
 	},
 	Header: (props) => {
 		return (
@@ -114,7 +111,6 @@ const generateAnnoyBoxProps = (props = { isConfirmation: false }) => {
 		const annoyBoxProps: AnnoyBoxProps = {
 			key: 'confirm',
 			id: 'confirm',
-			styles: {},
 			title: 'Tempting, eh?',
 			content: () => (
 				<>
