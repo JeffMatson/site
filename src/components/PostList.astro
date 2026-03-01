@@ -1,5 +1,5 @@
 ---
-import { CollectionEntry, getEntryBySlug } from 'astro:content';
+import { type CollectionEntry, getEntry } from 'astro:content';
 
 interface Props {
     entries: CollectionEntry<'blog'>[];
@@ -17,13 +17,13 @@ if ( ! Title ) {
 
 <div class="post-list">
     {entries.map(async post => {
-        const postSlug        = post.slug;
+        const postSlug        = post.id;
         const postTitle       = post.data.title;
         const postDescription = post.data.description;
         const postDateString  = post.data.date.toDateString();
         const postISOString   = post.data.date.toISOString();
         const postAuthorSlug  = post.data.author;
-        const postAuthor      = await getEntryBySlug('authors', postAuthorSlug);
+        const postAuthor      = await getEntry('authors', postAuthorSlug);
 
         return (
             <article class="post-item">

@@ -1,5 +1,5 @@
 ---
-import { getEntryBySlug } from "astro:content";
+import { getEntry } from "astro:content";
 
 const { props } = Astro.props;
 type Schema = { [prop: string]: any };
@@ -21,7 +21,7 @@ if ( props.entry ) {
         }
 
         if ( data.author ) {
-            const author = await getEntryBySlug( 'authors', data.author );
+            const author = await getEntry( 'authors', data.author );
 
             if ( author ) {
                 const authorSchema = {

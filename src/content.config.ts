@@ -1,9 +1,11 @@
 import { z, defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
 
 /**
  * Single pages collection.
  */
 const singleCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/single" }),
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
@@ -15,6 +17,7 @@ const singleCollection = defineCollection({
  * Blog posts collection.
  */
 const blogCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     description: z.string().default(""),
@@ -32,6 +35,7 @@ const blogCollection = defineCollection({
  * Authors collection
  */
 const authorsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/authors" }),
   schema: z.object({
     name: z.string(),
     description: z.string().default(""),
@@ -44,7 +48,7 @@ const authorsCollection = defineCollection({
 });
 
 /**
- * Collection tags. Maps to `/src/content/<collection>`.
+ * Collection tags. Maps to content directories via glob loaders.
  */
 export const collections = {
   single: singleCollection,

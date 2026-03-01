@@ -1,15 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 import BrowserWindow from '@components/Theme/BrowserWindow.astro';
 import Layout from '@layouts/Layout.astro';
 
 export async function getStaticPaths() {
 	const pages = await getCollection('single');
-	
+
 	return pages.map(entry => {
 		return {
-			params: { slug: entry.slug },
+			params: { slug: entry.id },
 			props: { entry },
 		};
 	});
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { data } = entry;
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
 <Layout title={data.title} entry={entry}>
