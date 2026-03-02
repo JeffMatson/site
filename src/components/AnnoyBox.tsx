@@ -125,7 +125,7 @@ const generateAnnoyBoxProps = (props = { isConfirmation: false }) => {
 			content: () => (
 				<>
 					<p>Are you sure you really want to go down this road?</p>
-					<img src={boldStrategy} alt="Bold strategy meme" style={{ maxWidth: '100%', height: 'auto' }} />
+					<img src={boldStrategy.src} alt="Bold strategy meme" style={{ maxWidth: '100%', height: 'auto' }} />
 				</>
 			),
 			isConfirmation: true,
