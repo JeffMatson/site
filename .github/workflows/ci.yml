@@ -1,14 +1,13 @@
-name: Deploy to Cloudflare Pages
+name: CI
 
 on:
-    push:
+    pull_request:
         branches:
             - master
-    workflow_dispatch:
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
-    cancel-in-progress: false
+    cancel-in-progress: true
 
 permissions: {}
 
@@ -62,30 +61,3 @@ jobs:
             - run: pnpm install --frozen-lockfile
 
             - run: pnpm build
-
-            - uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-              with:
-                  name: dist
-                  path: dist/
-                  retention-days: 1
-
-    deploy:
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        needs: build
-        permissions:
-            contents: read
-            deployments: write
-        steps:
-            - uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
-              with:
-                  name: dist
-                  path: dist/
-
-            - name: Deploy
-              uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
-              with:
-                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-                  accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  command: pages deploy dist --project-name=jeffmatson-site
-                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
