@@ -39,7 +39,9 @@ const blogEntriesByDate = blogEntries.sort((a, b) => {
                         <p>Just for a little bit of icing on the cake, <a href="https://github.com/jeffmatson/site">it's overengineered too</a>.</p>
                     </div>
                     <div class="homepage-split-col">
-                        <YouWon className="sanityModeHidden" client:visible />
+                        <div class="sanityModeHidden">
+                            <YouWon client:visible />
+                        </div>
                     </div>
                 </div>
 
