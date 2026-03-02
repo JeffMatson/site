@@ -8,19 +8,24 @@ Personal portfolio site (jeffmatson.net) built with Astro 5. Intentionally embra
 
 ## Commands
 
+**Script naming convention:** Entry points are bare verbs (`dev`, `build`, `test`). Variants use `base:qualifier` where `base` is also runnable (`test:run`, `lint:fix`). Standalone utilities use `verb-noun` (`generate-tokens`).
+
 ```bash
 pnpm dev              # Start dev server (generates tokens first)
 pnpm build            # Production build (generates tokens first, output: dist/)
 pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
 pnpm test             # Run Vitest in watch mode
 pnpm test:run         # Run tests once (test/pages/ Playwright tests excluded, require pre-built dist/)
-pnpm coverage         # Run tests with coverage
-pnpm test-ui          # Interactive Vitest UI
+pnpm test:coverage    # Run tests with coverage
+pnpm test:ui          # Interactive Vitest UI
 pnpm lint             # Check for lint and format issues
 pnpm lint:fix         # Auto-fix lint and format issues
 pnpm format           # Auto-format code
 pnpm format:mdx       # Format MDX files only
+pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fresh clone)
 ```
+
+- **pnpm config:** `pnpm-workspace.yaml` holds `onlyBuiltDependencies` (build script allowlist). Do not put pnpm settings in `package.json`.
 
 ### Linting & Formatting
 
@@ -43,6 +48,9 @@ pnpm format:mdx       # Format MDX files only
 - **Astro components** (`.astro`) render server-side only as static HTML
 - **React components** (`.tsx`/`.jsx`) are used only for client-side interactivity and hydrate selectively via `client:visible` or `client:only` directives
 - All data comes from the filesystem at build time — no runtime API calls
+- **Dependency split:** `dependencies` = packages that ship to the browser (React, nanostores, md5, zod) plus Astro and its integrations. `devDependencies` = everything else (sharp, Biome, Vitest, Playwright, tsx, @types/*). CI always runs `pnpm install` (all deps) — no `--omit=dev`.
+- **Gotcha:** `sharp` must be listed as a direct `devDependency` — Astro declares it as an optional dep, but pnpm's strict module isolation prevents Astro's build chunks from resolving it otherwise. Do not remove it.
+- **Gotcha:** `.astro/` is gitignored but contains generated types needed by VS Code. If JSX elements show `'no interface JSX.IntrinsicElements'` errors, run `pnpm astro sync`. This runs automatically during `dev` and `build`.
 - **Gotcha:** Astro scoped styles cannot target elements rendered by React islands (`client:only`/`client:visible`). Use global.css selectors to style elements inside React islands.
 
 ### Content Collections
@@ -75,7 +83,7 @@ Client-side state uses **Nanostores** with `@nanostores/persistent` for localSto
 
 ### Styling
 
-Plain CSS with a TypeScript design token pipeline — no Sass dependency:
+Plain CSS with a TypeScript design token pipeline — no Sass usage (sass is installed as an unexcludable optional peer dep of Vite):
 
 - **Token source of truth:** `src/styles/tokens.ts` — typed color, theme, typography, and shadow definitions
 - **Generated CSS:** `src/styles/tokens.css` — auto-generated via `pnpm generate-tokens` using CSS `@layer` for cascade control
@@ -94,6 +102,8 @@ Theme is applied by setting a class on `<html>` — an inline script in `Layout.
 To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm generate-tokens` to regenerate the CSS. `src/styles/tokens.css` is gitignored — never edit it directly. Astro `<style>` blocks use plain CSS with native nesting — do not add `lang="scss"`.
 
 ### TypeScript Path Aliases
+
+`tsconfig.json` extends `astro/tsconfigs/strict` (which chains to `base`). The preset already sets `target`, `module`, `moduleResolution`, `resolveJsonModule`, `verbatimModuleSyntax`, `isolatedModules`, `noEmit`, `esModuleInterop`, and `strict` — do not re-add these. Only project-specific options (like `paths`) belong in tsconfig.json.
 
 ```
 @components/* → src/components/*
