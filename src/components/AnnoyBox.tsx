@@ -110,7 +110,10 @@ const forkAnnoyBox = (toFork: string) => {
 		return;
 	}
 	const newAnnoyBox1 = generateAnnoyBoxProps();
-	const newAnnoyBox2 = generateAnnoyBoxProps();
+	let newAnnoyBox2 = generateAnnoyBoxProps();
+	while (newAnnoyBox2.id === newAnnoyBox1.id) {
+		newAnnoyBox2 = generateAnnoyBoxProps();
+	}
 	addAnnoyBox(newAnnoyBox1.id, newAnnoyBox1);
 	addAnnoyBox(newAnnoyBox2.id, newAnnoyBox2);
 	removeAnnoyBox(toFork);
