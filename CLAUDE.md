@@ -43,6 +43,7 @@ pnpm format:mdx       # Format MDX files only
 - **Astro components** (`.astro`) render server-side only as static HTML
 - **React components** (`.tsx`/`.jsx`) are used only for client-side interactivity and hydrate selectively via `client:visible` or `client:only` directives
 - All data comes from the filesystem at build time — no runtime API calls
+- **Gotcha:** Astro scoped styles cannot target elements rendered by React islands (`client:only`/`client:visible`). Use global.css selectors to style elements inside React islands.
 
 ### Content Collections
 
@@ -68,6 +69,8 @@ File-based routing via `src/pages/`:
 Client-side state uses **Nanostores** with `@nanostores/persistent` for localStorage persistence:
 - `src/stores/themeStore.ts` — Theme selection (light/dark/sanity/hotdog), palette, reduced motion preference
 - `src/stores/annoyBoxStore.ts` — Interactive popup/annoyance box state
+- `src/components/AnnoyBox.tsx` — Easter egg popup system. Fork cap at 16 boxes. Desktop: random fixed positioning. Mobile (<768px): full-screen sequential "takeover" mode with counter badge. Close All button visible on both.
+- `src/hooks/useIsMobile.ts` — `matchMedia`-based mobile detection hook used by YouWon.tsx for render branching
 - **Gotcha:** `nanostores` `map.get()` returns the internal state reference. Never mutate it directly — always spread into a new object before calling `.set()`, otherwise subscribers won't be notified (identity check in `.set()`)
 
 ### Styling
@@ -82,6 +85,9 @@ Plain CSS with a TypeScript design token pipeline — no Sass dependency:
 - **4 themes:** dark (default), light, sanity (accessibility mode), hotdog — defined as typed override maps in tokens.ts, merged via `{ ...base, ...overrides }` spread
 - **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`**`-based modular scale, 16px base, 1.2 ratio)
 - **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
+- **Mobile breakpoint:** `768px` — used in `@media (max-width: 768px)` across global.css, TopNav.astro, and index.astro
+- **Adding tokens:** Add key to `themeTokenKeys` array → add value to `baseTheme` → add overrides in theme-specific objects → run `pnpm generate-tokens`. TypeScript will error until all themes have the new key.
+- **SVG in tokens:** `selectArrowSvg()` in tokens.ts generates URL-encoded SVG data URIs with theme-specific colors. Colors must be `encodeURIComponent()`-encoded for use in CSS `url()` values.
 
 Theme is applied by setting a class on `<html>` — an inline script in `Layout.astro` reads localStorage on load to prevent flash. Components consume theme tokens via `var(--token-name)`. The theme names array in Layout.astro's `is:inline` script is intentionally duplicated from `tokens.ts` — inline scripts cannot import ES modules.
 
@@ -98,6 +104,14 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 ### Key Types
 
 `src/types.ts` defines shared Zod schemas: `ThemeName` (derived from `tokens.ts` via `z.enum(themeNames)`) and `BooleanAsString`. To add a theme, add it to `themeNames` in `tokens.ts` — the Zod schema updates automatically.
+
+### Testing
+
+- Vitest with `happy-dom` environment (1024x768 default viewport)
+- `@testing-library/react` for React hook tests (`renderHook`, `act`)
+- Test files go in `test/` directory, named `<subject>.test.ts`
+- Nanostores can be tested directly — call store functions and assert on `store.get()`
+- Call `removeAllAnnoyBoxes()` (or equivalent reset) in `beforeEach` when testing store-dependent logic
 
 ## Deployment
 

@@ -1,7 +1,7 @@
 import CrappyAds, { type CrappyAd } from '@components/CrappyAds';
 import type { FunctionComponent, ReactElement, ReactNode } from 'react';
 import boldStrategy from '../images/bold-strategy.gif';
-import { addAnnoyBox, removeAllAnnoyBoxes, removeAnnoyBox } from '../stores/annoyBoxStore';
+import { addAnnoyBox, annoyBoxStore, removeAllAnnoyBoxes, removeAnnoyBox } from '../stores/annoyBoxStore';
 import { generateString, getViewportSize } from '../utils';
 
 import styles from './YouWon.module.css';
@@ -46,10 +46,13 @@ export interface AnnoyBoxProps extends CrappyAd {
 	buttons: AnnoyBoxButton[];
 }
 
+let zIndexCounter = 1000;
+
 const AnnoyBox: AnnoyBox = {
 	Container: ({ isConfirmation, position: { x, y }, children }): ReactElement => {
 		const classNames = `${styles.browserWindow} ${isConfirmation ? styles.annoyBoxConfirm : styles.annoyBox}`;
-		const positions = !isConfirmation ? { top: y, left: x } : {};
+		const zIndex = isConfirmation ? 9998 : ++zIndexCounter;
+		const positions = !isConfirmation ? { top: y, left: x, zIndex } : { zIndex: 9998 };
 
 		return (
 			<div className={classNames} style={positions}>
@@ -87,10 +90,10 @@ const AnnoyBox: AnnoyBox = {
 
 const getAnnoyBoxPosition = (): PositionCoordinates => {
 	const viewportSize = getViewportSize();
-
-	const x = Math.random() * (viewportSize.width - 250) + 1;
-	const y = Math.random() * (viewportSize.height - 250) + 1;
-
+	const boxWidth = Math.min(250, viewportSize.width * 0.9);
+	const boxHeight = Math.min(250, viewportSize.height * 0.9);
+	const x = Math.max(0, Math.random() * (viewportSize.width - boxWidth));
+	const y = Math.max(0, Math.random() * (viewportSize.height - boxHeight));
 	return { x, y };
 };
 
@@ -98,7 +101,14 @@ const getCrappyAd = (): CrappyAd => {
 	return CrappyAds[Math.floor(Math.random() * CrappyAds.length)];
 };
 
+const FORK_CAP = 16;
+
 const forkAnnoyBox = (toFork: string) => {
+	const currentCount = Object.keys(annoyBoxStore.get()).length;
+	if (currentCount + 1 > FORK_CAP) {
+		removeAnnoyBox(toFork);
+		return;
+	}
 	const newAnnoyBox1 = generateAnnoyBoxProps();
 	const newAnnoyBox2 = generateAnnoyBoxProps();
 	addAnnoyBox(newAnnoyBox1.id, newAnnoyBox1);
@@ -115,7 +125,7 @@ const generateAnnoyBoxProps = (props = { isConfirmation: false }) => {
 			content: () => (
 				<>
 					<p>Are you sure you really want to go down this road?</p>
-					<img src={boldStrategy} alt="Bold strategy meme" />
+					<img src={boldStrategy} alt="Bold strategy meme" style={{ maxWidth: '100%', height: 'auto' }} />
 				</>
 			),
 			isConfirmation: true,
@@ -145,4 +155,4 @@ const generateAnnoyBoxProps = (props = { isConfirmation: false }) => {
 	return annoyBoxProps;
 };
 
-export { AnnoyBox, getCrappyAd, generateAnnoyBoxProps };
+export { AnnoyBox, FORK_CAP, forkAnnoyBox, generateAnnoyBoxProps, getAnnoyBoxPosition, getCrappyAd };

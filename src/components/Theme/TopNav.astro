@@ -25,6 +25,7 @@ import ThemeSelect from './ThemeSelect';
     .navItems {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -50,5 +51,24 @@ import ThemeSelect from './ThemeSelect';
 
     .sanityModeToggle:hover {
         box-shadow: none !important;
+    }
+
+    @media (max-width: 768px) {
+        .navItems li {
+            padding: 0;
+        }
+
+        .navItems li a {
+            display: block;
+            padding: 12px;
+        }
+
+        .sanityModeToggle {
+            margin-left: 0;
+            width: 100%;
+            padding: 8px 12px;
+            border-top: 1px solid var(--window-color-nav-separator);
+            box-shadow: inset 0 1px 0 var(--window-color-nav-highlight);
+        }
     }
 </style>

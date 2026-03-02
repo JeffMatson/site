@@ -27,6 +27,7 @@
     "@biomejs/biome": "^2.4.4",
     "@nanostores/react": "^1.0.0",
     "@playwright/test": "^1.58.2",
+    "@testing-library/react": "^16.3.2",
     "@types/md5": "^2.3.6",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.14",

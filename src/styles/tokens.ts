@@ -41,6 +41,19 @@ export const shadows = {
 
 const fireSvg = `url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) --><path d="M323.56 51.2c-20.8 19.3-39.58 39.59-56.22 59.97C240.08 73.62 206.28 35.53 168 0 69.74 91.17 0 209.96 0 281.6 0 408.85 100.29 512 224 512s224-103.15 224-230.4c0-53.27-51.98-163.14-124.44-230.4zM224 464c-97.05 0-176-81.83-176-182.4 0-45.37 44.3-133.21 120.16-214.09 22.34 23.36 42.82 47.72 60.34 71.86l36.62 50.44 39.41-48.29c5.83-7.15 11.85-14.15 18.01-20.97C368.89 177.96 400 250.42 400 281.6 400 382.17 321.05 464 224 464zm89.47-220.84l-51.3 58.52S181.75 198.98 175.69 192C133.27 242.86 112 272.62 112 306.41 112 374.23 163.37 416 226.5 416c25.26 0 48.62-7.87 67.58-21.13 43.08-30.14 53.18-88.58 29.26-134.24-2.95-5.62-6.24-11.48-9.87-17.47z" fill="%23fe0000"/></svg>')`;
 
+// Win95-style select dropdown arrow SVG with themed colors
+// Colors map: highlight (top-left edge), light (inner highlight), shadow (bottom-right + arrow), darkShadow (inner shadow), face (button background)
+function selectArrowSvg(opts: {
+	highlight: string;
+	light: string;
+	shadow: string;
+	darkShadow: string;
+	face: string;
+}): string {
+	const enc = (c: string) => encodeURIComponent(c);
+	return `url("data:image/svg+xml;charset=utf-8,%3Csvg width='16' height='17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 0H0v16h1V1h14V0z' fill='${enc(opts.highlight)}'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2 1H1v14h1V2h12V1H2z' fill='${enc(opts.light)}'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16 17H0v-1h15V0h1v17z' fill='${enc(opts.shadow)}'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M15 1h-1v14H1v1h14V1z' fill='${enc(opts.darkShadow)}'/%3E%3Cpath fill='${enc(opts.face)}' d='M2 2h12v13H2z'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M11 6H4v1h1v1h1v1h1v1h1V9h1V8h1V7h1V6z' fill='${enc(opts.shadow)}'/%3E%3C/svg%3E")`;
+}
+
 // ---------------------------------------------------------------------------
 // Theme tokens
 // ---------------------------------------------------------------------------
@@ -74,6 +87,9 @@ const themeTokenKeys = [
 	'window-color-border',
 	'window-color-nav-background',
 	'window-color-nav-text',
+	'window-color-nav-separator',
+	'window-color-nav-highlight',
+	'select-arrow-image',
 	'comment-form-background-color',
 	'comment-form-submit-padding',
 	'comment-form-submit-font-size',
@@ -118,6 +134,15 @@ const baseTheme: ThemeTokens = {
 	'window-color-border': colors.grayLight,
 	'window-color-nav-background': colors.grayLight,
 	'window-color-nav-text': colors.black,
+	'window-color-nav-separator': colors.gray,
+	'window-color-nav-highlight': colors.white,
+	'select-arrow-image': selectArrowSvg({
+		highlight: colors.grayLight,
+		light: colors.white,
+		shadow: colors.black,
+		darkShadow: colors.gray,
+		face: '#c0c0c0',
+	}),
 
 	// Comments
 	'comment-form-background-color': colors.grayLight,
@@ -195,6 +220,15 @@ const hotdogOverrides: Partial<ThemeTokens> = {
 	'window-color-border': colors.red,
 	'window-color-nav-background': colors.white,
 	'window-color-nav-text': colors.black,
+	'window-color-nav-separator': colors.gray,
+	'window-color-nav-highlight': colors.white,
+	'select-arrow-image': selectArrowSvg({
+		highlight: colors.white,
+		light: colors.white,
+		shadow: colors.red,
+		darkShadow: colors.gray,
+		face: colors.yellow,
+	}),
 	'comment-form-background-color': colors.yellow,
 	'comment-form-submit-background-color': colors.yellow,
 	'comment-single-background-color': colors.red,
