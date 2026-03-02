@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-import { useIsMobile } from '../src/hooks/useIsMobile';
+import { useIsMobile } from '../../src/hooks/useIsMobile';
 
 function mockMatchMedia(matches: boolean) {
 	const listeners: Array<(e: { matches: boolean }) => void> = [];

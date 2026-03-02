@@ -75,9 +75,6 @@ importers:
       happy-dom:
         specifier: ^20.7.0
         version: 20.7.0
-      playwright:
-        specifier: ^1.58.2
-        version: 1.58.2
       prettier:
         specifier: ^3.8.1
         version: 3.8.1

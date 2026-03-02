@@ -16,9 +16,10 @@ pnpm build            # Production build (generates tokens first, output: dist/)
 pnpm preview          # Preview production build locally (run after pnpm build)
 pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
 pnpm test             # Run Vitest in watch mode
-pnpm test:run         # Run tests once (test/pages/ Playwright tests excluded, require pre-built dist/)
-pnpm test:coverage    # Run tests with coverage
+pnpm test:run         # Run unit tests once
+pnpm test:coverage    # Run unit tests with coverage
 pnpm test:ui          # Interactive Vitest UI
+pnpm test:e2e         # Run Playwright E2E tests (builds site first)
 pnpm lint             # Check for lint and format issues
 pnpm lint:fix         # Auto-fix lint and format issues
 pnpm format           # Auto-format code
@@ -51,6 +52,7 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 - **React components** (`.tsx`/`.jsx`) are used only for client-side interactivity and hydrate selectively via `client:visible` or `client:only` directives
 - All data comes from the filesystem at build time — no runtime API calls
 - **Dependency split:** `dependencies` = packages that ship to the browser (React, nanostores, md5, zod) plus Astro and its integrations. `devDependencies` = everything else (sharp, Biome, Vitest, Playwright, tsx, @types/*). CI always runs `pnpm install` (all deps) — no `--omit=dev`.
+- **Gotcha:** Only `@playwright/test` is needed as a dependency — it bundles the browser automation library internally. Do not add the bare `playwright` package.
 - **Gotcha:** `sharp` must be listed as a direct `devDependency` — Astro declares it as an optional dep, but pnpm's strict module isolation prevents Astro's build chunks from resolving it otherwise. Do not remove it.
 - **Gotcha:** `.astro/` is gitignored but contains generated types needed by VS Code. If JSX elements show `'no interface JSX.IntrinsicElements'` errors, run `pnpm astro sync`. This runs automatically during `dev` and `build`.
 - **Gotcha:** Astro scoped styles cannot target elements rendered by React islands (`client:only`/`client:visible`). Use global.css selectors to style elements inside React islands.
@@ -146,11 +148,29 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 ### Testing
 
+Test directory structure:
+```
+test/
+  unit/    # Vitest unit tests (*.test.ts)
+  e2e/     # Playwright E2E tests (*.spec.ts)
+```
+
+#### Unit Tests (Vitest)
+
 - Vitest with `happy-dom` environment (1024x768 default viewport)
 - `@testing-library/react` for React hook tests (`renderHook`, `act`)
-- Test files go in `test/` directory, named `<subject>.test.ts`
+- Unit test files go in `test/unit/`, named `<subject>.test.ts`
 - Nanostores can be tested directly — call store functions and assert on `store.get()`
 - Call `removeAllAnnoyBoxes()` (or equivalent reset) in `beforeEach` when testing store-dependent logic
+
+#### E2E Tests (Playwright)
+
+- Playwright with Chromium only (personal site, no cross-browser matrix)
+- E2E test files go in `test/e2e/`, named `<subject>.spec.ts`
+- `pnpm test:e2e` runs the full cycle: build, start preview server, run tests, shut down
+- Locally, if a preview server is already running on port 4321, Playwright reuses it (`reuseExistingServer`)
+- Playwright tests use `@playwright/test` imports — do not mix with Vitest imports
+- **Not yet in CI** — adding E2E to CI requires installing Chromium (`pnpm exec playwright install chromium`) and running `pnpm test:e2e` after build
 
 ## Deployment
 

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest';
-import { FORK_CAP, forkAnnoyBox, generateAnnoyBoxProps, getAnnoyBoxPosition } from '../src/components/AnnoyBox';
-import { addAnnoyBox, annoyBoxStore, removeAllAnnoyBoxes } from '../src/stores/annoyBoxStore';
+import { FORK_CAP, forkAnnoyBox, generateAnnoyBoxProps, getAnnoyBoxPosition } from '../../src/components/AnnoyBox';
+import { addAnnoyBox, annoyBoxStore, removeAllAnnoyBoxes } from '../../src/stores/annoyBoxStore';
 
 describe('getAnnoyBoxPosition', () => {
 	test('returns non-negative coordinates', () => {

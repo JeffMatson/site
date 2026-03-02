@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { emailToGravatar, generateString, getViewportSize, iso8601ToString, stripTrailingSlash } from '../src/utils';
+import { emailToGravatar, generateString, getViewportSize, iso8601ToString, stripTrailingSlash } from '../../src/utils';
 
 describe('Test utility functions: utils.ts', () => {
     test('generate string with defaults', () => {

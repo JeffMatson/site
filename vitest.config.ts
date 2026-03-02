@@ -4,7 +4,7 @@ import { getViteConfig } from 'astro/config';
 export default getViteConfig({
 	test: {
 		environment: 'happy-dom',
-		exclude: ['test/pages/**', 'node_modules/**'],
+		include: ['test/unit/**/*.test.ts'],
 		testTimeout: 60_000,
 		hookTimeout: 60_000,
 	},
