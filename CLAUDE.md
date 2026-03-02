@@ -13,6 +13,7 @@ Personal portfolio site (jeffmatson.net) built with Astro 5. Intentionally embra
 ```bash
 pnpm dev              # Start dev server (generates tokens first)
 pnpm build            # Production build (generates tokens first, output: dist/)
+pnpm preview          # Preview production build locally (run after pnpm build)
 pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
 pnpm test             # Run Vitest in watch mode
 pnpm test:run         # Run tests once (test/pages/ Playwright tests excluded, require pre-built dist/)
@@ -26,6 +27,7 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 ```
 
 - **pnpm config:** `pnpm-workspace.yaml` holds `onlyBuiltDependencies` (build script allowlist). Do not put pnpm settings in `package.json`.
+- **`scripts/` directory:** Build-time scripts live here (e.g., `scripts/generate-tokens.ts`). Place new build-time scripts in this directory.
 
 ### Linting & Formatting
 
@@ -52,6 +54,8 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 - **Gotcha:** `sharp` must be listed as a direct `devDependency` — Astro declares it as an optional dep, but pnpm's strict module isolation prevents Astro's build chunks from resolving it otherwise. Do not remove it.
 - **Gotcha:** `.astro/` is gitignored but contains generated types needed by VS Code. If JSX elements show `'no interface JSX.IntrinsicElements'` errors, run `pnpm astro sync`. This runs automatically during `dev` and `build`.
 - **Gotcha:** Astro scoped styles cannot target elements rendered by React islands (`client:only`/`client:visible`). Use global.css selectors to style elements inside React islands.
+- **Component organization:** Subdirectories (`Theme/`, `CrappyAds/`) group tightly-coupled components sharing a domain, often with a CSS module and/or barrel `index.tsx`. Standalone single-purpose components live at `src/components/` root.
+- **Hydration directives:** `client:visible` for below-fold interactive content (defers JS until scrolled into view). `client:only` for purely client-side components with no meaningful server render (e.g., reads localStorage). No other hydration directives are used in this project.
 
 ### Content Collections
 
@@ -62,6 +66,13 @@ Content lives in `src/content/` as MDX files with Zod-validated frontmatter sche
 - `authors/` — Author metadata
 
 Dynamic routes in `src/pages/` use `getStaticPaths()` + `getCollection()` to generate pages from these collections.
+
+### Adding Content
+
+- **Blog post:** Create `src/content/blog/<slug>.mdx`. Required frontmatter: `title` (string), `date` (string, `YYYY-M-D` format like `'2023-6-16'`). Optional: `description` (defaults to `''`), `image` (path like `"/images/featured/<name>.png"` — file must exist in both `src/images/featured/` and `public/images/featured/`), `author` (defaults to `'jeffmatson'`).
+- **Single page:** Create `src/content/single/<slug>.mdx`. Required: `title` (string). `description` and `author` have defaults — omit unless needed.
+- **Inline images in MDX:** `import { Image } from 'astro:assets'` + `import img from '../../images/file.jpg'`, then `<Image src={img} alt="..." />` in the body.
+- Schemas are validated by Zod at build time — see `src/content.config.ts` for exact shapes.
 
 ### Routing
 
@@ -101,6 +112,15 @@ Theme is applied by setting a class on `<html>` — an inline script in `Layout.
 
 To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm generate-tokens` to regenerate the CSS. `src/styles/tokens.css` is gitignored — never edit it directly. Astro `<style>` blocks use plain CSS with native nesting — do not add `lang="scss"`.
 
+### Images & Static Assets
+
+- **Source images:** `src/images/` — processed by Astro's asset pipeline when imported. Featured images go in `src/images/featured/`.
+- **Static assets:** `public/` — served as-is (favicons, fonts, files referenced by absolute URL path). Featured image copies also live in `public/images/featured/` for frontmatter `image` paths.
+- **No `@images/` alias** — use relative imports: `import img from '../images/file.png'`
+- **In `.astro`/`.tsx`:** `import img from '../images/file.png'` + `<Image>` from `astro:assets`
+- **In MDX frontmatter:** absolute path `"/images/featured/<name>.png"` (resolves to `public/`)
+- **In MDX body:** relative import `import img from '../../images/file.jpg'` + `<Image>` from `astro:assets`
+
 ### TypeScript Path Aliases
 
 `tsconfig.json` extends `astro/tsconfigs/strict` (which chains to `base`). The preset already sets `target`, `module`, `moduleResolution`, `resolveJsonModule`, `verbatimModuleSyntax`, `isolatedModules`, `noEmit`, `esModuleInterop`, and `strict` — do not re-add these. Only project-specific options (like `paths`) belong in tsconfig.json.
@@ -115,6 +135,15 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 `src/types.ts` defines shared Zod schemas: `ThemeName` (derived from `tokens.ts` via `z.enum(themeNames)`) and `BooleanAsString`. To add a theme, add it to `themeNames` in `tokens.ts` — the Zod schema updates automatically.
 
+### Utilities
+
+`src/utils.ts` — shared helper functions. Check here before writing new helpers:
+- `generateString(prefix?, length?)` — random alphanumeric string (default 16 chars)
+- `getViewportSize()` — returns `{ width, height }` viewport dimensions (client-side only)
+- `stripTrailingSlash(str)` — removes trailing `/`
+- `iso8601ToString(iso8601)` — converts ISO 8601 string to UTC date string via `Date.toUTCString()`
+- `emailToGravatar(email)` — returns `{ tiny, normal }` Gravatar URLs via md5 hash
+
 ### Testing
 
 - Vitest with `happy-dom` environment (1024x768 default viewport)
@@ -125,4 +154,11 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 ## Deployment
 
-Pushes to `master` trigger GitHub Actions → lint → test → build with pnpm + Node 22 → deploys to Cloudflare Pages via Wrangler.
+Pushes to `master` trigger GitHub Actions → deploys to Cloudflare Pages via Wrangler. Two workflow files:
+
+- **`.github/workflows/ci.yml`** — Reusable (`workflow_call`) + PR trigger. Runs `check` (lint + test) and `build` in parallel.
+- **`.github/workflows/deploy.yml`** — Push to master + `workflow_dispatch`. Calls `ci.yml`, then `deploy` job builds and deploys via Wrangler.
+- **`.github/dependabot.yml`** — Weekly updates for GitHub Actions versions and npm dependencies.
+- **Gotcha:** The `ci` job in `deploy.yml` must have explicit `permissions: contents: read` — top-level `permissions: {}` means reusable workflows inherit nothing unless the calling job grants it.
+- **Gotcha:** `pnpm/action-setup` must run before `actions/setup-node` — setup-node calls `pnpm store path` for caching and fails if pnpm isn't installed yet.
+- All actions are pinned to commit SHAs. Dependabot keeps them updated.

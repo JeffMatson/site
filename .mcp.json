@@ -1,0 +1,12 @@
+{
+	"mcpServers": {
+		"context7": {
+			"command": "npx",
+			"args": ["-y", "@upstash/context7-mcp@latest"]
+		},
+		"astro-docs": {
+			"command": "npx",
+			"args": ["-y", "mcp-remote", "https://mcp.docs.astro.build/mcp"]
+		}
+	}
+}
