@@ -14,6 +14,7 @@
 		"test:coverage": "vitest run --coverage",
 		"test:ui": "vitest --ui",
 		"test:e2e": "playwright test",
+		"test:screenshots": "playwright test test/e2e/screenshots.spec.ts",
 		"lint": "biome check src/ scripts/ && prettier --check 'src/**/*.mdx'",
 		"lint:fix": "biome check --write src/ scripts/ && prettier --write 'src/**/*.mdx'",
 		"format": "biome format --write src/ scripts/ && prettier --write 'src/**/*.mdx'",
