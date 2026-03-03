@@ -18,18 +18,17 @@ const paletteStore = persistentAtom<PaletteStoreValue>('palette', undefined);
 // I should really just loop this. It's fine now, but it's gonna get annoying.
 themeStore.subscribe((val) => {
 	if (typeof document === 'undefined') return;
-	const themeName = ThemeName.parse(val);
+	const parsed = ThemeName.safeParse(val);
+	if (!parsed.success) {
+		themeStore.set(getPreferredTheme());
+		return;
+	}
 	const root = document.documentElement;
 
-	const themeOptions = Array.from(themeNames);
-	if (themeOptions.includes(themeName)) {
-		for (const themeOption of themeOptions) {
-			root.classList.remove(themeOption);
-			if (themeOption === themeName) {
-				root.classList.add(themeName);
-			}
-		}
+	for (const themeOption of themeNames) {
+		root.classList.remove(themeOption);
 	}
+	root.classList.add(parsed.data);
 });
 
 function getPrefersReducedMotion(): BooleanAsString {

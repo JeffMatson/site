@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from 'vitest';
-import { useTestStorageEngine } from '@nanostores/persistent';
+import { setTestStorageKey, useTestStorageEngine } from '@nanostores/persistent';
 import { themeNames } from '../../src/styles/tokens';
 
 // Replace happy-dom's localStorage proxy with a plain object
@@ -62,6 +62,16 @@ describe('themeStore', () => {
 	test('themeStore.get() matches getTheme()', () => {
 		setTheme('sanity');
 		expect(themeStore.get()).toBe(getTheme());
+	});
+
+	test('recovers gracefully from corrupted localStorage value', () => {
+		// Simulate a corrupted value written by a browser extension or manual edit
+		setTestStorageKey('theme', 'invalid-theme');
+
+		// Store should have auto-corrected to a valid theme
+		expect(themeNames).toContain(getTheme());
+		// The corrupted class should not be on the document
+		expect(document.documentElement.classList.contains('invalid-theme')).toBe(false);
 	});
 });
 
