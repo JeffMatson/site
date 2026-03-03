@@ -20,6 +20,7 @@ pnpm test:run         # Run unit tests once
 pnpm test:coverage    # Run unit tests with coverage
 pnpm test:ui          # Interactive Vitest UI
 pnpm test:e2e         # Run Playwright E2E tests (builds site first)
+pnpm test:screenshots # Capture README screenshots (dark, hotdog, sanity themes)
 pnpm lint             # Check for lint and format issues
 pnpm lint:fix         # Auto-fix lint and format issues
 pnpm format           # Auto-format code
@@ -120,6 +121,7 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 - **Source images:** `src/images/` — processed by Astro's asset pipeline when imported. Featured images go in `src/images/featured/`.
 - **Static assets:** `public/` — served as-is (favicons, fonts, files referenced by absolute URL path). Featured image copies also live in `public/images/featured/` for frontmatter `image` paths.
+- **README screenshots:** `public/images/screenshots/` — theme screenshots referenced in README.md with relative paths (no leading `/`). Updated via `pnpm test:screenshots` locally or the screenshots GitHub Actions workflow.
 - **No `@images/` alias** — use relative imports: `import img from '../images/file.png'`
 - **In `.astro`/`.tsx`:** `import img from '../images/file.png'` + `<Image>` from `astro:assets`
 - **In MDX frontmatter:** absolute path `"/images/featured/<name>.png"` (resolves to `public/`)
@@ -175,6 +177,7 @@ test/
 - Locally, if a preview server is already running on port 4321, Playwright reuses it (`reuseExistingServer`)
 - Playwright tests use `@playwright/test` imports — do not mix with Vitest imports
 - **Not yet in CI** — adding E2E to CI requires installing Chromium (`pnpm exec playwright install chromium`) and running `pnpm test:e2e` after build
+- **Screenshot spec** (`test/e2e/screenshots.spec.ts`): Captures themed homepage screenshots for the README. Pauses the marquee CSS animation and resets its position before capture to avoid mid-scroll artifacts.
 
 ## Deployment
 
@@ -182,6 +185,7 @@ Pushes to `master` trigger GitHub Actions → deploys to Cloudflare Pages via Wr
 
 - **`.github/workflows/ci.yml`** — Reusable (`workflow_call`) + PR trigger. Runs `check` (lint + test) and `build` in parallel.
 - **`.github/workflows/deploy.yml`** — Push to master + `workflow_dispatch`. Calls `ci.yml`, then `deploy` job builds and deploys via Wrangler.
+- **`.github/workflows/screenshots.yml`** — Manual dispatch only (owner-gated). Captures README screenshots via Playwright, commits updated images to master if changed. Screenshots live in `public/images/screenshots/`.
 - **`.github/dependabot.yml`** — Weekly updates for GitHub Actions versions and npm dependencies.
 - **Gotcha:** The `ci` job in `deploy.yml` must have explicit `permissions: contents: read` — top-level `permissions: {}` means reusable workflows inherit nothing unless the calling job grants it.
 - **Gotcha:** `pnpm/action-setup` must run before `actions/setup-node` — setup-node calls `pnpm store path` for caching and fails if pnpm isn't installed yet.
