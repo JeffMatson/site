@@ -93,6 +93,7 @@ Client-side state uses **Nanostores** with `@nanostores/persistent` for localSto
 - `src/components/AnnoyBox.tsx` — Easter egg popup system. Fork cap at 16 boxes. Desktop: random fixed positioning. Mobile (<768px): full-screen sequential "takeover" mode with counter badge. Close All button visible on both.
 - `src/hooks/useIsMobile.ts` — `matchMedia`-based mobile detection hook used by YouWon.tsx for render branching
 - **Gotcha:** `nanostores` `map.get()` returns the internal state reference. Never mutate it directly — always spread into a new object before calling `.set()`, otherwise subscribers won't be notified (identity check in `.set()`)
+- **Gotcha:** Always use Zod `.safeParse()` (not `.parse()`) when validating values from `localStorage` / `@nanostores/persistent`. localStorage can contain corrupted values from browser extensions, manual edits, or schema migrations. The theme store subscriber auto-corrects invalid values to the user's preferred default.
 
 ### Styling
 
@@ -107,6 +108,7 @@ Plain CSS with a TypeScript design token pipeline — no Sass usage (sass is ins
 - **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`**`-based modular scale, 16px base, 1.2 ratio)
 - **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
 - **Mobile breakpoint:** `768px` — used in `@media (max-width: 768px)` across global.css, TopNav.astro, and index.astro
+- **`body` background:** Uses `var(--color-wallpaper)`, not `var(--color-background)`. Content background (`--color-background`) is on `select` elements and the `.main` div inside BrowserWindow. Dark and light themes share the same wallpaper color (`cyanDark`).
 - **Adding tokens:** Add key to `themeTokenKeys` array → add value to `baseTheme` → add overrides in theme-specific objects → run `pnpm generate-tokens`. TypeScript will error until all themes have the new key.
 - **SVG in tokens:** `selectArrowSvg()` in tokens.ts generates URL-encoded SVG data URIs with theme-specific colors. Colors must be `encodeURIComponent()`-encoded for use in CSS `url()` values.
 
@@ -162,6 +164,8 @@ test/
 - Unit test files go in `test/unit/`, named `<subject>.test.ts`
 - Nanostores can be tested directly — call store functions and assert on `store.get()`
 - Call `removeAllAnnoyBoxes()` (or equivalent reset) in `beforeEach` when testing store-dependent logic
+- **Testing `@nanostores/persistent` stores:** Call `useTestStorageEngine()` from `@nanostores/persistent` *before* importing any persistent store module (use dynamic `await import()`). This replaces happy-dom's localStorage proxy, which rejects the direct property assignment that `@nanostores/persistent` uses internally. Use `setTestStorageKey()` to simulate external storage changes. Avoid `cleanTestStorage()` — it fires listeners with `undefined`, causing ZodErrors in subscribers that validate values.
+- **Nanostores identity check:** `atom.set()` skips notification when `oldValue === newValue`. To force subscriber execution in `beforeEach`, toggle to a different value first (e.g., `setTheme('light'); setTheme('dark')`).
 
 #### E2E Tests (Playwright)
 
