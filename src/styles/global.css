@@ -3,10 +3,11 @@
 @import "./tokens.css";
 @import "./fonts.css";
 
-/* Base font */
+/* Base font (W95FA served as "Windows Regular" — slightly tighter than the original, so letter-spacing compensates) */
 body,
 select {
 	font-family: "Windows Regular", sans-serif;
+	letter-spacing: 0.5px;
 }
 
 body {
@@ -98,7 +99,7 @@ a {
 select {
 	appearance: none;
 	background-image: var(--select-arrow-image);
-	background-position: top 2px right 2px;
+	background-position: center right 2px;
 	background-repeat: no-repeat;
 	background-color: var(--color-background);
 	color: var(--color-text);
@@ -107,7 +108,7 @@ select {
 	position: relative;
 	border: none;
 	box-sizing: border-box;
-	padding: 3px 32px 3px 4px;
+	padding: 4px 32px 4px 6px;
 }
 
 /* Post list */

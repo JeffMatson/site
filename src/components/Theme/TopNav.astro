@@ -32,7 +32,7 @@ import ThemeSelect from './ThemeSelect';
     }
 
     .navItems li {
-        padding: 2px 5px;
+        padding: 0;
 
         &:hover {
             box-shadow: var(--shadow-offset);
@@ -40,13 +40,23 @@ import ThemeSelect from './ThemeSelect';
     }
 
     .navItems li a {
+        display: block;
         text-decoration: none;
         color: var(--window-color-nav-text);
         font-size: var(--font-size-sm);
+        line-height: 1.2;
+        padding: 4px 5px;
+    }
+
+    .navItems li:first-child a {
+        padding-left: 2px;
     }
 
     .sanityModeToggle {
         margin-left: auto;
+        display: flex;
+        align-items: center;
+        padding: 0 2px;
     }
 
     .sanityModeToggle:hover {
@@ -61,9 +71,15 @@ import ThemeSelect from './ThemeSelect';
         .navItems li a {
             display: block;
             padding: 12px;
+            font-size: var(--font-size-base);
+        }
+
+        .navItems li:first-child a {
+            padding-left: 12px;
         }
 
         .sanityModeToggle {
+            display: block;
             margin-left: 0;
             width: 100%;
             padding: 8px 12px;

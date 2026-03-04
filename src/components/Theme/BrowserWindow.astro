@@ -40,14 +40,17 @@ const { title = null, children = null, showTopNav = false } = Astro.props;
             color: var(--window-color-title-text);
             font-weight: bold;
             font-size: var(--font-size-sm);
-            padding: 3px;
+            padding: 4px 3px;
+            line-height: 1.2;
             background: linear-gradient(90deg, var(--window-color-background-left), var(--window-color-background-right));
+            box-shadow: 0 1px 0 var(--window-color-nav-highlight), 0 2px 0 var(--window-color-nav-separator);
         }
 
         .main {
             background-color: var(--color-background);
             color: var(--color-text);
             font-family: var(--font-normal);
+            letter-spacing: normal;
             box-shadow: var(--shadow-inset);
         }
     }
