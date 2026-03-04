@@ -248,6 +248,80 @@ export const themes: Record<ThemeName, ThemeTokens> = {
 export { baseTheme };
 
 // ---------------------------------------------------------------------------
+// Customizable token definitions for the advanced theme panel
+// ---------------------------------------------------------------------------
+
+export type CustomizableToken = {
+	key: ThemeTokenKey;
+	label: string;
+};
+
+export type CustomizableTokenGroup = {
+	id: string;
+	label: string;
+	type: 'color' | 'font';
+	tokens: CustomizableToken[];
+};
+
+export const customizableTokenGroups: CustomizableTokenGroup[] = [
+	{
+		id: 'colors',
+		label: 'Colors',
+		type: 'color',
+		tokens: [
+			{ key: 'color-background', label: 'Background' },
+			{ key: 'color-wallpaper', label: 'Wallpaper' },
+			{ key: 'color-text', label: 'Text' },
+			{ key: 'color-a', label: 'Links' },
+			{ key: 'color-h1', label: 'Heading 1' },
+			{ key: 'color-h2', label: 'Heading 2' },
+			{ key: 'color-h3', label: 'Heading 3' },
+			{ key: 'color-h4', label: 'Heading 4' },
+			{ key: 'color-h5', label: 'Heading 5' },
+			{ key: 'color-post-meta', label: 'Post Meta' },
+		],
+	},
+	{
+		id: 'windowColors',
+		label: 'Window',
+		type: 'color',
+		tokens: [
+			{ key: 'window-color-background-left', label: 'Title Bar Left' },
+			{ key: 'window-color-background-right', label: 'Title Bar Right' },
+			{ key: 'window-color-title-text', label: 'Title Text' },
+			{ key: 'window-color-border', label: 'Border' },
+			{ key: 'window-color-nav-background', label: 'Nav Background' },
+			{ key: 'window-color-nav-text', label: 'Nav Text' },
+		],
+	},
+	{
+		id: 'fonts',
+		label: 'Fonts',
+		type: 'font',
+		tokens: [
+			{ key: 'font-normal', label: 'Body' },
+			{ key: 'font-h1', label: 'Heading 1' },
+			{ key: 'font-h2', label: 'Heading 2' },
+			{ key: 'font-h3', label: 'Heading 3' },
+			{ key: 'font-h4', label: 'Heading 4' },
+			{ key: 'font-h5', label: 'Heading 5' },
+			{ key: 'font-comments', label: 'Comments' },
+		],
+	},
+];
+
+export const fontOptions = [
+	{ value: "'Comic Neue'", label: 'Comic Neue' },
+	{ value: "'Papyrus'", label: 'Papyrus' },
+	{ value: "'Tinos', 'Times New Roman', Times, serif", label: 'Tinos' },
+	{ value: "'Windows Regular', sans-serif", label: 'Windows Regular' },
+	{ value: 'sans-serif', label: 'Sans Serif' },
+	{ value: 'serif', label: 'Serif' },
+	{ value: 'monospace', label: 'Monospace' },
+	{ value: 'cursive', label: 'Cursive' },
+] as const;
+
+// ---------------------------------------------------------------------------
 // Fluid typography computation
 // ---------------------------------------------------------------------------
 

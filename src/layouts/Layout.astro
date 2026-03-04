@@ -60,6 +60,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 					}
 				}
 			}
+
+			// Apply advanced mode overrides to prevent flash
+			if ( localStorage.getItem('advancedMode') === 'true' ) {
+				try {
+					const overrides = JSON.parse(localStorage.getItem('advancedOverrides') || '{}');
+					for ( const key of Object.keys(overrides) ) {
+						if ( typeof overrides[key] === 'string' ) {
+							root.style.setProperty('--' + key, overrides[key]);
+						}
+					}
+				} catch (e) {
+					// Invalid JSON, skip
+				}
+			}
 		</script>
 	</head>
 	<body>

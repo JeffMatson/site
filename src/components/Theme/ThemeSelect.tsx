@@ -1,16 +1,21 @@
 import { useStore } from '@nanostores/react';
-import { type PaletteStoreValue, setPalette, setTheme, themeStore } from '../../stores/themeStore';
+import { advancedModeStore, setAdvancedMode, setTheme, themeStore } from '../../stores/themeStore';
 import type { ThemeName } from '../../types';
 
 export default function ThemeSelect() {
 	const theme = useStore(themeStore);
+	const advancedMode = useStore(advancedModeStore);
+
+	const selectValue = advancedMode === 'true' ? 'advanced' : theme;
 
 	const onModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setTheme(e.target.value as ThemeName);
-	};
-
-	const _onPaletteChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setPalette(e.target.value as PaletteStoreValue);
+		const value = e.target.value;
+		if (value === 'advanced') {
+			setAdvancedMode('true');
+		} else {
+			setAdvancedMode('false');
+			setTheme(value as ThemeName);
+		}
 	};
 
 	return (
@@ -34,13 +39,14 @@ export default function ThemeSelect() {
 				name="theme"
 				id="themeSelector"
 				aria-label="Theme select"
-				value={theme}
+				value={selectValue}
 				onChange={onModeChange}
 			>
 				<option value="sanity">Sanity Mode</option>
 				<option value="dark">Dark Mode</option>
 				<option value="light">Light Mode</option>
 				<option value="hotdog">Hot Dog Stand</option>
+				<option value="advanced">Advanced</option>
 			</select>
 		</>
 	);
