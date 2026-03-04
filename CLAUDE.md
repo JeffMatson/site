@@ -15,6 +15,7 @@ pnpm dev              # Start dev server (generates tokens first)
 pnpm build            # Production build (generates tokens first, output: dist/)
 pnpm preview          # Preview production build locally (run after pnpm build)
 pnpm generate-tokens  # Regenerate src/styles/tokens.css from tokens.ts
+pnpm optimize-fonts   # Regenerate WOFF2 font files from fontsource + ttf2woff2
 pnpm test             # Run Vitest in watch mode
 pnpm test:run         # Run unit tests once
 pnpm test:coverage    # Run unit tests with coverage
@@ -56,6 +57,7 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 - **Gotcha:** Only `@playwright/test` is needed as a dependency — it bundles the browser automation library internally. Do not add the bare `playwright` package.
 - **Gotcha:** `sharp` must be listed as a direct `devDependency` — Astro declares it as an optional dep, but pnpm's strict module isolation prevents Astro's build chunks from resolving it otherwise. Do not remove it.
 - **Gotcha:** `.astro/` is gitignored but contains generated types needed by VS Code. If JSX elements show `'no interface JSX.IntrinsicElements'` errors, run `pnpm astro sync`. This runs automatically during `dev` and `build`.
+- **Gotcha:** `.playwright-mcp/` directory is created by Playwright MCP debugging sessions. Clean it up before committing (`rm -rf .playwright-mcp`).
 - **Gotcha:** Astro scoped styles cannot target elements rendered by React islands (`client:only`/`client:visible`). Use global.css selectors to style elements inside React islands.
 - **Component organization:** Subdirectories (`Theme/`, `CrappyAds/`) group tightly-coupled components sharing a domain, often with a CSS module and/or barrel `index.tsx`. Standalone single-purpose components live at `src/components/` root.
 - **Hydration directives:** `client:visible` for below-fold interactive content (defers JS until scrolled into view). `client:only` for purely client-side components with no meaningful server render (e.g., reads localStorage). No other hydration directives are used in this project.
@@ -103,12 +105,17 @@ Plain CSS with a TypeScript design token pipeline — no Sass usage (sass is ins
 - **Token source of truth:** `src/styles/tokens.ts` — typed color, theme, typography, and shadow definitions
 - **Generated CSS:** `src/styles/tokens.css` — auto-generated via `pnpm generate-tokens` using CSS `@layer` for cascade control
 - **Global styles:** `src/styles/global.css` — imports tokens.css and fonts.css, defines element and component styles
-- **Font declarations:** `src/styles/fonts.css` — `@font-face` rules for Windows Regular, Comic Neue, Papyrus, Tinos
+- **Font declarations:** `src/styles/fonts.css` — `@font-face` rules with WOFF2 primary + TTF fallback for W95FA (replaces Windows Regular), Comic Neue, Papyrus, Tinos
+- **Font optimization:** `pnpm optimize-fonts` generates WOFF2 files in `public/fonts/` from fontsource packages (`@fontsource/comic-neue`, `@fontsource/tinos`, `@fontsource/win95fa`) and ttf2woff2 (Papyrus). Original TTF files are preserved as fallbacks. WOFF2 files are committed — the script only needs to re-run when source fonts change.
+- **Font loading:** All `@font-face` rules use `font-display: swap`. Critical fonts (W95FA, Comic Neue Regular/Bold, Papyrus, Tinos Regular) are preloaded as WOFF2 in `Layout.astro`.
+- **Gotcha:** fontkit's `subset.encode()` produces Apple-style TrueType headers (`true`) that ttf2woff2 cannot parse. Do not combine fontkit subsetting with ttf2woff2 conversion — use fontsource pre-subset WOFF2 files instead, or convert full TTFs directly.
+- **Gotcha:** W95FA (served as `font-family: "Windows Regular"`) has tighter metrics than the original. `letter-spacing: 0.5px` on `body, select` compensates; `letter-spacing: normal` on `.main` prevents cascade into content fonts (Comic Neue, Papyrus, Tinos).
 - **Component styles:** Astro scoped `<style>` blocks and CSS Modules (`.module.css`) for React islands
 - **4 themes:** dark (default), light, sanity (accessibility mode), hotdog — defined as typed override maps in tokens.ts, merged via `{ ...base, ...overrides }` spread
 - **Fluid typography:** 7-step type scale computed at build time in tokens.ts (`**`-based modular scale, 16px base, 1.2 ratio)
 - **Design:** Windows 95-style beveled shadows (`--shadow-offset`, `--shadow-inset`) and retro color palette
 - **Mobile breakpoint:** `768px` — used in `@media (max-width: 768px)` across global.css, TopNav.astro, and index.astro
+- **Gotcha:** Desktop `:first-child` / `:last-child` padding overrides cascade into mobile breakpoints. Always add explicit resets in `@media (max-width: 768px)` for any pseudo-class padding rules added at desktop.
 - **`body` background:** Uses `var(--color-wallpaper)`, not `var(--color-background)`. Content background (`--color-background`) is on `select` elements and the `.main` div inside BrowserWindow. Dark and light themes share the same wallpaper color (`cyanDark`).
 - **Adding tokens:** Add key to `themeTokenKeys` array → add value to `baseTheme` → add overrides in theme-specific objects → run `pnpm generate-tokens`. TypeScript will error until all themes have the new key.
 - **SVG in tokens:** `selectArrowSvg()` in tokens.ts generates URL-encoded SVG data URIs with theme-specific colors. Colors must be `encodeURIComponent()`-encoded for use in CSS `url()` values.
@@ -175,9 +182,11 @@ test/
 - E2E test files go in `test/e2e/`, named `<subject>.spec.ts`
 - `pnpm test:e2e` runs the full cycle: build, start preview server, run tests, shut down
 - Locally, if a preview server is already running on port 4321, Playwright reuses it (`reuseExistingServer`)
+- **Gotcha:** When testing CSS/font changes, kill any running preview server before `pnpm test:e2e` — Playwright reuses the stale server and won't reflect the new build. Use `lsof -ti:4321 | xargs kill` then rebuild.
 - Playwright tests use `@playwright/test` imports — do not mix with Vitest imports
 - **Not yet in CI** — adding E2E to CI requires installing Chromium (`pnpm exec playwright install chromium`) and running `pnpm test:e2e` after build
 - **Screenshot spec** (`test/e2e/screenshots.spec.ts`): Captures themed homepage screenshots for the README. Pauses the marquee CSS animation and resets its position before capture to avoid mid-scroll artifacts.
+- **Layout shift spec** (`test/e2e/layout-shift.spec.ts`): CLS regression test across desktop, mobile (Pixel 5), and slow connection (Fast 3G) profiles. Uses CDP `Network.emulateNetworkConditions` for throttling and `page.addInitScript` with `PerformanceObserver` (`type: 'layout-shift', buffered: true`) to capture shifts from first paint. Fresh browser context per test to avoid font cache sharing.
 
 ## Deployment
 
