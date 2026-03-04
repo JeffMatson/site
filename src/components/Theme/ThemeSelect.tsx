@@ -41,6 +41,7 @@ export default function ThemeSelect() {
 				<option value="dark">Dark Mode</option>
 				<option value="light">Light Mode</option>
 				<option value="hotdog">Hot Dog Stand</option>
+				<option value="dracula">Dracula</option>
 			</select>
 		</>
 	);

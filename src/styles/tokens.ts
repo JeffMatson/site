@@ -24,6 +24,19 @@ export const colors = {
 	cyanDark: '#047e7e',
 	windowsLeft: '#000080',
 	windowsRight: '#1084d0',
+
+	// Dracula palette
+	draculaBackground: '#282a36',
+	draculaCurrentLine: '#44475a',
+	draculaForeground: '#f8f8f2',
+	draculaComment: '#6272a4',
+	draculaCyan: '#8be9fd',
+	draculaGreen: '#50fa7b',
+	draculaOrange: '#ffb86c',
+	draculaPink: '#ff79c6',
+	draculaPurple: '#bd93f9',
+	draculaRed: '#ff5555',
+	draculaYellow: '#f1fa8c',
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -58,7 +71,7 @@ function selectArrowSvg(opts: {
 // Theme tokens
 // ---------------------------------------------------------------------------
 
-export const themeNames = ['dark', 'light', 'sanity', 'hotdog'] as const;
+export const themeNames = ['dark', 'light', 'sanity', 'hotdog', 'dracula'] as const;
 
 export type ThemeName = (typeof themeNames)[number];
 
@@ -238,11 +251,48 @@ const hotdogOverrides: Partial<ThemeTokens> = {
 	'li-image': fireSvg,
 };
 
+const draculaOverrides: Partial<ThemeTokens> = {
+	'color-background': colors.draculaBackground,
+	'color-text': colors.draculaForeground,
+	'color-a': colors.draculaCyan,
+	'color-h1': colors.draculaPurple,
+	'color-h2': colors.draculaPink,
+	'color-h3': colors.draculaGreen,
+	'color-h4': colors.draculaOrange,
+	'color-h5': colors.draculaYellow,
+	'color-wallpaper': '#1e1f29',
+	'color-post-meta': colors.draculaComment,
+	'window-color-background-left': colors.draculaPurple,
+	'window-color-background-right': colors.draculaPink,
+	'window-color-title-text': colors.draculaForeground,
+	'window-color-border': colors.draculaComment,
+	'window-color-nav-background': colors.draculaCurrentLine,
+	'window-color-nav-text': colors.draculaForeground,
+	'window-color-nav-separator': colors.draculaComment,
+	'window-color-nav-highlight': colors.draculaPurple,
+	'select-arrow-image': selectArrowSvg({
+		highlight: colors.draculaComment,
+		light: colors.draculaForeground,
+		shadow: colors.draculaBackground,
+		darkShadow: colors.draculaCurrentLine,
+		face: colors.draculaCurrentLine,
+	}),
+	'comment-form-background-color': colors.draculaCurrentLine,
+	'comment-form-submit-padding': '3rem',
+	'comment-form-submit-font-size': '3rem',
+	'comment-form-submit-background-color': colors.draculaPurple,
+	'comment-single-background-color': colors.draculaCurrentLine,
+	'comment-single-avatar-border': `2px solid ${colors.draculaPurple}`,
+	'comment-single-date-color': colors.draculaCyan,
+	'comment-single-author-color': colors.draculaGreen,
+};
+
 export const themes: Record<ThemeName, ThemeTokens> = {
 	dark: { ...baseTheme, ...darkOverrides },
 	light: { ...baseTheme, ...lightOverrides },
 	sanity: { ...baseTheme, ...sanityOverrides },
 	hotdog: { ...baseTheme, ...hotdogOverrides },
+	dracula: { ...baseTheme, ...draculaOverrides },
 };
 
 export { baseTheme };

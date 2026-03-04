@@ -48,7 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 			const root  = document.documentElement;
 			const theme = localStorage.getItem('theme');
 			// Duplicated from tokens.ts — is:inline scripts can't import ES modules
-			const themeOptions = ['light', 'dark', 'sanity', 'hotdog'];
+			const themeOptions = ['light', 'dark', 'sanity', 'hotdog', 'dracula'];
 
 			if ( themeOptions.includes(theme) ) {
 				for ( const themeOption of themeOptions ) {
