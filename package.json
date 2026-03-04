@@ -8,6 +8,7 @@
 		"dev": "pnpm generate-tokens && astro dev",
 		"build": "pnpm generate-tokens && astro build",
 		"generate-tokens": "tsx scripts/generate-tokens.ts",
+		"optimize-fonts": "tsx scripts/optimize-fonts.ts",
 		"preview": "astro preview",
 		"test": "vitest",
 		"test:run": "vitest run",
@@ -36,6 +37,9 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.4",
+		"@fontsource/comic-neue": "^5.2.7",
+		"@fontsource/tinos": "^5.2.7",
+		"@fontsource/win95fa": "^5.2.5",
 		"@playwright/test": "^1.58.2",
 		"@testing-library/react": "^16.3.2",
 		"@types/md5": "^2.3.6",
@@ -48,6 +52,7 @@
 		"prettier": "^3.8.1",
 		"sharp": "^0.34.5",
 		"tsx": "^4.21.0",
+		"ttf2woff2": "^8.0.1",
 		"vitest": "^4.0.18"
 	}
 }

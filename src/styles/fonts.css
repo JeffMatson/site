@@ -1,22 +1,29 @@
 /**
- * Windows Regular
+ * W95FA (replaces Windows Regular for web delivery)
+ * Source: @fontsource/win95fa — SIL Open Font License
+ * Original Windows Regular TTF preserved in public/fonts/ as fallback
  */
 @font-face {
 	font-family: "Windows Regular";
 	font-style: normal;
 	font-weight: 1 1000;
-	src: url("/fonts/windows-regular.ttf") format("truetype");
+	src:
+		url("/fonts/w95fa.woff2") format("woff2"),
+		url("/fonts/windows-regular.ttf") format("truetype");
 	font-display: swap;
 }
 
 /**
  * Comic Neue
+ * Source: @fontsource/comic-neue (latin subset WOFF2)
  */
 @font-face {
 	font-family: "Comic Neue";
 	font-style: normal;
 	font-weight: 300;
-	src: url("/fonts/ComicNeue-Light.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-Light.woff2") format("woff2"),
+		url("/fonts/ComicNeue-Light.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -24,7 +31,9 @@
 	font-family: "Comic Neue";
 	font-style: normal;
 	font-weight: 400;
-	src: url("/fonts/ComicNeue-Regular.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-Regular.woff2") format("woff2"),
+		url("/fonts/ComicNeue-Regular.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -32,7 +41,9 @@
 	font-family: "Comic Neue";
 	font-style: normal;
 	font-weight: 700;
-	src: url("/fonts/ComicNeue-Bold.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-Bold.woff2") format("woff2"),
+		url("/fonts/ComicNeue-Bold.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -40,7 +51,9 @@
 	font-family: "Comic Neue";
 	font-style: italic;
 	font-weight: 300;
-	src: url("/fonts/ComicNeue-LightItalic.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-LightItalic.woff2") format("woff2"),
+		url("/fonts/ComicNeue-LightItalic.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -48,7 +61,9 @@
 	font-family: "Comic Neue";
 	font-style: italic;
 	font-weight: 400;
-	src: url("/fonts/ComicNeue-Italic.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-Italic.woff2") format("woff2"),
+		url("/fonts/ComicNeue-Italic.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -56,29 +71,37 @@
 	font-family: "Comic Neue";
 	font-style: italic;
 	font-weight: 700;
-	src: url("/fonts/ComicNeue-BoldItalic.ttf") format("truetype");
+	src:
+		url("/fonts/ComicNeue-BoldItalic.woff2") format("woff2"),
+		url("/fonts/ComicNeue-BoldItalic.ttf") format("truetype");
 	font-display: swap;
 }
 
 /**
  * Papyrus
+ * WOFF2 generated via ttf2woff2
  */
 @font-face {
 	font-family: "Papyrus";
 	font-style: normal;
 	font-weight: 1 1000;
-	src: url("/fonts/papyrus.ttf") format("truetype");
+	src:
+		url("/fonts/papyrus.woff2") format("woff2"),
+		url("/fonts/papyrus.ttf") format("truetype");
 	font-display: swap;
 }
 
 /**
  * Tinos
+ * Source: @fontsource/tinos (latin subset WOFF2)
  */
 @font-face {
 	font-family: "Tinos";
 	font-style: normal;
 	font-weight: 400;
-	src: url("/fonts/Tinos-Regular.ttf") format("truetype");
+	src:
+		url("/fonts/Tinos-Regular.woff2") format("woff2"),
+		url("/fonts/Tinos-Regular.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -86,7 +109,9 @@
 	font-family: "Tinos";
 	font-style: normal;
 	font-weight: 700;
-	src: url("/fonts/Tinos-Bold.ttf") format("truetype");
+	src:
+		url("/fonts/Tinos-Bold.woff2") format("woff2"),
+		url("/fonts/Tinos-Bold.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -94,7 +119,9 @@
 	font-family: "Tinos";
 	font-style: italic;
 	font-weight: 400;
-	src: url("/fonts/Tinos-Italic.ttf") format("truetype");
+	src:
+		url("/fonts/Tinos-Italic.woff2") format("woff2"),
+		url("/fonts/Tinos-Italic.ttf") format("truetype");
 	font-display: swap;
 }
 
@@ -102,6 +129,8 @@
 	font-family: "Tinos";
 	font-style: italic;
 	font-weight: 700;
-	src: url("/fonts/Tinos-BoldItalic.ttf") format("truetype");
+	src:
+		url("/fonts/Tinos-BoldItalic.woff2") format("woff2"),
+		url("/fonts/Tinos-BoldItalic.ttf") format("truetype");
 	font-display: swap;
 }
