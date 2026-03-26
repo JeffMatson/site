@@ -36,7 +36,7 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.6",
+		"@biomejs/biome": "^2.4.8",
 		"@fontsource/comic-neue": "^5.2.7",
 		"@fontsource/tinos": "^5.2.7",
 		"@fontsource/win95fa": "^5.2.5",

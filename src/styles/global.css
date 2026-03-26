@@ -15,6 +15,10 @@ body {
 	font-size: var(--font-size-base);
 }
 
+a {
+	color: var(--color-a);
+}
+
 /* Headings: color from theme tokens, font-size from fluid type tokens */
 h1 {
 	color: var(--color-h1);
@@ -49,10 +53,6 @@ h5 {
 	color: var(--color-h5);
 	font-size: var(--font-size-md);
 	font-family: var(--font-h5);
-}
-
-a {
-	color: var(--color-a);
 }
 
 /* List bullet image for dark/light themes */
