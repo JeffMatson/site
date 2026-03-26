@@ -22,10 +22,10 @@ importers:
         version: 3.7.1
       '@nanostores/persistent':
         specifier: ^1.3.3
-        version: 1.3.3(nanostores@1.1.1)
+        version: 1.3.3(nanostores@1.2.0)
       '@nanostores/react':
-        specifier: ^1.0.0
-        version: 1.0.0(nanostores@1.1.1)(react@19.2.4)
+        specifier: ^1.1.0
+        version: 1.1.0(nanostores@1.2.0)(react@19.2.4)
       astro:
         specifier: ^6.0.8
         version: 6.0.8(@types/node@25.5.0)(rollup@4.59.0)(tsx@4.21.0)(typescript@5.9.3)
@@ -33,8 +33,8 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       nanostores:
-        specifier: ^1.1.1
-        version: 1.1.1
+        specifier: ^1.2.0
+        version: 1.2.0
       react:
         specifier: ^19.2.4
         version: 19.2.4
@@ -43,7 +43,7 @@ importers:
         version: 19.2.4(react@19.2.4)
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.4.8
+        specifier: ^2.4.9
         version: 2.4.9
       '@fontsource/comic-neue':
         specifier: ^5.2.7
@@ -79,8 +79,8 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1(vitest@4.1.1)
       happy-dom:
-        specifier: ^20.8.3
-        version: 20.8.3
+        specifier: ^20.8.8
+        version: 20.8.8
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -95,7 +95,7 @@ importers:
         version: 8.0.1
       vitest:
         specifier: ^4.1.1
-        version: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.3)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
+        version: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
 
 packages:
 
@@ -809,11 +809,11 @@ packages:
     peerDependencies:
       nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^1.0.0
 
-  '@nanostores/react@1.0.0':
-    resolution: {integrity: sha512-eDduyNy+lbQJMg6XxZ/YssQqF6b4OXMFEZMYKPJCCmBevp1lg0g+4ZRi94qGHirMtsNfAWKNwsjOhC+q1gvC+A==}
+  '@nanostores/react@1.1.0':
+    resolution: {integrity: sha512-MbH35fjhcf7LAubYX5vhOChYUfTLzNLqH/mBGLVsHkcvjy0F8crO1WQwdmQ2xKbAmtpalDa2zBt3Hlg5kqr8iw==}
     engines: {node: ^20.0.0 || >=22.0.0}
     peerDependencies:
-      nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^1.0.0
+      nanostores: ^1.2.0
       react: '>=18.0.0'
 
   '@npmcli/agent@3.0.0':
@@ -1618,8 +1618,8 @@ packages:
   h3@1.15.6:
     resolution: {integrity: sha512-oi15ESLW5LRthZ+qPCi5GNasY/gvynSKUQxgiovrY63bPAtG59wtM+LSrlcwvOHAXzGrXVLnI97brbkdPF9WoQ==}
 
-  happy-dom@20.8.3:
-    resolution: {integrity: sha512-lMHQRRwIPyJ70HV0kkFT7jH/gXzSI7yDkQFe07E2flwmNDFoWUTRMKpW2sglsnpeA7b6S2TJPp98EbQxai8eaQ==}
+  happy-dom@20.8.8:
+    resolution: {integrity: sha512-5/F8wxkNxYtsN0bXfMwIyNLZ9WYsoOYPbmoluqVJqv8KBUbcyKZawJ7uYK4WTX8IHBLYv+VXIwfeNDPy1oKMwQ==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -2036,8 +2036,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanostores@1.1.1:
-    resolution: {integrity: sha512-EYJqS25r2iBeTtGQCHidXl1VfZ1jXM7Q04zXJOrMlxVVmD0ptxJaNux92n1mJ7c5lN3zTq12MhH/8x59nP+qmg==}
+  nanostores@1.2.0:
+    resolution: {integrity: sha512-F0wCzbsH80G7XXo0Jd9/AVQC7ouWY6idUCTnMwW5t/Rv9W8qmO6endavDwg7TNp5GbugwSukFMVZqzPSrSMndg==}
     engines: {node: ^20.0.0 || >=22.0.0}
 
   negotiator@1.0.0:
@@ -3394,13 +3394,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@nanostores/persistent@1.3.3(nanostores@1.1.1)':
+  '@nanostores/persistent@1.3.3(nanostores@1.2.0)':
     dependencies:
-      nanostores: 1.1.1
+      nanostores: 1.2.0
 
-  '@nanostores/react@1.0.0(nanostores@1.1.1)(react@19.2.4)':
+  '@nanostores/react@1.1.0(nanostores@1.2.0)(react@19.2.4)':
     dependencies:
-      nanostores: 1.1.1
+      nanostores: 1.2.0
       react: 19.2.4
 
   '@npmcli/agent@3.0.0':
@@ -3690,7 +3690,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.0.3
-      vitest: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.3)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
+      vitest: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
 
   '@vitest/expect@4.1.1':
     dependencies:
@@ -3736,7 +3736,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.3)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
+      vitest: 4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
 
   '@vitest/utils@4.1.1':
     dependencies:
@@ -4284,7 +4284,7 @@ snapshots:
       ufo: 1.6.3
       uncrypto: 0.1.3
 
-  happy-dom@20.8.3:
+  happy-dom@20.8.8:
     dependencies:
       '@types/node': 25.5.0
       '@types/whatwg-mimetype': 3.0.2
@@ -5060,7 +5060,7 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  nanostores@1.1.1: {}
+  nanostores@1.2.0: {}
 
   negotiator@1.0.0: {}
 
@@ -5766,7 +5766,7 @@ snapshots:
     optionalDependencies:
       vite: 7.3.1(@types/node@25.5.0)(tsx@4.21.0)
 
-  vitest@4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.3)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0)):
+  vitest@4.1.1(@types/node@25.5.0)(@vitest/ui@4.1.1)(happy-dom@20.8.8)(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0)):
     dependencies:
       '@vitest/expect': 4.1.1
       '@vitest/mocker': 4.1.1(vite@7.3.1(@types/node@25.5.0)(tsx@4.21.0))
@@ -5791,7 +5791,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 25.5.0
       '@vitest/ui': 4.1.1(vitest@4.1.1)
-      happy-dom: 20.8.3
+      happy-dom: 20.8.8
     transitivePeerDependencies:
       - msw
 
