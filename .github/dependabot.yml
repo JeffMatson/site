@@ -9,3 +9,27 @@ updates:
       directory: /
       schedule:
           interval: weekly
+      versioning-strategy: increase
+      groups:
+          astro:
+              patterns:
+                  - "astro"
+                  - "@astrojs/*"
+          vitest:
+              patterns:
+                  - "vitest"
+                  - "@vitest/*"
+          nanostores:
+              patterns:
+                  - "nanostores"
+                  - "@nanostores/*"
+          react:
+              patterns:
+                  - "react"
+                  - "react-dom"
+                  - "@types/react"
+                  - "@types/react-dom"
+                  - "@testing-library/react"
+          fontsource:
+              patterns:
+                  - "@fontsource/*"
