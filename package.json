@@ -4,6 +4,9 @@
 	"private": true,
 	"packageManager": "pnpm@10.33.0",
 	"type": "module",
+	"engines": {
+		"node": ">=22.12.0"
+	},
 	"scripts": {
 		"dev": "pnpm generate-tokens && astro dev",
 		"build": "pnpm generate-tokens && astro build",
