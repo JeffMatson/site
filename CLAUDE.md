@@ -31,6 +31,7 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 
 - **pnpm config:** `pnpm-workspace.yaml` holds `onlyBuiltDependencies` (build script allowlist). Do not put pnpm settings in `package.json`.
 - **`scripts/` directory:** Build-time scripts live here (e.g., `scripts/generate-tokens.ts`). Place new build-time scripts in this directory.
+- **Gotcha:** `pnpm dlx @astrojs/upgrade` is interactive (prompts for confirmation). Let the user run it via `!` prefix in Claude Code, then continue with the results.
 
 ### Linting & Formatting
 
@@ -53,7 +54,8 @@ pnpm astro sync       # Regenerate .astro/types.d.ts (run after git clean or fre
 - **Astro components** (`.astro`) render server-side only as static HTML
 - **React components** (`.tsx`/`.jsx`) are used only for client-side interactivity and hydrate selectively via `client:visible` or `client:only` directives
 - All data comes from the filesystem at build time — no runtime API calls
-- **Dependency split:** `dependencies` = packages that ship to the browser (React, nanostores, md5, zod) plus Astro and its integrations. `devDependencies` = everything else (sharp, Biome, Vitest, Playwright, tsx, @types/*). CI always runs `pnpm install` (all deps) — no `--omit=dev`.
+- **Dependency split:** `dependencies` = packages that ship to the browser (React, nanostores, md5) plus Astro and its integrations. `devDependencies` = everything else (sharp, Biome, Vitest, Playwright, tsx, @types/*). CI always runs `pnpm install` (all deps) — no `--omit=dev`.
+- **Dependency pinning:** All versions in `package.json` are exact (no `^` or `~`). This ensures Dependabot PRs update `package.json` directly, not just the lockfile. When adding a dependency, use `pnpm add --save-exact <pkg>` or remove the `^` prefix manually.
 - **Gotcha:** Only `@playwright/test` is needed as a dependency — it bundles the browser automation library internally. Do not add the bare `playwright` package.
 - **Gotcha:** `sharp` must be listed as a direct `devDependency` — Astro declares it as an optional dep, but pnpm's strict module isolation prevents Astro's build chunks from resolving it otherwise. Do not remove it.
 - **Gotcha:** `.astro/` is gitignored but contains generated types needed by VS Code. If JSX elements show `'no interface JSX.IntrinsicElements'` errors, run `pnpm astro sync`. This runs automatically during `dev` and `build`.
@@ -71,6 +73,7 @@ Content lives in `src/content/` as MDX files with Zod-validated frontmatter sche
 - `authors/` — Author metadata
 
 Dynamic routes in `src/pages/` use `getStaticPaths()` + `getCollection()` to generate pages from these collections.
+- **Gotcha:** Import `z` from `astro/zod`, not from `astro:content` (deprecated in Astro 6). `defineCollection` still comes from `astro:content`.
 
 ### Adding Content
 
@@ -128,7 +131,7 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 
 - **Source images:** `src/images/` — processed by Astro's asset pipeline when imported. Featured images go in `src/images/featured/`.
 - **Static assets:** `public/` — served as-is (favicons, fonts, files referenced by absolute URL path). Featured image copies also live in `public/images/featured/` for frontmatter `image` paths.
-- **README screenshots:** `public/images/screenshots/` — theme screenshots referenced in README.md with relative paths (no leading `/`). Updated via `pnpm test:screenshots` locally or the screenshots GitHub Actions workflow.
+- **README screenshots:** `public/images/screenshots/` — theme screenshots referenced in README.md with relative paths (no leading `/`). Updated via the screenshots GitHub Actions workflow (manual dispatch). Do not commit locally-generated screenshots — the workflow is the source of truth.
 - **No `@images/` alias** — use relative imports: `import img from '../images/file.png'`
 - **In `.astro`/`.tsx`:** `import img from '../images/file.png'` + `<Image>` from `astro:assets`
 - **In MDX frontmatter:** absolute path `"/images/featured/<name>.png"` (resolves to `public/`)
@@ -147,6 +150,8 @@ To modify themes or typography, edit `src/styles/tokens.ts` and run `pnpm genera
 ### Key Types
 
 `src/types.ts` defines shared Zod schemas: `ThemeName` (derived from `tokens.ts` via `z.enum(themeNames)`) and `BooleanAsString`. To add a theme, add it to `themeNames` in `tokens.ts` — the Zod schema updates automatically.
+
+- **Zod:** Import from `astro/zod` (not `zod` or `astro:content`). Astro 6 bundles Zod v4 via this path. There is no direct `zod` dependency — `astro/zod` is the single source. Works in Astro components, React islands, stores, and Vitest tests (via `getViteConfig()`).
 
 ### Utilities
 
