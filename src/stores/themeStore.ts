@@ -56,4 +56,4 @@ function getPalette(): PaletteStoreValue {
 	return paletteStore.get();
 }
 
-export { prefersReducedMotionStore, themeStore, setTheme, setPalette, getTheme, getPalette };
+export { getPalette, getTheme, prefersReducedMotionStore, setPalette, setTheme, themeStore };
