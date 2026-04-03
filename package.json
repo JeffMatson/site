@@ -42,7 +42,7 @@
 		"@fontsource/comic-neue": "5.2.7",
 		"@fontsource/tinos": "5.2.7",
 		"@fontsource/win95fa": "5.2.5",
-		"@playwright/test": "1.58.2",
+		"@playwright/test": "1.59.1",
 		"@testing-library/react": "16.3.2",
 		"@types/md5": "2.3.6",
 		"@types/node": "25.5.0",
