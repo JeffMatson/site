@@ -25,13 +25,13 @@
 		"format:mdx": "prettier --write 'src/**/*.mdx'"
 	},
 	"dependencies": {
-		"@astrojs/mdx": "5.0.3",
-		"@astrojs/react": "5.0.2",
+		"@astrojs/mdx": "5.0.4",
+		"@astrojs/react": "5.0.4",
 		"@astrojs/rss": "4.0.18",
 		"@astrojs/sitemap": "3.7.2",
 		"@nanostores/persistent": "1.3.3",
 		"@nanostores/react": "1.1.0",
-		"astro": "6.1.0",
+		"astro": "6.1.9",
 		"md5": "2.3.0",
 		"nanostores": "1.2.0",
 		"react": "19.2.4",
